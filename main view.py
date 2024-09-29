@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 
 def main():
     """pywebview"""
-    f = open('my web.html')
+    f = open('./it-encode-web.html', 'r')
     fsimp = BeautifulSoup(f.read(), "html.parser").prettify()
     f.close()
 
@@ -13,4 +13,4 @@ def main():
     webview.start()
 
 if __name__ == '__main__':
-    main
+    main()
