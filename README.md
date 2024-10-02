@@ -9,4 +9,6 @@ PSCP project
 * bae 32
 * ROT13
 * Morse code
+* hex
+* ascii
 * ... (more information soon)
