@@ -1,0 +1,221 @@
+/* Reset some basic styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Sidebar styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -310px;
+    height: 100%;
+    width: 300px;
+    color: #777;
+    background-color: #292929;
+    transition: left 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Enable scrolling */
+    scrollbar-width: thin; /* Firefox custom scrollbar width */
+    box-shadow: 0 0 10px #000;
+    z-index: 99;
+    direction: rtl;
+}
+
+.sidebar .empty-space {
+    width: 100%;
+    height: 60px;
+}
+
+.sidebar.open {
+    left: 0;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 1px; /* Custom scrollbar width for WebKit browsers */
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: #888; /* Custom scrollbar color */
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+.sidebar p {
+    font-family: monospace;
+    text-align: center;
+    padding: 0 10px;
+}
+
+.sidebar .logo {
+    padding: 0 30px;
+    /* border: thin solid red; */
+    object-fit: contain;
+    height: 150px;
+}
+
+
+/* Top bar for label */
+.topbar {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.title span:first-child {
+    color: #3c84ff;
+}
+.title span:last-child {
+    color: #ffb049;
+}
+
+
+/* Grid for navbar buttons */
+.nav-grid {
+    list-style-type: none;
+    padding: 5px;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    justify-items: center;
+}
+
+.nav-grid li {
+    width: 60px;
+    height: 60px;
+    text-align: center;
+}
+
+.nav-grid a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-grid img {
+    width: 80px;
+    margin: 20px 0 5px 0;
+    transition: width 0.2s ease-out, transform 0.1s ease-out, box-shadow 0.2s ease-out;
+    filter: brightness(100%), drop-shadow(0 0 5px #000);
+    transform: rotate(0deg);
+    border-radius: 5px;
+    box-shadow: 0 0 0 #000;
+}
+
+.nav-grid img:hover {
+    width: 85px;
+    filter: brightness(110%);
+    transform: rotate(2deg);
+    box-shadow: 0 0 10px #000;
+}
+
+.nav-grid span {
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+/* Category divider styles */
+.category-divider {
+    color: #fff;
+    padding: 5px 0;
+    text-align: center;
+    border-bottom: 2px solid #555;
+    margin: 50px 0 20px 0;
+}
+
+/* Menu toggle button */
+.menu-toggle {
+    position: relative;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Main content area */
+.translator-section {
+    max-width: 800px;
+    margin: 6rem auto;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.translator-section h1 {
+    margin-bottom: 1rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+textarea {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.button-container button {
+    padding: 0.75rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease-out;
+}
+
+.button-container #translateBtn {
+    flex: 0.5 1 auto;
+}
+
+.button-container #clearBtn {
+    background-color: transparent;
+    color: #333;
+    font-weight: bolder;
+    border: 2px solid #333;
+}
+
+
+
+.button-container button:hover {
+    background-color: #555;
+}
