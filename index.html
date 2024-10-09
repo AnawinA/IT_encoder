@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translator Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <!-- Navbar (Sidebar) -->
+    <div class="topbar" id="topbar">
+        <div class="menu-toggle" id="mobile-menu">&#9776;</div>
+        <h2 class="title"><span>I</span><span>T</span> encoder</h2>
+        <div>
+        </div>
+    </div>
+    <div class="sidebar" id="sidebar">
+        <nav>
+            <img src="images/it encoder.png" class="logo" alt="" width="100%">
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa accusamus sit mollitia tenetur voluptas temporibus vel ipsam quasi modi
+            </p>
+            <div class="close-btn" id="close-btn">&times;</div>
+
+            <h2 class="category-divider">Main</h2>
+            <ul class="nav-grid">
+                <li><a href="#"><img src="images/default.png" alt="Home"><span>A</span></a></li>
+                <li><a href="#"><img src="images/default.png" alt="Translate"><span>B</span></a></li>
+                <li><a href="#"><img src="images/default.png" alt="Language"><span>C</span></a></li>
+            </ul>
+
+            <h2 class="category-divider">Tools</h2>
+            <ul class="nav-grid">
+                <li><a href="#"><img src="images/default.png" alt="Dictionary"><span>D</span></a></li>
+                <li><a href="#"><img src="images/default.png" alt="Help"><span>E</span></a></li>
+                <li><a href="#"><img src="images/default.png" alt="Contact"><span>F</span></a></li>
+            </ul>
+            <h2 class="category-divider">Tools</h2>
+            <ul class="nav-grid">
+                <li><a href="#"><img src="images/default.png" alt="Dictionary"><span>D</span></a></li>
+                <li><a href="#"><img src="images/default.png" alt="Help"><span>E</span></a></li>
+                <li><a href="#"><img src="images/default.png" alt="Contact"><span>F</span></a></li>
+            </ul>
+            <h2 class="category-divider">Tools</h2>
+            <ul class="nav-grid">
+                <li><a href="#"><img src="images/default.png" alt="Dictionary"><span>D</span></a></li>
+                <li><a href="#"><img src="images/default.png" alt="Help"><span>E</span></a></li>
+                <li><a href="#"><img src="images/default.png" alt="Contact"><span>F</span></a></li>
+            </ul>
+        </nav>
+    </div>
+    <main>
+        <section class="translator-section">
+            <h1>Language Translator</h1>
+            <form id="translator-form">
+                <label for="inputText">Text to Translate:</label>
+                <textarea id="inputText" rows="4" placeholder="Enter text here..."></textarea>
+
+                <label for="outputText">Translated Text:</label>
+                <textarea id="outputText" rows="4" readonly></textarea>
+
+                <div class="button-container">
+                    <button id="clearBtn">Clear</button>
+                    <button type="button" id="translateBtn">Translate</button>
+                    <button id="copyBtn">Copy</button>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
