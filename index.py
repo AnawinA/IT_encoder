@@ -1,5 +1,5 @@
 '''index.py'''
-from it_encode_lib.base64.base64 import base64_encoder
-x = str(input())
-t = base64_encoder(x)
-print(t)
+from it_encode_lib.base64.base64 import *
+a = str(input())
+b = base64_decoder(base64_encoder(a))
+print(b)
