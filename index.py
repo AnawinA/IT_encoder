@@ -1,12 +1,13 @@
 """index.py"""
 from browser import document, alert
-import packages
+import bundle
 # note from ... import *  // "*" is not good practice
 # can import only non-import files
 
+
 it_encode = {
     "Main": {
-        "base64": packages.base64,
+        "base64": (bundle.base64_encoder, bundle.base64_decoder),
     },
     "iJudge": {
         
@@ -17,20 +18,27 @@ it_encode = {
 input_text = document["inputText"]
 output_text = document["outputText"]
 
-def test(e):
-    """what"""
+topic = "Main"
+tool = "base64"
+
+def execute(is_decode, text_input):
+    """execute"""
+    return it_encode[topic][tool][is_decode](text_input)
+
+def translate(e):
+    """encode"""
     try:
         text_input = input_text.value
         if text_input != "":
-            is_decode = document["isDecode"].checked
-            output_result = packages.base64(text_input, True if is_decode else False)
+            is_decode = 1 if document["isDecode"].checked else 0
+            output_result = execute(is_decode, text_input)
             output_text.value = output_result
         else:
             alert("Error: Nothing to translate")
     except ValueError:
         alert("Error: Something went wrong")
 
-document["translateBtn"].bind("click", test)
+document["translateBtn"].bind("click", translate)
 
 # from it_encode_lib.base64.base64 import *
 # a = str(input())

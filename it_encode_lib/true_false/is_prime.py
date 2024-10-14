@@ -13,5 +13,3 @@ def is_prime(n):
         if not n % i:
             return False
     return True
-
-is_prime()
