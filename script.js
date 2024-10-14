@@ -8,9 +8,23 @@ document.getElementById('close-btn').addEventListener('click', function() {
     document.getElementById('sidebar').classList.remove('open');
 });
 
-// Mockup translation functionality
-document.getElementById('translateBtn').addEventListener('click', function() {
-    const inputText = document.getElementById('inputText').value;
-    const outputText = inputText.split('').reverse().join('');
-    document.getElementById('outputText').value = outputText;
-});
+const inputText = document.getElementById('inputText');
+const outputText = document.getElementById('outputText');
+
+
+document.getElementById('isDecode').addEventListener('click', function() {
+    if (this.checked) {
+        this.nextSibling.textContent = "Decode"
+    } else {
+        this.nextSibling.textContent = "Encode"
+    }
+})
+
+document.getElementById('translator-form').onsubmit = function(e) {
+    e.preventDefault();
+}
+
+document.getElementById('copyBtn').addEventListener('click', function() {
+    navigator.clipboard.writeText(outputText.value);
+})
+
