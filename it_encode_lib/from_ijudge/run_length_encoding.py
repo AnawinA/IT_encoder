@@ -27,7 +27,3 @@ def run_length_decode(text_encoded: str) -> str:
             text += i * int(current_count)
             current_count = ""
     return text
-
-temp = run_length_encode(input())
-print(temp)
-print(run_length_decode(temp))

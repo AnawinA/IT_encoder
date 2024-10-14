@@ -8,4 +8,5 @@ def mov199(text, n, reverse=False):
     e.rotate(n)
     return ''.join(e)
 
-# print(mov199('My name is Anawin', 3, True))
+for i in range(100):
+    print(mov199('My name is Anawin', i, False))
