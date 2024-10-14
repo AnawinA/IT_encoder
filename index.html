@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Translator Website</title>
     <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.10.6/brython.min.js"></script>
 </head>
-<body>
+<body onload="brython()">
     <!-- Navbar (Sidebar) -->
     <div class="topbar" id="topbar">
         <div class="menu-toggle" id="mobile-menu">&#9776;</div>
@@ -22,40 +22,49 @@
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa accusamus sit mollitia tenetur voluptas temporibus vel ipsam quasi modi
             </p>
             <div class="close-btn" id="close-btn">&times;</div>
-
+            
             <h2 class="category-divider">Main</h2>
             <ul class="nav-grid">
-                <li><a href="#"><img src="images/default.png" alt="Home"><span>A</span></a></li>
-                <li><a href="#"><img src="images/default.png" alt="Translate"><span>B</span></a></li>
-                <li><a href="#"><img src="images/default.png" alt="Language"><span>C</span></a></li>
+                <li><button><img src="images/default.png" alt="Home"><span>A</span></button></li>
+                <li><button><img src="images/default.png" alt="Translate"><span>B</span></button></li>
+                <li><button><img src="images/default.png" alt="Language"><span>C</span></button></li>
             </ul>
 
             <h2 class="category-divider">Tools</h2>
             <ul class="nav-grid">
-                <li><a href="#"><img src="images/default.png" alt="Dictionary"><span>D</span></a></li>
-                <li><a href="#"><img src="images/default.png" alt="Help"><span>E</span></a></li>
-                <li><a href="#"><img src="images/default.png" alt="Contact"><span>F</span></a></li>
+                <li><button><img src="images/default.png" alt="Dictionary"><span>D</span></button></li>
+                <li><button><img src="images/default.png" alt="Help"><span>E</span></button></li>
+                <li><button><img src="images/default.png" alt="Contact"><span>F</span></button></li>
             </ul>
             <h2 class="category-divider">Tools</h2>
             <ul class="nav-grid">
-                <li><a href="#"><img src="images/default.png" alt="Dictionary"><span>D</span></a></li>
-                <li><a href="#"><img src="images/default.png" alt="Help"><span>E</span></a></li>
-                <li><a href="#"><img src="images/default.png" alt="Contact"><span>F</span></a></li>
+                <li><button><img src="images/default.png" alt="Dictionary"><span>D</span></button></li>
+                <li><button><img src="images/default.png" alt="Help"><span>E</span></button></li>
+                <li><button><img src="images/default.png" alt="Contact"><span>F</span></button></li>
             </ul>
             <h2 class="category-divider">Tools</h2>
             <ul class="nav-grid">
-                <li><a href="#"><img src="images/default.png" alt="Dictionary"><span>D</span></a></li>
-                <li><a href="#"><img src="images/default.png" alt="Help"><span>E</span></a></li>
-                <li><a href="#"><img src="images/default.png" alt="Contact"><span>F</span></a></li>
+                <li><button><img src="images/default.png" alt="Dictionary"><span>D</span></button></li>
+                <li><button><img src="images/default.png" alt="Help"><span>E</span></button></li>
+                <li><button><img src="images/default.png" alt="Contact"><span>F</span></button></li>
             </ul>
         </nav>
     </div>
     <main>
         <section class="translator-section">
             <h1>Language Translator</h1>
+            <h2>encoder = <ins>Base 64</ins></h2>
             <form id="translator-form">
-                <label for="inputText">Text to Translate:</label>
+                <label for="inputText">Text to Translate: <span class="describeLabel"></span></label>
                 <textarea id="inputText" rows="4" placeholder="Enter text here..."></textarea>
+
+                <div>
+                    <div class="middle-control">
+                        <input type="checkbox" id="isDecode"><label for="isDecode">Encode</label>
+                        <h3 class="arrow-translate">&dArr;</h3><br>
+                        <small>(encode/decode)</small>
+                    </div>
+                </div>
 
                 <label for="outputText">Translated Text:</label>
                 <textarea id="outputText" rows="4" readonly></textarea>
@@ -68,5 +77,7 @@
             </form>
         </section>
     </main>
+    <script type="text/javascript" src="script.js"></script>
+    <script type="text/python" src="index.py"></script>
 </body>
 </html>
