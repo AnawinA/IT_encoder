@@ -107,7 +107,7 @@ body {
     margin-bottom: 50px;
 }
 
-.nav-grid button {
+.nav-grid button, .nav-grid a {
     display: block;
     width: 100%;
     height: 100%;
