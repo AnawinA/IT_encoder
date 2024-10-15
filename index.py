@@ -14,15 +14,28 @@ it_encode = {
         "mealEncoding": (bundle.meal_encode, bundle.meal_decode),
         "numberFactory": (bundle.number_cut_encode, bundle.number_cut_decode),
         "runLength": (bundle.run_length_encode, bundle.run_length_decode),
-        "shorten": (bundle.shorten_num_encode, bundle.shorten_num_decode),
+        "test": (bundle.shorten_num_encode, bundle.shorten_num_decode),
+        "test2": (bundle.shorten_num_encode, bundle.shorten_num_decode),
+        "test3": (bundle.shorten_num_encode, bundle.shorten_num_decode),
+        "test4": (bundle.shorten_num_encode, bundle.shorten_num_decode),
+    },
+    "other test": {
+        "test5": (bundle.shorten_num_encode, bundle.shorten_num_decode),
     }
 }
+
+
+
+def getName(e):
+    mytopic, mytool = str(e.target.title).split(" ")
+    document['topic-using'].textContent = mytopic
+    document['tool-using'].textContent = mytool
 
 for i_topic in it_encode:
     print(i_topic)
     document['search-box'] <= html.H2(i_topic, Class="category-divider")
     document['search-box'] <= html.UL((html.LI(
-        html.BUTTON(html.IMG(src="images/default.png", alt=i_tool) + html.SPAN(i_tool), name=i_tool)
+        html.BUTTON(html.IMG(src="images/default.png", alt=i_tool, title=i_topic+" "+i_tool) + html.SPAN(i_tool)).bind('click', getName)
         ) for i_tool in it_encode[i_topic]), Class="nav-grid")
 
 
@@ -30,12 +43,12 @@ for i_topic in it_encode:
 input_text = document["inputText"]
 output_text = document["outputText"]
 
-topic = "Main"
-tool = "base64"
+topic = document["topic-using"]
+tool = document["tool-using"]
 
 def execute(is_decode, text_input):
     """execute"""
-    return it_encode[topic][tool][is_decode](text_input)
+    return it_encode[topic.textContent][tool.textContent][is_decode](text_input)
 
 def translate(e):
     """encode"""

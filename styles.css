@@ -33,7 +33,6 @@ body {
     scrollbar-width: thin; /* Firefox custom scrollbar width */
     box-shadow: 0 0 10px #000;
     z-index: 99;
-    direction: rtl;
 }
 
 .sidebar .empty-space {
@@ -105,6 +104,7 @@ body {
     width: 60px;
     height: 60px;
     text-align: center;
+    margin-bottom: 50px;
 }
 
 .nav-grid button {
@@ -137,8 +137,6 @@ body {
 }
 
 .nav-grid img:active {
-    width: 83px;
-    filter: brightness(100%);
     box-shadow: 0 0 0 #000;
     border: medium solid white;
 }
@@ -198,7 +196,13 @@ body {
     background-image: linear-gradient(to right, #ffffff 15%, #78a1e7, #daa764);
 }
 
-.translator-section h2 ins {
+#topic-using {
+    color: #45669b;
+    font-size: 1rem;
+    font-style: italic;
+}
+
+#tool-using {
     color: #274b8a;
 }
 
@@ -213,8 +217,12 @@ details summary {
 }
 
 details summary::marker {
+    display: none;
     font-size: 0;
-    transition: .25s transform ease;
+}
+
+details summary::-webkit-details-marker {
+    display:none;
 }
 
 summary::before {
