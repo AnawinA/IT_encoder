@@ -1,0 +1,156 @@
+:root {
+    --gray: rgb(46, 46, 46);
+}
+html, body {
+    color: var(--gray);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 1.1em;
+    margin: 0;
+    height: 70rem;
+    background-image: linear-gradient(to top, rgb(27, 27, 27), rgb(65, 65, 65));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+main {
+    margin: 20% 10%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 30px 50px;
+    box-shadow: 0 0 10px var(--gray);
+}
+form {
+    border: 1.8px solid var(--gray);
+    padding: 5% calc(30px + 5%);
+    border-radius: 5px;
+    text-align: center;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.form_matrix {
+    border: none;
+    display: block;
+    width: 100%;
+}
+.input_string {
+    width: 200px;
+}
+.e_matrix {
+    width: 30px;
+    text-align: center;
+}
+input[type=text] {
+    box-sizing: border-box;
+    font-weight: bold;
+    border: 1.8px solid var(--gray);
+    padding: 2%;
+    outline: none;
+    border-radius: 4px;
+    color: var(--gray);
+}
+input[type=text]:focus {
+    border: 2px solid dodgerblue;
+    box-shadow: 0 0 5px dodgerblue;
+    color: rgb(44, 61, 114);
+}
+hr {
+    border: 1.8px solid dodgerblue;
+    width: 70%;
+}
+h1 {
+    margin-top: 5px;
+}
+h1::first-letter {
+    color: dodgerblue;
+}
+.h2-encode {
+    color: rgb(29, 94, 158);
+}
+.h2-decode {
+    color: rgb(44, 61, 114);
+}
+button {
+    appearance: none;
+    background-color: rgb(228, 228, 228);
+    border: 2px solid rgb(60, 106, 153);
+    border-radius: 5px;
+    box-sizing: border-box;
+    box-shadow: 0 0 0 dodgerblue;
+    color: var(--gray);
+    cursor: pointer;
+    display: inline-block;
+    font-size: 0.8em;
+    font-weight: bold;
+    transition: 0.05s ease-out;
+}
+button:hover {
+    border: 2px solid dodgerblue;
+    box-shadow: 0 0 5px dodgerblue;
+}
+button:active {
+    background-color: dodgerblue;
+    color: white;
+}
+form ~ p {
+    font-weight: 500;
+    margin-top: 10px;
+}
+p > span {
+    font-weight: 500;
+    background-color: rgba(134, 134, 134, 0.15);
+    padding: 3px 2px 5px 4px;
+    border-radius: 10px;
+    text-align: center;
+    margin-left: 5px;
+    margin-top: 3px;
+    display: block;
+}
+span.credit-mini {
+    font-weight: lighter;
+    font-size: smaller;
+}
+.matrix_text {
+    font-weight: 500;
+    color: rgb(29, 94, 158);
+}
+
+#pyscript-operation-details {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(27, 27, 27, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    pointer-events: none;
+}
+
+#pyscript-operation-details p {
+    animation: floating 1s ease-in-out infinite alternate;
+}
+
+#pyscript-operation-details p::before {
+    content: "pyscript: ";
+}
+
+@keyframes floating {
+    0% {
+        transform: opacity(1);
+    }
+    100% {
+        transform: opacity(0.7);
+    }
+}

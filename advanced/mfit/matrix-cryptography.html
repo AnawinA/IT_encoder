@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Cryptography</title>
+    <link rel="stylesheet" href="styles-matrix.css">
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <py-env>
+        - numpy
+        - paths:
+            - mfit_ende_matrix.py
+    </py-env>
+</head>
+<body>
+    <main>
+        <header>
+            <a href="../../index.html"><button>IT encoder</button></a>
+            <h1 class="text-primary">Matrix Cryptography</h1>
+            <small>What is Matrix Cryptography? get pdf from MFIT <a href="./MFIT-only-crytography.pdf" target="_blank">Here.</a></small>
+            <hr>
+        </header>
+    <h2 class="h2-encode">Encode</h2>
+    <form class="form" id="encode_form">
+        <label for="encode_string">String to encode:</label><br>
+        <input type="text" class="input_string" id="encode_string" placeholder="HELLO" oninput="validateStringInput(event)"><br>
+        <div>
+            <button type="button" id="encode_button">Encode</button>
+            <button type="button" id="copy_encode">cp</button>
+        </div>
+    </form>
+
+    <p>Encoded Output: <span id="encoded_output"></span></p>
+    
+    <h2 class="h2-decode">Decode</h2>
+    <form class="form" id="decode_form">
+        <label for="decode_list">List to decode:</label><br>
+        <input type="text" class="input_string" id="decode_list" placeholder="[?, ?, ?] / ? ? ?"><br>
+        <div>
+            <button type="button" id="decode_button">Decode</button>
+            <button type="button" id="copy_decode">cp</button>
+        </div>
+    </form>
+    <p>Decoded Output: <span id="decoded_output"></span></p>
+    <hr>
+    <form class="form_matrix">
+        <label class="matrix_text" for="encode_matrix">Matrix (3x3):</label><br><br>
+        <input type="text" class="e_matrix" id="e_matrix_00" placeholder="1" maxlength="2" onkeypress="validateMatrixInput(event)" value="1" >
+        <input type="text" class="e_matrix" id="e_matrix_01" placeholder="0" maxlength="2" onkeypress="validateMatrixInput(event)" value="-2">
+        <input type="text" class="e_matrix" id="e_matrix_02" placeholder="1" maxlength="2" onkeypress="validateMatrixInput(event)" value="2" ><br>
+        <input type="text" class="e_matrix" id="e_matrix_10" placeholder="0" maxlength="2" onkeypress="validateMatrixInput(event)" value="-1">
+        <input type="text" class="e_matrix" id="e_matrix_11" placeholder="1" maxlength="2" onkeypress="validateMatrixInput(event)" value="1" >
+        <input type="text" class="e_matrix" id="e_matrix_12" placeholder="0" maxlength="2" onkeypress="validateMatrixInput(event)" value="3" ><br>
+        <input type="text" class="e_matrix" id="e_matrix_20" placeholder="1" maxlength="2" onkeypress="validateMatrixInput(event)" value="1" >
+        <input type="text" class="e_matrix" id="e_matrix_21" placeholder="0" maxlength="2" onkeypress="validateMatrixInput(event)" value="-1">
+        <input type="text" class="e_matrix" id="e_matrix_22" placeholder="1" maxlength="2" onkeypress="validateMatrixInput(event)" value="-4"><br><br>
+        <small id="matrix_str"></small>
+    </form>
+    <span class="credit-mini">Made with ❤️ by <a href="/index.html">IT encoder</a></span>
+    </main>
+    <script src="matrix.js"></script>
+    <py-script src="matrix.py"></py-script>
+</body>
+</html>
