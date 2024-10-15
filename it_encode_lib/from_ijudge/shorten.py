@@ -1,7 +1,8 @@
 """Shorten"""
 
-def shorten_num_encode(arr: list[int]) -> str:
+def shorten_num_encode(str_arr: str) -> str:
     """Shorten"""
+    arr = map(int, str_arr.replace("[", '').replace("]", '').split(","))
     is_wait = False
     prev = None
     encoded = ""

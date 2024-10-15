@@ -8,13 +8,14 @@ import bundle
 it_encode = {
     "binary": {
         "base64": (bundle.base64_encoder, bundle.base64_decoder),
-        # "base32": (bundle.base32_encoder, bundle.base32_decoder),
+        "base32": (bundle.base32_encoder, bundle.base32_decoder),
     },
     "iJudge": {
         "mealEncoding": (bundle.meal_encode, bundle.meal_decode),
         "numberFactory": (bundle.number_cut_encode, bundle.number_cut_decode),
         "runLength": (bundle.run_length_encode, bundle.run_length_decode),
-        "test": (bundle.shorten_num_encode, bundle.shorten_num_decode),
+        "shorten": (bundle.shorten_num_encode, bundle.shorten_num_decode),
+        "number_cut": (bundle.number_cut_encode, bundle.number_cut_decode),
         "test2": (bundle.shorten_num_encode, bundle.shorten_num_decode),
         "test3": (bundle.shorten_num_encode, bundle.shorten_num_decode),
         "test4": (bundle.shorten_num_encode, bundle.shorten_num_decode),
