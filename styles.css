@@ -58,7 +58,7 @@ body {
     background-color: #555;
 }
 
-.sidebar p {
+.small-description {
     font-family: monospace;
     text-align: center;
     padding: 0 10px;
@@ -122,10 +122,10 @@ body {
 .nav-grid img {
     width: 80px;
     margin: 20px 0 5px 0;
-    transition: width 0.2s ease-out, transform 0.1s ease-out, box-shadow 0.2s ease-out;
+    transition: width 0.2s ease-out, transform 0.05s ease-out, box-shadow 0.2s ease-out;
     filter: brightness(100%), drop-shadow(0 0 5px #000);
     transform: rotate(0deg);
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: 0 0 0 #000;
 }
 
@@ -134,6 +134,13 @@ body {
     filter: brightness(110%);
     transform: rotate(2deg);
     box-shadow: 0 0 10px #000;
+}
+
+.nav-grid img:active {
+    width: 83px;
+    filter: brightness(100%);
+    box-shadow: 0 0 0 #000;
+    border: medium solid white;
 }
 
 .nav-grid span {
@@ -195,6 +202,41 @@ body {
     color: #274b8a;
 }
 
+details {
+    margin-bottom: 1rem;
+    margin-top: -10px;
+    text-align: left;
+}
+
+details summary {
+    font-weight: bold;
+}
+
+details summary::marker {
+    font-size: 0;
+    transition: .25s transform ease;
+}
+
+summary::before {
+    content: '';
+    border-width: .4rem;
+    border-style: solid;
+    border-color: transparent transparent transparent black;
+    position: relative;
+    top: 0.05rem;
+    display: inline-block;
+    transform: rotate(0);
+    transform-origin: .2rem 50%;
+    transition: .25s transform ease;
+    margin-right: 3px;
+}
+
+details[open] > summary::before {
+    transform: rotate(90deg);
+    border-color: transparent transparent transparent #3c84ff;
+}
+
+
 form {
     display: flex;
     flex-direction: column;
@@ -223,7 +265,16 @@ textarea {
     color: #fff;
     border: none;
     cursor: pointer;
-    transition: background-color 0.2s ease-out;
+    transition: background-color 0.15s ease-out, outline 0.1s ease-out;
+    outline: 0 solid #AAA;
+}
+
+.button-container button:hover {
+    outline-width: 5px;
+}
+
+.button-container button:active {
+    outline-width: 2px;
 }
 
 .button-container #translateBtn {
@@ -236,6 +287,8 @@ textarea {
     font-weight: bolder;
     border: 2px solid #333;
 }
+
+
 
 
 
@@ -280,7 +333,11 @@ textarea {
     -ms-user-select: none;
     user-select: none;
     cursor: pointer;
-    transition: background-color 0.1s ease-out;
+    transition: background-color 0.1s ease-out, box-shadow 0.1s ease-out;
+}
+
+#isDecode ~ label:hover {
+    box-shadow: 0 0 10px var(--blue);
 }
 
 .arrow-translate {

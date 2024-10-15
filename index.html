@@ -6,6 +6,7 @@
     <title>Translator Website</title>
     <link rel="stylesheet" href="styles.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.10.6/brython.min.js"></script>
+    
 </head>
 <body onload="brython()">
     <!-- Navbar (Sidebar) -->
@@ -18,42 +19,48 @@
     <div class="sidebar" id="sidebar">
         <nav>
             <img src="images/it encoder.png" class="logo" alt="" width="100%">
-            <p>
+            <p class="small-description">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa accusamus sit mollitia tenetur voluptas temporibus vel ipsam quasi modi
             </p>
             <div class="close-btn" id="close-btn">&times;</div>
             
-            <h2 class="category-divider">Main</h2>
-            <ul class="nav-grid">
-                <li><button><img src="images/default.png" alt="Home"><span>A</span></button></li>
-                <li><button><img src="images/default.png" alt="Translate"><span>B</span></button></li>
-                <li><button><img src="images/default.png" alt="Language"><span>C</span></button></li>
-            </ul>
-
-            <h2 class="category-divider">Tools</h2>
-            <ul class="nav-grid">
-                <li><button><img src="images/default.png" alt="Dictionary"><span>D</span></button></li>
-                <li><button><img src="images/default.png" alt="Help"><span>E</span></button></li>
-                <li><button><img src="images/default.png" alt="Contact"><span>F</span></button></li>
-            </ul>
-            <h2 class="category-divider">Tools</h2>
-            <ul class="nav-grid">
-                <li><button><img src="images/default.png" alt="Dictionary"><span>D</span></button></li>
-                <li><button><img src="images/default.png" alt="Help"><span>E</span></button></li>
-                <li><button><img src="images/default.png" alt="Contact"><span>F</span></button></li>
-            </ul>
-            <h2 class="category-divider">Tools</h2>
-            <ul class="nav-grid">
-                <li><button><img src="images/default.png" alt="Dictionary"><span>D</span></button></li>
-                <li><button><img src="images/default.png" alt="Help"><span>E</span></button></li>
-                <li><button><img src="images/default.png" alt="Contact"><span>F</span></button></li>
-            </ul>
+            <div id="search-box">
+                <!-- <h2 class="category-divider">Main</h2>
+                <ul class="nav-grid">
+                    <li><button><img src="images/default.png" alt="Home"><span>A</span></button></li>
+                    <li><button><img src="images/default.png" alt="Translate"><span>B</span></button></li>
+                    <li><button><img src="images/default.png" alt="Language"><span>C</span></button></li>
+                </ul>
+    
+                <h2 class="category-divider">Tools</h2>
+                <ul class="nav-grid">
+                    <li><button><img src="images/default.png" alt="Dictionary"><span>D</span></button></li>
+                    <li><button><img src="images/default.png" alt="Help"><span>E</span></button></li>
+                    <li><button><img src="images/default.png" alt="Contact"><span>F</span></button></li>
+                </ul>
+                <h2 class="category-divider">Tools</h2>
+                <ul class="nav-grid">
+                    <li><button><img src="images/default.png" alt="Dictionary"><span>D</span></button></li>
+                    <li><button><img src="images/default.png" alt="Help"><span>E</span></button></li>
+                    <li><button><img src="images/default.png" alt="Contact"><span>F</span></button></li>
+                </ul>
+                <h2 class="category-divider">Tools</h2>
+                <ul class="nav-grid">
+                    <li><button><img src="images/default.png" alt="Dictionary"><span>D</span></button></li>
+                    <li><button><img src="images/default.png" alt="Help"><span>E</span></button></li>
+                    <li><button><img src="images/default.png" alt="Contact"><span>F</span></button></li>
+                </ul> -->
+            </div>
         </nav>
     </div>
     <main>
         <section class="translator-section">
             <h1>Language Translator</h1>
             <h2>encoder = <ins>Base 64</ins></h2>
+            <details>
+                <summary>description base64</summary>
+                <p class="small-description">Base64 is an encoding method that transforms binary data into text format using 64 different ASCII characters. It's widely used to transmit data over media that handle text, ensuring the data remains unchanged. Base64 is prevalent in web development for embedding images and other files within HTML or CSS files.</p>
+            </details>
             <form id="translator-form">
                 <label for="inputText">Text to Translate: <span class="describeLabel"></span></label>
                 <textarea id="inputText" rows="4" placeholder="Enter text here..."></textarea>
@@ -67,7 +74,7 @@
                 </div>
 
                 <label for="outputText">Translated Text:</label>
-                <textarea id="outputText" rows="4" readonly></textarea>
+                <textarea id="outputText" rows="4" readonly placeholder="Translation will appear here"></textarea>
 
                 <div class="button-container">
                     <button id="clearBtn">Clear</button>

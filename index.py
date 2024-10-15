@@ -1,18 +1,30 @@
 """index.py"""
-from browser import document, alert
+from browser import document, alert, html
 import bundle
 # note from ... import *  // "*" is not good practice
 # can import only non-import files
 
 
 it_encode = {
-    "Main": {
+    "binary": {
         "base64": (bundle.base64_encoder, bundle.base64_decoder),
+        # "base32": (bundle.base32_encoder, bundle.base32_decoder),
     },
     "iJudge": {
-        
+        "mealEncoding": (bundle.meal_encode, bundle.meal_decode),
+        "numberFactory": (bundle.number_cut_encode, bundle.number_cut_decode),
+        "runLength": (bundle.run_length_encode, bundle.run_length_decode),
+        "shorten": (bundle.shorten_num_encode, bundle.shorten_num_decode),
     }
 }
+
+for i_topic in it_encode:
+    print(i_topic)
+    document['search-box'] <= html.H2(i_topic, Class="category-divider")
+    document['search-box'] <= html.UL((html.LI(
+        html.BUTTON(html.IMG(src="images/default.png", alt=i_tool) + html.SPAN(i_tool), name=i_tool)
+        ) for i_tool in it_encode[i_topic]), Class="nav-grid")
+
 
 
 input_text = document["inputText"]
