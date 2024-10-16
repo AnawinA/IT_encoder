@@ -239,6 +239,37 @@ def number_cut_decode(str_arr: str) -> int:
     return sum(arr)
 
 
+"""password"""
+# import hashlib
+# def password(text: str):
+#     """password"""
+#     word = hashlib.sha512(text.encode('utf-8'))
+#     print(word.hexdigest().upper())
+
+# def break_password(word: str):
+#     """BreakPassword"""
+#     for i in range(0, 100000):
+#         tmp = hashlib.sha512(str(i).zfill(5).encode('utf-8')).hexdigest().upper()
+#         if tmp == word:
+#             print(str(i).zfill(5))
+#             break
+
+
+"""Ejudge"""
+def main():
+    """Roman"""
+    romanvalue = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
+    roman = input()
+    ans = 0
+    for i, j in enumerate(roman):
+        if i == len(roman)-1:
+            ans += romanvalue[j]
+        elif romanvalue[j] >= romanvalue[roman[i+1]]:
+            ans += romanvalue[j]
+        else:
+            ans -= romanvalue[j]
+    print(ans)
+
 """Run Length Encoding"""
 
 def run_length_encode(text: str) -> str:
@@ -262,7 +293,7 @@ def run_length_decode(text_encoded: str) -> str:
     text = ""
     current_count = ""
     for i in text_encoded:
-        if i.isnumeric():
+        if i.isdigit():
             current_count += i
         else:
             text += i * int(current_count)

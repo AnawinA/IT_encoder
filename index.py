@@ -33,7 +33,6 @@ def getName(e):
     document['tool-using'].textContent = mytool
 
 for i_topic in it_encode:
-    print(i_topic)
     document['search-box'] <= html.H2(i_topic, Class="category-divider")
     document['search-box'] <= html.UL((html.LI(
         html.BUTTON(html.IMG(src="images/default.png", alt=i_tool, title=i_topic+" "+i_tool) + html.SPAN(i_tool)).bind('click', getName)
@@ -61,8 +60,8 @@ def translate(e):
             output_text.value = output_result
         else:
             alert("Error: Nothing to translate")
-    except ValueError:
-        alert("Error: Something went wrong")
+    except ValueError as err:
+        alert("Error: Something went wrong " + str(err))
 
 document["translateBtn"].bind("click", translate)
 
