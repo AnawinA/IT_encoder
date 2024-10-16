@@ -28,3 +28,12 @@ document.getElementById('copyBtn').addEventListener('click', function() {
     navigator.clipboard.writeText(outputText.value);
 })
 
+const params = new URLSearchParams(window.location.search);
+const topic = params.get('e');
+const tool = params.get('c')
+if (topic && tool) {
+    document.getElementById('topic-using').textContent = topic
+    document.getElementById('tool-using').textContent = tool
+} else {
+    console.log("no data")
+}
