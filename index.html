@@ -62,12 +62,12 @@
             <h1>Language Translator</h1>
             <h2>encoder = <ins id="tool-using">base64</ins> <ins id="topic-using">binary</ins></h2>
             <details>
-                <summary>description base64</summary>
-                <p class="small-description">Base64 is an encoding method that transforms binary data into text format using 64 different ASCII characters. It's widely used to transmit data over media that handle text, ensuring the data remains unchanged. Base64 is prevalent in web development for embedding images and other files within HTML or CSS files.</p>
+                <summary id="details-desc">description base64</summary>
+                <p class="small-description" id="details-content">Base64 is an encoding method that transforms binary data into text format using 64 different ASCII characters. It's widely used to transmit data over media that handle text, ensuring the data remains unchanged. Base64 is prevalent in web development for embedding images and other files within HTML or CSS files.</p>
             </details>
             <form id="translator-form">
                 <label for="inputText">Text to Translate: <span class="describeLabel"></span></label>
-                <textarea id="inputText" rows="4" placeholder="Enter text here..."></textarea>
+                <textarea id="inputText" rows="4" placeholder="Enter Text Here... ex.Hello IT!"></textarea>
 
                 <div>
                     <div class="middle-control">
@@ -78,7 +78,7 @@
                 </div>
 
                 <label for="outputText">Translated Text:</label>
-                <textarea id="outputText" rows="4" readonly placeholder="Translation will appear here"></textarea>
+                <textarea id="outputText" rows="4" disabled placeholder="Translated = SGVsbG8gSVQh"></textarea>
 
                 <div class="button-container">
                     <button id="clearBtn">Clear</button>
