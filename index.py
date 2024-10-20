@@ -25,13 +25,14 @@ it_encode = {
         "test3": (bundle.shorten_num_encode, bundle.shorten_num_decode, {}),
         "test4": (bundle.shorten_num_encode, bundle.shorten_num_decode, {}),
     },
-    "other test": {
-        "test5": (bundle.shorten_num_encode, bundle.shorten_num_decode),
+    "Text": {
+        "upper/lowercase": (str.upper, str.lower, {'in': str.lower(ph_prev), 'out': str.upper(ph_prev)}),
+        "swapcase": (str.swapcase, str.swapcase, {'in': ph_prev, 'out': str.swapcase(ph_prev)}),
+        "capitalize": (str.capitalize, str.capitalize, {'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev)}),
+        "title": (str.title, str.title, {'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev)}),
+        "join/split-text": (str.join, str.split, {'in': ph_prev, 'out': str.split(ph_prev)}),
     }
 }
-
-
-
 
 
 def getName(e):
@@ -48,7 +49,6 @@ def getName(e):
     document['sidebar'].classList.remove('open')
     on_in, on_out = (tool_details['in'], tool_details['out']) if not input_text.classList.contains('swap-placeholder') else (tool_details['out'], tool_details['in'])
     input_text.attrs['placeholder'], output_text.attrs['placeholder'] = on_in, on_out
-
 
 for i_topic in it_encode:
     document['search-box'] <= html.H2(i_topic, Class="category-divider")

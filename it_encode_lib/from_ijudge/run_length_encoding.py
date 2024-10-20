@@ -21,7 +21,7 @@ def run_length_decode(text_encoded: str) -> str:
     text = ""
     current_count = ""
     for i in text_encoded:
-        if i.isnumeric():
+        if i.isdigit():
             current_count += i
         else:
             text += i * int(current_count)
