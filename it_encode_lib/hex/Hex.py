@@ -1,13 +1,11 @@
-"""HexEncoder"""
-def encode():
+"""HexEncoder/decoder"""
+def hex_encode(text):
     """encoderHex"""
-    text = str(input("encode: "))
     encode_text = text.encode("utf-8").hex()
-    print(encode_text)
-encode()
-def decode():
+    return encode_text
+
+def hex_decode(text_encoded):
     """decodeHex"""
-    text = str(input("decode: "))
-    decode_text = bytes.fromhex(text).decode('utf-8')
-    print(decode_text)
-decode()
+    decode_text = bytes.fromhex(text_encoded).decode('utf-8')
+    return decode_text
+

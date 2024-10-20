@@ -135,6 +135,16 @@ def base64_decoder(plain_txt):
         dec_txt += (chr(int(dec_bin[i*8:((i+1)*8)], 2)))
     return dec_txt
 
+"""HexEncoder/decoder"""
+def hex_encode(text):
+    """encoderHex"""
+    encode_text = text.encode("utf-8").hex()
+    return encode_text
+
+def hex_decode(text_encoded):
+    """decodeHex"""
+    decode_text = bytes.fromhex(text_encoded).decode('utf-8')
+    return decode_text
 
 
 """Caesar shift"""

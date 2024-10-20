@@ -14,6 +14,7 @@ it_encode = {
     "binary": {
         "base64": (bundle.base64_encoder, bundle.base64_decoder, {'desc': details.base64, 'in': ph_prev, 'out': bundle.base64_encoder(ph_prev)}),
         "base32": (bundle.base32_encoder, bundle.base32_decoder, {'desc': details.base32, 'in': ph_prev, 'out': bundle.base32_encoder(ph_prev)}),
+        "hex/base16": (bundle.hex_encode, bundle.hex_decode,{'desc': details.hex_base16, 'in': ph_prev, 'out': bundle.hex_encode(ph_prev)}),
     },
     "iJudge": {
         "mealEncoding": (bundle.meal_encode, bundle.meal_decode, {'in': ph_prev, 'out': bundle.meal_encode(ph_prev)}),
