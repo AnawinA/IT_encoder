@@ -16,6 +16,21 @@ print(f"SHA-1 hash of '{input_string}': {hash_result}")
 
 """Sha-2 Family"""
 import hashlib
+def generate_sha224(input_string):
+    """Sha-224 hashing algorithm"""
+    encoded_string = input_string.encode('utf-8')
+    
+    sha224_hash = hashlib.sha224()
+    
+    sha224_hash.update(encoded_string)
+
+    return sha224_hash.hexdigest()
+
+input_string = "Hello, World!"
+hash_result = generate_sha224(input_string)
+print(f"SHA-224 hash of '{input_string}': {hash_result}")
+
+import hashlib
 def generate_sha256(input_string):
     """Sha-256 hashing algorithm"""
     encoded_string = input_string.encode('utf-8')
