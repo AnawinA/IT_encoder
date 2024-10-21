@@ -34,15 +34,28 @@ PSCP project - IT_encoder
 
 ## Credits
 67070197 นายอภิพล สุวรรณชัยสกุล
+
 67070196 นายอนาวิล ภู่รัตนากรกุล
+
 67070303 คทาฤทธี อวยพร
+
 67070162 นายวสวัตติ์ เนตร์พันธ์
+
 67070184 น.ส.สิทธารถ สีโยธะ
 
-by Brython & py-script
+
+### Powered by HTML CSS JS & Python
+
+.Brython
 ```py
-def main():
-  return(True)
+document["translateBtn"].bind("click", translate)
 ```
+
+<py-script>
+```py
+Element("encoded_output").write(encoded)
+```
+
+
 
 
