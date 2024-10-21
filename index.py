@@ -8,7 +8,9 @@ import details
 
 ph_prev = "Hello IT!"
 ph_prev_num = "67070197"
+ph_prev_small_num = "196"
 ph_prev_list = "1, 3, 4, 5, 7, 8, 10"
+ph_prev_ip = ("161,246,38,35", "255,255,0,128")
 
 it_encode = {
     "binary": {
@@ -21,41 +23,64 @@ it_encode = {
         "numberFactory": (bundle.number_cut_encode, bundle.number_cut_decode, {'in': ph_prev_num, 'out': bundle.number_cut_encode(ph_prev_num)}),
         "runLength": (bundle.run_length_encode, bundle.run_length_decode, {'in': ph_prev, 'out': bundle.run_length_encode(ph_prev)}),
         "shorten": (bundle.shorten_num_encode, bundle.shorten_num_decode, {'in': ph_prev_list, 'out': bundle.shorten_num_encode(ph_prev_list)}),
-        "test2": (bundle.shorten_num_encode, bundle.shorten_num_decode, {}),
-        "test3": (bundle.shorten_num_encode, bundle.shorten_num_decode, {}),
-        "test4": (bundle.shorten_num_encode, bundle.shorten_num_decode, {}),
+        "roman": (bundle.en_roman, bundle.de_roman, {'in': ph_prev_small_num, 'out': bundle.en_roman(ph_prev_small_num)}),
+    },
+    "ICS": {
+        "networkID": (bundle.networkid, bundle.networkid, {'in': ph_prev_ip[0], 'out': bundle.networkid(*ph_prev_ip), 'input2': '252,127,63,6', 'no_decode': True}),
     },
     "Text": {
         "upper/lowercase": (str.upper, str.lower, {'in': str.lower(ph_prev), 'out': str.upper(ph_prev)}),
         "swapcase": (str.swapcase, str.swapcase, {'in': ph_prev, 'out': str.swapcase(ph_prev)}),
-        "capitalize": (str.capitalize, str.capitalize, {'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev)}),
-        "title": (str.title, str.title, {'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev)}),
+        "capitalize": (str.capitalize, str.capitalize, {'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev), 'no_decode': True}),
+        "title": (str.title, str.title, {'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev), 'no_decode': True}),
         "join/split-text": (str.join, str.split, {'in': ph_prev, 'out': str.split(ph_prev)}),
-    }
+    },
+
 }
 
 
 def getName(e):
+    """getName for execute from 'it_encode' dict"""
     mytopic, mytool = str(e.target.title).split(" ")
     document['topic-using'].textContent = mytopic
     document['tool-using'].textContent = mytool
+
     tool_details = it_encode[mytopic][mytool][2]
-    if 'desc' in tool_details:
-        document['details-desc'].textContent = 'description ' + mytool 
-        document['details-content'].textContent = tool_details.get('desc')
-        document['details-desc'].style.display = 'block'
-    else:
-        document['details-desc'].style.display = 'none'
+    config(tool_details, mytool)
+
     document['sidebar'].classList.remove('open')
     on_in, on_out = (tool_details['in'], tool_details['out']) if not input_text.classList.contains('swap-placeholder') else (tool_details['out'], tool_details['in'])
     input_text.attrs['placeholder'], output_text.attrs['placeholder'] = on_in, on_out
+
+
+def config(td, mytool):
+    """[-] Ignore"""
+    if 'no_decode' in td:
+        document['isDecode'].checked = False
+        document['isDecode'].disabled = True
+    else:
+        document['isDecode'].parent.style.display = 'block'
+        document['isDecode'].disabled = False
+    if 'desc' in td:
+        document['details-desc'].textContent = 'description ' + mytool 
+        document['details-content'].textContent = td.get('desc')
+        document['details-desc'].style.display = 'block'
+    else:
+        document['details-desc'].style.display = 'none'
+
+    if 'input2' in td:
+        document['input2-input'].attrs['placeholder'] = td.get('input2')
+        document['input2-input'].disabled = False
+        document['input2-input'].parent.style.display = 'block'
+    else:
+        document['input2-input'].disabled = True
+        document['input2-input'].parent.style.display = 'none'
 
 for i_topic in it_encode:
     document['search-box'] <= html.H2(i_topic, Class="category-divider")
     document['search-box'] <= html.UL((html.LI(
         html.BUTTON(html.IMG(src="images/default.png", alt=i_tool, title=i_topic+" "+i_tool) + html.SPAN(i_tool)).bind('click', getName)
         ) for i_tool in it_encode[i_topic]), Class="nav-grid")
-
 
 
 input_text = document["inputText"]
@@ -66,6 +91,13 @@ tool = document["tool-using"]
 
 def execute(is_decode, text_input):
     """execute"""
+    if False if document["input2-input"].disabled else True:
+        my_value = document["input2-input"].value
+        if my_value != "":
+            return it_encode[topic.textContent][tool.textContent][is_decode](text_input, my_value)
+        else:
+            alert("Error: Input 2 is empty")
+            return ""
     return it_encode[topic.textContent][tool.textContent][is_decode](text_input)
 
 def translate(e):

@@ -329,6 +329,11 @@ textarea {
     color: var(--blue);
 }
 
+#isDecode:disabled ~ label {
+    background-color: darkgray;
+    color: white;
+}
+
 #isDecode ~ label {
     background-color: var(--blue);
     color: white;
@@ -345,9 +350,10 @@ textarea {
     transition: background-color 0.1s ease-out, box-shadow 0.1s ease-out;
 }
 
-#isDecode ~ label:hover {
+#isDecode:not(:disabled) ~ label:hover {
     box-shadow: 0 0 10px var(--blue);
 }
+
 
 .arrow-translate {
     display: inline-block;
@@ -365,5 +371,13 @@ textarea {
 
 .middle-control {
     margin: 5px 0;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 10px;
 }
 
+#input2-input {
+    padding: 5px;
+    font-size: 1.05rem;
+}

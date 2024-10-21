@@ -493,7 +493,8 @@ def hex_decode(text_encoded):
 '''input ip address and subnet mask output network id'''
 def networkid(address,subnet):
     '''input address [255, 082, 255, 000] subnet [252, 127, 063, 006] list[4][3] '''
-    
+    address = address.replace("[", '').replace("]", '').split(",")
+    subnet = subnet.replace("[", '').replace("]", '').split(",")
     netid = []
     for i in range(4):
         atemp = ""
@@ -510,8 +511,6 @@ def networkid(address,subnet):
             astemp += str(i)
         netid.append(int(astemp,2))
     return netid
-print(networkid([161,246,38,35],[255,255,0,128]))
-
 
 # '''pep8borntojudge'''
 # import random
