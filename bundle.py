@@ -1,12 +1,5 @@
 #!/usr/bin/env python
 
-# """encodeHex"""
-# def Encodehex():
-#     """hexencode"""
-#     text = input()
-#     text_encode = text.encode("utf-8").hex()
-#     print(text_encode)
-
 # from collections import deque
 
 # def mov199(text, n, reverse=False):
@@ -135,16 +128,84 @@ def base64_decoder(plain_txt):
         dec_txt += (chr(int(dec_bin[i*8:((i+1)*8)], 2)))
     return dec_txt
 
-"""HexEncoder/decoder"""
-def hex_encode(text):
-    """encoderHex"""
-    encode_text = text.encode("utf-8").hex()
-    return encode_text
 
-def hex_decode(text_encoded):
-    """decodeHex"""
-    decode_text = bytes.fromhex(text_encoded).decode('utf-8')
-    return decode_text
+
+# """Sha-1"""
+# import hashlib
+# def generate_sha1(input_string):
+#     """Sha-1 hashing algorithm"""
+#     encoded_string = input_string.encode('utf-8')
+    
+#     sha1_hash = hashlib.sha1()
+    
+#     sha1_hash.update(encoded_string)
+    
+#     return sha1_hash.hexdigest()
+
+# input_string = "Hello, World!"
+# hash_result = generate_sha1(input_string)
+# print(f"SHA-1 hash of '{input_string}': {hash_result}")
+
+# """Sha-2 Family"""
+# import hashlib
+# def generate_sha224(input_string):
+#     """Sha-224 hashing algorithm"""
+#     encoded_string = input_string.encode('utf-8')
+    
+#     sha224_hash = hashlib.sha224()
+    
+#     sha224_hash.update(encoded_string)
+
+#     return sha224_hash.hexdigest()
+
+# input_string = "Hello, World!"
+# hash_result = generate_sha224(input_string)
+# print(f"SHA-224 hash of '{input_string}': {hash_result}")
+
+# import hashlib
+# def generate_sha256(input_string):
+#     """Sha-256 hashing algorithm"""
+#     encoded_string = input_string.encode('utf-8')
+
+#     sha256_hash = hashlib.sha256()
+
+#     sha256_hash.update(encoded_string)
+    
+#     return sha256_hash.hexdigest()
+
+# input_string = "Hello, World!"
+# hash_result = generate_sha256(input_string)
+# print(f"SHA-256 hash of '{input_string}': {hash_result}")
+
+# import hashlib
+# def generate_sha384(input_string):
+#     """Sha-384 hashing algorithm"""
+#     encoded_string = input_string.encode('utf-8')
+
+#     sha384_hash = hashlib.sha384()
+    
+#     sha384_hash.update(encoded_string)
+    
+#     return sha384_hash.hexdigest()
+
+# input_string = "Hello, World!"
+# hash_result = generate_sha384(input_string)
+# print(f"SHA-384 hash of '{input_string}': {hash_result}")
+
+# import hashlib
+# def generate_sha512(input_string):
+#     """Sha-512 hashing algorithm"""
+#     encoded_string = input_string.encode('utf-8')
+
+#     sha512_hash = hashlib.sha512()
+
+#     sha512_hash.update(encoded_string)
+    
+#     return sha512_hash.hexdigest()
+
+# input_string = "Hello, World!"
+# hash_result = generate_sha512(input_string)
+# print(f"SHA-512 hash of '{input_string}': {hash_result}")
 
 
 """Caesar shift"""
@@ -266,10 +327,10 @@ def number_cut_decode(str_arr: str) -> int:
 
 
 """Ejudge"""
-def main():
+
+def de_roman(roman):
     """Roman"""
     romanvalue = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
-    roman = input()
     ans = 0
     for i, j in enumerate(roman):
         if i == len(roman)-1:
@@ -278,7 +339,24 @@ def main():
             ans += romanvalue[j]
         else:
             ans -= romanvalue[j]
-    print(ans)
+    return ans
+
+def en_roman(num):
+    """Convert an integer to a Roman numeral."""
+    num = int(num)
+    roman_numerals = {
+        1000: "M", 900: "CM", 500: "D", 400: "CD",
+        100: "C", 90: "XC", 50: "L", 40: "XL",
+        10: "X", 9: "IX", 5: "V", 4: "IV",
+        1: "I"
+    }
+    result = ""
+    for value in sorted(roman_numerals.keys(), reverse=True):
+        while num >= value:
+            result += roman_numerals[value]
+            num -= value
+    return result
+
 
 """Run Length Encoding"""
 
@@ -390,6 +468,147 @@ def temperature(temp: float, type_temp="C", to_type="F"):
         new_temp = c_to_r(c_temp)
     return new_temp
 
+
+"""HexEncoder/decoder"""
+def hex_encode(text):
+    """encoderHex"""
+    encode_text = text.encode("utf-8").hex()
+    return encode_text
+
+def hex_decode(text_encoded):
+    """decodeHex"""
+    decode_text = bytes.fromhex(text_encoded).decode('utf-8')
+    return decode_text
+
+
+
+
+
+
+
+
+
+
+
+'''input ip address and subnet mask output network id'''
+def networkid(address,subnet):
+    '''input address [255, 082, 255, 000] subnet [252, 127, 063, 006] list[4][3] '''
+    
+    netid = []
+    for i in range(4):
+        atemp = ""
+        stemp = ""
+        kaddress = int(address[i])
+        ksubnet = int(subnet[i])
+        atmp = bin(kaddress).replace("0b","")
+        stmp = bin(ksubnet).replace("0b","")
+        atemp = "0"*(8-len(atmp))+atmp
+        stemp = "0"*(8-len(stmp))+stmp
+        addsub = [int(i) and int(j) for (i, j) in zip(atemp, stemp)]
+        astemp = ""
+        for i in addsub:
+            astemp += str(i)
+        netid.append(int(astemp,2))
+    return netid
+print(networkid([161,246,38,35],[255,255,0,128]))
+
+
+# '''pep8borntojudge'''
+# import random
+# def main():
+#     '''pep9'''
+#     error=24
+#     score=41
+#     while score <=72 :
+#         proba=random.randint(100,999)
+#         print(f"{score}.) {proba} * 999 = ")
+        
+#         answer_user=int(input("your answer : "))
+#         if answer_user != proba * 999 :
+#             error-=1
+#             print("wrong answer, heart = ",error,", score = ", score)
+#         else:
+#             score+=1
+#             print("correct answer, heart = ",error, ", score = ", score)
+#         print("game over")
+    
+#         score += 1
+# main()
+
+
+# '''pep8borntojudge'''
+# import random
+# def main():
+#     '''pep9'''
+#     print("Welcome \n1. +\n2. -\n3. *\n4. /")
+#     var=""
+#     error="0"
+#     while error=="0":
+#         mode_program=str(input("Please Select : "))
+#         if mode_program=="1":
+#             var ="+"
+#             error="1"
+#         elif mode_program=="2":
+#             var ="-"
+#             error="1"
+#         elif mode_program=="3":
+#             var ="x"
+#             error="1"
+#         elif mode_program=="4":
+#             var ="/"
+#             error="1"
+#         else:
+#             error="0"
+#             print("invalid key Try again . . .")
+#     minimum_number=int(input("minimum : "))
+#     maximum_number=int(input("maximum : "))
+#     prob_length=int(input("number ex.0-100 : "))
+#     for i in range(1,prob_length+1):
+#         proba=random.randint(minimum_number,maximum_number)
+#         probb=random.randint(minimum_number,maximum_number)
+#         print(f"{i}.) {proba} {var} {probb} = ")
+# main()
+
+
+# '''pep8'''
+# import random
+# def main():
+#     '''fwedscx'''
+#     a = random.randint(0,19)
+#     b = random.randint(0,29)
+#     c = random.randint(10,29)
+#     d = random.randint(10,19)
+#     num = 1
+#     heart = 5
+#     score = 0
+#     while heart>0:
+#         a = random.randint(0,9)
+#         b = random.randint(0,9)
+#         c = random.randint(0,9)
+#         d = random.randint(0,9)
+#         print("\n\n-------------score =",score,"-------- heart =",heart,"-----------------")
+#         print(f"{num}.) {a} + {b} + {c} + {d} = ")
+#         x = int(input())
+#         if x != a+b+c+d:
+#             heart -= 1
+#             if score >= 0.25:
+#                 score -= 0.25
+#             print("incorrect")
+#         else:
+#             score += 1
+#             print("correct")
+#         num += 1
+#     print("Game Over your score is",score)
+# main()
+
+
+'''all text to uppercase'''
+def lowercase(plaintext):
+    return plaintext.lower()
+
+'''all text to uppercase'''
+def uppercase(plaintext):
+    return plaintext.upper()
 
 """ArmStrong"""
 
