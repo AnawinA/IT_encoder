@@ -38,3 +38,11 @@ PSCP project - IT_encoder
 67070303 คทาฤทธี อวยพร
 67070162 นายวสวัตติ์ เนตร์พันธ์
 67070184 น.ส.สิทธารถ สีโยธะ
+
+by Brython & py-script
+```py
+def main():
+  return(True)
+```
+
+
