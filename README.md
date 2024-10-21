@@ -52,6 +52,7 @@ document["translateBtn"].bind("click", translate)
 ```
 
 <py-script>
+
 ```py
 Element("encoded_output").write(encoded)
 ```
