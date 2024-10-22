@@ -33,9 +33,9 @@ it_encode = {
         "swapcase": (str.swapcase, str.swapcase, {'in': ph_prev, 'out': str.swapcase(ph_prev)}),
         "capitalize": (str.capitalize, str.capitalize, {'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev), 'no_decode': True}),
         "title": (str.title, str.title, {'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev), 'no_decode': True}),
-        "join/split-text": (str.join, str.split, {'in': ph_prev, 'out': str.split(ph_prev)}),
+        "join/split-text": (lambda x: ''.join(x), str.split, {'in': ph_prev, 'out': str.split(ph_prev)}),
+        "snake->camel": (bundle.toCamelCase, bundle.to_snakecase, {'in': 'hello_it!', 'out': bundle.toCamelCase('hello_it!'), 'input2': 'delimiter: _'}),
     },
-
 }
 
 
@@ -93,11 +93,7 @@ def execute(is_decode, text_input):
     """execute"""
     if False if document["input2-input"].disabled else True:
         my_value = document["input2-input"].value
-        if my_value != "":
-            return it_encode[topic.textContent][tool.textContent][is_decode](text_input, my_value)
-        else:
-            alert("Error: Input 2 is empty")
-            return ""
+        return it_encode[topic.textContent][tool.textContent][is_decode](text_input, my_value or "")
     return it_encode[topic.textContent][tool.textContent][is_decode](text_input)
 
 def translate(e):
