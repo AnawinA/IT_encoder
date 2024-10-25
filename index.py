@@ -39,6 +39,7 @@ it_encode = {
         "title": (str.title, str.title, {'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev), 'no_decode': True}),
         "join/split-text": (lambda x: ''.join(x), str.split, {'in': ph_prev, 'out': str.split(ph_prev)}),
         "snake->camel": (bundle.toCamelCase, bundle.to_snakecase, {'in': 'hello_it!', 'out': bundle.toCamelCase('hello_it!'), 'input2': 'delimiter: _'}),
+        "reverse": (lambda x: x[::-1], lambda x: x[::-1], {'in': ph_prev, 'out': ph_prev[::-1]}),
     },
 }
 
