@@ -12,8 +12,9 @@
     <!-- Navbar (Sidebar) -->
     <div class="topbar" id="topbar">
         <div class="menu-toggle" id="mobile-menu">&#9776;</div>
-        <h2 class="title"><span>I</span><span>T</span> encoder</h2>
+        <h2 class="title"><span>i</span><span>T</span> encoder</h2>
         <div>
+            <button onclick="toggleDarkMode()" class="darkmode-btn">Dark Mode</button>
         </div>
     </div>
     <div class="sidebar" id="sidebar">
@@ -67,13 +68,13 @@
             </details>
             <form id="translator-form">
                 <label for="inputText">Text to Translate: <span class="describeLabel"></span></label>
-                <textarea id="inputText" rows="4" placeholder="Enter Text Here... ex.Hello IT!"></textarea>
+                <textarea id="inputText" rows="5" placeholder="Enter Text Here... ex.Hello IT!" autofocus autocomplete="on"></textarea>
 
                 <div>
                     
                     <div class="middle-control">
-                        <div >
-                            <input type="text" id="input2-input" size="10" placeholder="n/a"><br>
+                        <div style="display: none;">
+                            <input type="text" id="input2-input" size="10" disabled placeholder="n/a"><br>
                             <small>second input</small>
                         </div>
                         <div>
@@ -85,7 +86,7 @@
                 </div>
 
                 <label for="outputText">Translated Text:</label>
-                <textarea id="outputText" rows="4" readonly placeholder="Translated = SGVsbG8gSVQh"></textarea>
+                <textarea id="outputText" rows="5" readonly placeholder="Translated = SGVsbG8gSVQh"></textarea>
 
                 <div class="button-container">
                     <button id="clearBtn">Clear</button>

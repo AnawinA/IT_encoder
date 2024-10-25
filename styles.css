@@ -1,8 +1,25 @@
 /* Reset some basic styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&family=Quicksand:wght@300..700&display=swap');
 
 :root {
     --blue: #3c84ff;
+    --white: #f4f4f4;
+    --background-color: #fff;
+    --text-color: #333;
+    --side-bar-color: #292929;
+    --translator-color: #f4f4f4;
 }
+
+body.dark-mode {
+    --background-color: black;
+}
+
+body.dark-mode * {
+    --text-color: #f5f5f5;
+    --side-bar-color: #181818;
+    --translator-color: #1f1f1f
+}
+
 
 * {
     margin: 0;
@@ -10,12 +27,20 @@
     box-sizing: border-box;
 }
 
+
+
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Inter", Arial, sans-serif;
     line-height: 1.6;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    background-image: 
+    linear-gradient(75deg, rgba(133, 101, 75, 0.7), rgba(71, 66, 145, 0.7))
+    , linear-gradient(to top, rgb(0, 0, 0, 0.9), rgba(71, 66, 145, 0));
+    height: 100vh;
 }
+
 
 /* Sidebar styles */
 .sidebar {
@@ -25,7 +50,7 @@ body {
     height: 100%;
     width: 300px;
     color: #777;
-    background-color: #292929;
+    background-color: var(--side-bar-color);
     transition: left 0.3s ease-in-out;
     display: flex;
     flex-direction: column;
@@ -34,6 +59,8 @@ body {
     box-shadow: 0 0 10px #000;
     z-index: 99;
 }
+
+
 
 .sidebar .empty-space {
     width: 100%;
@@ -73,12 +100,20 @@ body {
 
 /* Top bar for label */
 .topbar {
-    background-color: #333;
+    background-color: var(--side-bar-color);
     color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+h2.title {
+    font-size: 2.5rem;
+    font-family: "Poppins" ,sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .title span:first-child {
@@ -86,6 +121,20 @@ body {
 }
 .title span:last-child {
     color: #ffb049;
+}
+
+button.darkmode-btn {
+    background-color: transparent;
+    color: #555;
+    border: thin solid #555;
+    padding: 2px 5px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+body.darkmode .darkmode-btn {
+    background-color: #333;
+    color: #f5f5f5;
 }
 
 
@@ -177,15 +226,20 @@ body {
     max-width: 800px;
     margin: 6rem auto;
     padding: 1rem;
-    background: #fff;
+    background: var(--translator-color);
+    color: var(--text-color);
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
     text-align: center;
+    transition: background-color 0.3s ease-out, color 0.3s ease-out;
 }
 
 .translator-section h1 {
     margin-bottom: 1rem;
-    font-size: 1.7rem;
+    font-size: 2rem;
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.25px;
 }
 
 .translator-section h2 {
@@ -193,7 +247,7 @@ body {
     margin-bottom: 1rem;
     text-align: left;
     padding-left: 10px;
-    background-image: linear-gradient(to right, #ffffff 15%, #78a1e7, #daa764);
+    background-image: linear-gradient(to right, #ffffff00 15%, #78a1e7, #daa764);
 }
 
 #topic-using {
@@ -254,12 +308,33 @@ form label {
     font-weight: bold;
 }
 
+textarea, input {
+    caret-color: var(--blue);
+    transition: all 0.2s ease-out;
+    background-color: transparent;
+}
+
+textarea:focus#outputText {
+    outline: none;
+}
+
+textarea:focus:not(#outputText), input:focus {
+    outline: none;
+    box-shadow: 0 0 0px 2px var(--blue) inset;
+    border: thin solid var(--blue);
+}
 
 textarea {
     margin-bottom: 1rem;
-    margin-inline: 1rem;
+    margin-inline: 2rem;
     padding: 0.5rem;
     font-size: 1.05rem;
+    resize: vertical;
+    border-radius: 5px;
+}
+
+textarea[readonly] {
+    background-color: rgb(0, 0, 0, 0.05);
 }
 
 .button-container {
@@ -295,6 +370,17 @@ textarea {
     color: #333;
     font-weight: bolder;
     border: 2px solid #333;
+}
+
+
+::-moz-selection { /* Code for Firefox */
+    color: white;
+    background: var(--blue);
+}
+  
+::selection {
+    color: white;
+    background: var(--blue);
 }
 
 

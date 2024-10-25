@@ -37,3 +37,20 @@ if (topic && tool) {
 } else {
     console.log("no data")
 }
+
+
+const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+const savedTheme = localStorage.getItem('theme') || (userPrefersDark ? 'dark' : 'light');
+
+// Apply the saved or prefered theme
+if (savedTheme === 'dark') {
+  document.body.classList.add('dark-mode');
+}
+
+// Toggle and save theme
+function toggleDarkMode() {
+  document.body.classList.toggle('dark-mode');
+  console.log("toggle")
+  const currentTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+  localStorage.setItem('theme', currentTheme);
+}

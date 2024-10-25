@@ -127,11 +127,9 @@ def clear(_):
 
 document["clearBtn"].bind("click", clear)
 
-
 def swap(_):
     input_text.value, output_text.value = output_text.value, input_text.value
     input_text.classList.toggle("swap-placeholder")
     input_text.attrs['placeholder'], output_text.attrs['placeholder'] = output_text.attrs['placeholder'], input_text.attrs['placeholder']
-
 
 document["isDecode"].bind("click", swap)
