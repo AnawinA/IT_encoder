@@ -16,9 +16,9 @@ bundle.generate_sha1("hi")
 
 it_encode = {
     "binary": {
-        "base64": (bundle.base64_encoder, bundle.base64_decoder, {'desc': details.base64, 'in': ph_prev, 'out': bundle.base64_encoder(ph_prev)}),
-        "base32": (bundle.base32_encoder, bundle.base32_decoder, {'desc': details.base32, 'in': ph_prev, 'out': bundle.base32_encoder(ph_prev)}),
-        "hex/base16": (bundle.hex_encode, bundle.hex_decode,{'desc': details.hex_base16, 'in': ph_prev, 'out': bundle.hex_encode(ph_prev)}),
+        "base64": (bundle.base64_encoder, bundle.base64_decoder, {'src': 'images/b64 icon.png', 'desc': details.base64, 'in': ph_prev, 'out': bundle.base64_encoder(ph_prev)}),
+        "base32": (bundle.base32_encoder, bundle.base32_decoder, {'src': 'images/b32 icon.png', 'desc': details.base32, 'in': ph_prev, 'out': bundle.base32_encoder(ph_prev)}),
+        "hex/base16": (bundle.hex_encode, bundle.hex_decode,{'src': 'images/H.png', 'desc': details.hex_base16, 'in': ph_prev, 'out': bundle.hex_encode(ph_prev)}),
         "sha1": (bundle.generate_sha1, None, {'desc': details.sha1, 'in': ph_prev, 'out': bundle.generate_sha1(ph_prev), 'no_decode': True}),
         "sha224": (bundle.generate_sha224, None, {'desc': details.sha122, 'in': ph_prev, 'out': bundle.generate_sha224(ph_prev), 'no_decode': True}),
     },
@@ -83,7 +83,7 @@ def config(td, mytool):
 for i_topic in it_encode:
     document['search-box'] <= html.H2(i_topic, Class="category-divider")
     document['search-box'] <= html.UL((html.LI(
-        html.BUTTON(html.IMG(src="images/default.png", alt=i_tool, title=i_topic+" "+i_tool) + html.SPAN(i_tool)).bind('click', getName)
+        html.BUTTON(html.IMG(src=it_encode[i_topic][i_tool][2].get("src", "images/default.png"), alt=i_tool, title=i_topic+" "+i_tool) + html.SPAN(i_tool)).bind('click', getName)
         ) for i_tool in it_encode[i_topic]), Class="nav-grid")
 
 
