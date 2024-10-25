@@ -1,0 +1,134 @@
+"""SHA-3 (Keccak) Hashing Algorithm"""
+
+class Keccak:
+    """Keccak (SHA-3) hashing algorithm implementation"""
+    def __init__(self, capacity_bits, output_bits):
+        self.capacity_bits = capacity_bits
+        self.output_bits = output_bits
+        self.rate_bits = 1600 - capacity_bits
+        self.state = [[0] * 5 for _ in range(5)]
+        self.buffer = bytearray()
+        self.delimited_suffix = 0x06
+
+    def update(self, data):
+        """Update the hash object with the bytes-like object"""
+        self.buffer.extend(data)
+        rate_bytes = self.rate_bits // 8
+        while len(self.buffer) >= rate_bytes:
+            block = self.buffer[:rate_bytes]
+            self.buffer = self.buffer[rate_bytes:]
+            self._absorb(block)
+
+    def digest(self):
+        """Return the digest of the data passed to the update() method so far"""
+        rate_bytes = self.rate_bits // 8
+        self.buffer.append(self.delimited_suffix)
+        self.buffer.extend([0] * (rate_bytes - len(self.buffer) % rate_bytes - 1))
+        self.buffer.append(0x80)
+        self._absorb(self.buffer)
+        return self._squeeze()
+
+    def hexdigest(self):
+        """Return the digest as a hexadecimal string"""
+        return self.digest().hex()
+
+    def _absorb(self, block):
+        """Absorb the block into the state"""
+        rate_bytes = self.rate_bits // 8
+        for i in range(rate_bytes // 8):
+            for j in range(8):
+                self.state[i % 5][i // 5] ^= block[i * 8 + j]
+        self._keccak_f()
+
+    def _squeeze(self):
+        """Squeeze the state to produce the output"""
+        output = bytearray()
+        rate_bytes = self.rate_bits // 8
+        while len(output) < self.output_bits // 8:
+            for i in range(rate_bytes // 8):
+                for j in range(8):
+                    output.append(self.state[i % 5][i // 5] & 0xFF)
+                    self.state[i % 5][i // 5] >>= 8
+            self._keccak_f()
+        return output[:self.output_bits // 8]
+
+    def _keccak_f(self):
+        """Keccak-f permutation"""
+        # Constants
+        RC = [
+            0x0000000000000001, 0x0000000000008082, 0x800000000000808A, 0x8000000080008000,
+            0x000000000000808B, 0x0000000080000001, 0x8000000080008081, 0x8000000000008009,
+            0x000000000000008A, 0x0000000000000088, 0x0000000080008009, 0x000000008000000A,
+            0x000000008000808B, 0x800000000000008B, 0x8000000000008089, 0x8000000000008003,
+            0x8000000000008002, 0x8000000000000080, 0x000000000000800A, 0x800000008000000A,
+            0x8000000080008081, 0x8000000000008080, 0x0000000080000001, 0x8000000080008008
+        ]
+
+        def rol(value, shift, size=64):
+            """Rotate left"""
+            return ((value << shift) % (1 << size)) | (value >> (size - shift))
+
+        def keccak_round(state, rc):
+            """Perform one round of the Keccak-f permutation"""
+            # Theta step
+            C = [state[x][0] ^ state[x][1] ^ state[x][2] ^ state[x][3] ^ state[x][4] for x in range(5)]
+            D = [C[(x - 1) % 5] ^ rol(C[(x + 1) % 5], 1) for x in range(5)]
+            for x in range(5):
+                for y in range(5):
+                    state[x][y] ^= D[x]
+
+            # Rho and Pi steps
+            B = [[0] * 5 for _ in range(5)]
+            for x in range(5):
+                for y in range(5):
+                    B[y][(2 * x + 3 * y) % 5] = rol(state[x][y], (x + 3 * y) % 64)
+
+            # Chi step
+            for x in range(5):
+                for y in range(5):
+                    state[x][y] = B[x][y] ^ ((~B[(x + 1) % 5][y]) & B[(x + 2) % 5][y])
+
+            # Iota step
+            state[0][0] ^= rc
+
+        for rc in RC:
+            keccak_round(self.state, rc)
+
+def sha3_224(data):
+    """Generate SHA3-224 hash"""
+    keccak = Keccak(448, 224)
+    keccak.update(data)
+    return keccak.hexdigest()
+
+def sha3_256(data):
+    """Generate SHA3-256 hash"""
+    keccak = Keccak(512, 256)
+    keccak.update(data)
+    return keccak.hexdigest()
+
+def sha3_384(data):
+    """Generate SHA3-384 hash"""
+    keccak = Keccak(768, 384)
+    keccak.update(data)
+    return keccak.hexdigest()
+
+def sha3_512(data):
+    """Generate SHA3-512 hash"""
+    keccak = Keccak(1024, 512)
+    keccak.update(data)
+    return keccak.hexdigest()
+
+if __name__ == "__main__":
+    input_string = "Hello, World!"
+    input_data = input_string.encode('utf-8')
+
+    sha3_224_result = sha3_224(input_data)
+    sha3_256_result = sha3_256(input_data)
+    sha3_384_result = sha3_384(input_data)
+    sha3_512_result = sha3_512(input_data)
+
+    print(f"SHA3-224 hash of '{input_string}': {sha3_224_result}")
+    print(f"SHA3-256 hash of '{input_string}': {sha3_256_result}")
+    print(f"SHA3-384 hash of '{input_string}': {sha3_384_result}")
+    print(f"SHA3-512 hash of '{input_string}': {sha3_512_result}")
+    
