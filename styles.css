@@ -198,10 +198,9 @@ body.darkmode .darkmode-btn {
 /* Category divider styles */
 .category-divider {
     color: #fff;
-    padding: 5px 0;
     text-align: center;
     border-bottom: 2px solid #555;
-    margin: 50px 0 20px 0;
+    margin: 15px 0 15px 0;
 }
 
 /* Menu toggle button */
@@ -283,7 +282,7 @@ summary::before {
     content: '';
     border-width: .4rem;
     border-style: solid;
-    border-color: transparent transparent transparent black;
+    border-color: transparent transparent transparent var(--text-color);
     position: relative;
     top: 0.05rem;
     display: inline-block;
@@ -312,6 +311,7 @@ textarea, input {
     caret-color: var(--blue);
     transition: all 0.2s ease-out;
     background-color: transparent;
+    color: var(--text-color);
 }
 
 textarea:focus#outputText {
@@ -323,6 +323,20 @@ textarea:focus:not(#outputText), input:focus {
     box-shadow: 0 0 0px 2px var(--blue) inset;
     border: thin solid var(--blue);
 }
+
+input[type="search"] {
+    display: block;
+    margin: auto;
+    border: none;
+    background-color: #333;
+    border-radius: 10px;
+    padding: 7px;
+    border: thin solid #555;
+    margin-top: 10px;
+    color: white;
+    font-size: 1.05rem;
+}
+
 
 textarea {
     margin-bottom: 1rem;

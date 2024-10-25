@@ -10,6 +10,7 @@ document.getElementById('close-btn').addEventListener('click', function() {
 
 const inputText = document.getElementById('inputText');
 const outputText = document.getElementById('outputText');
+const searchBox = document.getElementById('search-box');
 
 
 document.getElementById('isDecode').addEventListener('click', function() {
@@ -53,4 +54,21 @@ function toggleDarkMode() {
   console.log("toggle")
   const currentTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
   localStorage.setItem('theme', currentTheme);
+}
+
+
+
+function searching(e) {
+    const searchValue = e.target.value.toUpperCase();
+    const items = searchBox.getElementsByTagName('li');
+
+    for (let i = 0; i < items.length; i++) {
+        const a = items[i].getElementsByTagName('span')[0];
+        const textValue = a.textContent || a.innerText;
+        if (textValue.toUpperCase().indexOf(searchValue) > -1) {
+            items[i].style.display = '';
+        } else {
+            items[i].style.display = 'none';
+        }
+    }
 }
