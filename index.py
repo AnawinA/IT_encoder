@@ -12,11 +12,15 @@ ph_prev_small_num = "196"
 ph_prev_list = "1, 3, 4, 5, 7, 8, 10"
 ph_prev_ip = ("161,246,38,35", "255,255,0,128")
 
+bundle.generate_sha1("hi")
+
 it_encode = {
     "binary": {
         "base64": (bundle.base64_encoder, bundle.base64_decoder, {'desc': details.base64, 'in': ph_prev, 'out': bundle.base64_encoder(ph_prev)}),
         "base32": (bundle.base32_encoder, bundle.base32_decoder, {'desc': details.base32, 'in': ph_prev, 'out': bundle.base32_encoder(ph_prev)}),
         "hex/base16": (bundle.hex_encode, bundle.hex_decode,{'desc': details.hex_base16, 'in': ph_prev, 'out': bundle.hex_encode(ph_prev)}),
+        "sha1": (bundle.generate_sha1, None, {'desc': details.sha1, 'in': ph_prev, 'out': bundle.generate_sha1(ph_prev), 'no_decode': True}),
+        "sha224": (bundle.generate_sha224, None, {'desc': details.sha122, 'in': ph_prev, 'out': bundle.generate_sha224(ph_prev), 'no_decode': True}),
     },
     "iJudge": {
         "mealEncoding": (bundle.meal_encode, bundle.meal_decode, {'in': ph_prev, 'out': bundle.meal_encode(ph_prev)}),
