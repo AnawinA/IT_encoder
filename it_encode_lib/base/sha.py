@@ -139,3 +139,4 @@ if __name__ == "__main__":
     sha224_result = generate_sha224(input_string)
     print(f"SHA-1 hash of '{input_string}': {sha1_result}")
     print(f"SHA-224 hash of '{input_string}': {sha224_result}")
+
