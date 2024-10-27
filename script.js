@@ -72,3 +72,30 @@ function searching(e) {
         }
     }
 }
+
+
+// Modal
+const modal = document.getElementById('modal');
+const openModalBtn = document.getElementById('openModal');
+const closeModalBtn = document.getElementById('close-modal-btn');
+const arrowOverlap = document.getElementsByClassName('arrow-translate')[0];
+
+openModalBtn.addEventListener('click', () => {
+  modal.style.display = 'flex';
+  modal.classList.add('show');
+  modal.classList.remove('hide');
+  arrowOverlap.style.visibility = 'hidden';
+});
+
+
+modal.addEventListener('click', (event) => {
+    console.log("hi")
+    if (event.target === modal || event.target === closeModalBtn) {
+      modal.classList.add('hide');
+      modal.classList.remove('show');
+      setTimeout(() => {
+        modal.style.display = 'none';
+        arrowOverlap.style.visibility = 'visible';
+      }, 400); // Timeout matches animation duration for smooth transition
+    }
+  });

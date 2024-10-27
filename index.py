@@ -16,33 +16,34 @@ bundle.generate_sha1("hi")
 
 it_encode = {
     "binary": {
-        "base64": (bundle.base64_encoder, bundle.base64_decoder, {'src': 'images/b64 icon.png', 'desc': details.base64, 'in': ph_prev, 'out': bundle.base64_encoder(ph_prev)}),
-        "base32": (bundle.base32_encoder, bundle.base32_decoder, {'src': 'images/b32 icon.png', 'desc': details.base32, 'in': ph_prev, 'out': bundle.base32_encoder(ph_prev)}),
-        "hex/base16": (bundle.hex_encode, bundle.hex_decode,{'src': 'images/H.png', 'desc': details.hex_base16, 'in': ph_prev, 'out': bundle.hex_encode(ph_prev)}),
-        "sha1": (bundle.generate_sha1, None, {'desc': details.sha1, 'in': ph_prev, 'out': bundle.generate_sha1(ph_prev), 'no_decode': True}),
-        "sha224": (bundle.generate_sha224, None, {'desc': details.sha122, 'in': ph_prev, 'out': bundle.generate_sha224(ph_prev), 'no_decode': True}),
+        "base64": (bundle.base64_encoder, bundle.base64_decoder, {'c': 'T', 'src': 'images/b64 icon.png', 'desc': details.base64, 'in': ph_prev, 'out': bundle.base64_encoder(ph_prev)}),
+        "base32": (bundle.base32_encoder, bundle.base32_decoder, {'c': 'T', 'src': 'images/b32 icon.png', 'desc': details.base32, 'in': ph_prev, 'out': bundle.base32_encoder(ph_prev)}),
+        "hex/base16": (bundle.hex_encode, bundle.hex_decode,{'c': 'P', 'src': 'images/H.png', 'desc': details.hex_base16, 'in': ph_prev, 'out': bundle.hex_encode(ph_prev)}),
+        "sha1": (bundle.generate_sha1, None, {'c': 'K', 'desc': details.sha1, 'in': ph_prev, 'out': bundle.generate_sha1(ph_prev), 'no_decode': True}),
+        "sha224": (bundle.generate_sha224, None, {'c': 'K', 'desc': details.sha122, 'in': ph_prev, 'out': bundle.generate_sha224(ph_prev), 'no_decode': True}),
     },
     "iJudge": {
-        "mealEncoding": (bundle.meal_encode, bundle.meal_decode, {'in': ph_prev, 'out': bundle.meal_encode(ph_prev)}),
-        "numberFactory": (bundle.number_cut_encode, bundle.number_cut_decode, {'in': ph_prev_num, 'out': bundle.number_cut_encode(ph_prev_num)}),
-        "runLength": (bundle.run_length_encode, bundle.run_length_decode, {'in': ph_prev, 'out': bundle.run_length_encode(ph_prev)}),
-        "shorten": (bundle.shorten_num_encode, bundle.shorten_num_decode, {'in': ph_prev_list, 'out': bundle.shorten_num_encode(ph_prev_list)}),
-        "roman": (bundle.en_roman, bundle.de_roman, {'in': ph_prev_small_num, 'out': bundle.en_roman(ph_prev_small_num)}),
+        "mealEncoding": (bundle.meal_encode, bundle.meal_decode, {'c': 'W', 'in': ph_prev, 'out': bundle.meal_encode(ph_prev)}),
+        "numberFactory": (bundle.number_cut_encode, bundle.number_cut_decode, {'c': 'W', 'in': ph_prev_num, 'out': bundle.number_cut_encode(ph_prev_num)}),
+        "runLength": (bundle.run_length_encode, bundle.run_length_decode, {'c': 'W', 'in': ph_prev, 'out': bundle.run_length_encode(ph_prev)}),
+        "shorten": (bundle.shorten_num_encode, bundle.shorten_num_decode, {'c': 'W', 'in': ph_prev_list, 'out': bundle.shorten_num_encode(ph_prev_list)}),
+        "roman": (bundle.en_roman, bundle.de_roman, {'c': 'W', 'in': ph_prev_small_num, 'out': bundle.en_roman(ph_prev_small_num)}),
     },
     "ICS": {
-        "networkID": (bundle.networkid, bundle.networkid, {'in': ph_prev_ip[0], 'out': bundle.networkid(*ph_prev_ip), 'input2': '252,127,63,6', 'no_decode': True}),
+        "networkID": (bundle.networkid, bundle.networkid, {'c': 'T', 'in': ph_prev_ip[0], 'out': bundle.networkid(*ph_prev_ip), 'input2': '252,127,63,6', 'no_decode': True}),
     },
     "Text": {
-        "upper/lowercase": (str.upper, str.lower, {'in': str.lower(ph_prev), 'out': str.upper(ph_prev)}),
-        "swapcase": (str.swapcase, str.swapcase, {'in': ph_prev, 'out': str.swapcase(ph_prev)}),
-        "capitalize": (str.capitalize, str.capitalize, {'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev), 'no_decode': True}),
-        "title": (str.title, str.title, {'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev), 'no_decode': True}),
-        "join/split-text": (lambda x: ''.join(x), str.split, {'in': ph_prev, 'out': str.split(ph_prev)}),
-        "snake->camel": (bundle.toCamelCase, bundle.to_snakecase, {'in': 'hello_it!', 'out': bundle.toCamelCase('hello_it!'), 'input2': 'delimiter: _'}),
-        "reverse": (lambda x: x[::-1], lambda x: x[::-1], {'in': ph_prev, 'out': ph_prev[::-1]}),
+        "upper/lowercase": (str.upper, str.lower, {'c': 'W', 'in': str.lower(ph_prev), 'out': str.upper(ph_prev)}),
+        "swapcase": (str.swapcase, str.swapcase, {'c': 'W', 'in': ph_prev, 'out': str.swapcase(ph_prev)}),
+        "capitalize": (str.capitalize, str.capitalize, {'c': 'W', 'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev), 'no_decode': True}),
+        "title": (str.title, str.title, {'c': 'W', 'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev), 'no_decode': True}),
+        "join/split-text": (lambda x: ''.join(x), str.split, {'c': 'W', 'in': ph_prev, 'out': str.split(ph_prev)}),
+        "snake->camel": (bundle.toCamelCase, bundle.to_snakecase, {'c': 'W', 'in': 'hello_it!', 'out': bundle.toCamelCase('hello_it!'), 'input2': 'delimiter: _'}),
+        "reverse": (lambda x: x[::-1], lambda x: x[::-1], {'c': 'W', 'in': ph_prev, 'out': ph_prev[::-1]}),
     },
 }
 
+credits = {}
 
 def getName(e):
     """getName for execute from 'it_encode' dict"""
@@ -86,6 +87,27 @@ for i_topic in it_encode:
     document['search-box'] <= html.UL((html.LI(
         html.BUTTON(html.IMG(src=it_encode[i_topic][i_tool][2].get("src", "images/default.png"), alt=i_tool, title=i_topic+" "+i_tool) + html.SPAN(i_tool)).bind('click', getName)
         ) for i_tool in it_encode[i_topic]), Class="nav-grid")
+    
+    for i_tool in it_encode[i_topic]:
+        by = it_encode[i_topic][i_tool][2]['c']
+        name_by = None
+        match by:
+            case 'W':
+                name_by = 'อนาวิล'
+            case 'P':
+                name_by = 'วสวัตติ์'
+            case 'T':
+                name_by = 'อภิพล'
+            case 'K':
+                name_by = 'คทาฤทธี'
+        if name_by not in credits:
+            credits[name_by] = [i_tool]
+        else:
+            credits[name_by] += [i_tool]
+
+print(credits)
+for i in credits:
+    document['credits-here'] <= html.LI(html.STRONG(i + f" [{len(credits[i])}]: " ) + ", ".join(credits[i]))
 
 
 input_text = document["inputText"]
