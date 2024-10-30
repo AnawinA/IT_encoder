@@ -21,6 +21,7 @@ it_encode = {
         "hex/base16": (bundle.hex_encode, bundle.hex_decode,{'c': 'P', 'src': 'images/H.png', 'desc': details.hex_base16, 'in': ph_prev, 'out': bundle.hex_encode(ph_prev)}),
         "sha1": (bundle.generate_sha1, None, {'c': 'K', 'desc': details.sha1, 'in': ph_prev, 'out': bundle.generate_sha1(ph_prev), 'no_decode': True}),
         "sha224": (bundle.generate_sha224, None, {'c': 'K', 'desc': details.sha122, 'in': ph_prev, 'out': bundle.generate_sha224(ph_prev), 'no_decode': True}),
+        "ROT13": (bundle.rot13_encode, None, {'c': 'K', 'in': ph_prev, 'out': bundle.rot13_encode(ph_prev)}),
     },
     "iJudge": {
         "mealEncoding": (bundle.meal_encode, bundle.meal_decode, {'c': 'W', 'in': ph_prev, 'out': bundle.meal_encode(ph_prev)}),
@@ -37,7 +38,7 @@ it_encode = {
         "swapcase": (str.swapcase, str.swapcase, {'c': 'W', 'in': ph_prev, 'out': str.swapcase(ph_prev)}),
         "capitalize": (str.capitalize, str.capitalize, {'c': 'W', 'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev), 'no_decode': True}),
         "title": (str.title, str.title, {'c': 'W', 'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev), 'no_decode': True}),
-        "join/split-text": (lambda x: ''.join(x), str.split, {'c': 'W', 'in': ph_prev, 'out': str.split(ph_prev)}),
+        "join/split-text": (lambda x: list(x), lambda x: ''.join(x), {'c': 'W', 'in': ph_prev, 'out': str.split(ph_prev)}),
         "snake->camel": (bundle.toCamelCase, bundle.to_snakecase, {'c': 'W', 'in': 'hello_it!', 'out': bundle.toCamelCase('hello_it!'), 'input2': 'delimiter: _'}),
         "reverse": (lambda x: x[::-1], lambda x: x[::-1], {'c': 'W', 'in': ph_prev, 'out': ph_prev[::-1]}),
     },
@@ -123,7 +124,7 @@ def execute(is_decode, text_input):
         return it_encode[topic.textContent][tool.textContent][is_decode](text_input, my_value or "")
     return it_encode[topic.textContent][tool.textContent][is_decode](text_input)
 
-def translate(e):
+def translate(_):
     """encode"""
     try:
         text_input = input_text.value
@@ -132,11 +133,12 @@ def translate(e):
             output_result = execute(is_decode, text_input)
             output_text.value = output_result
         else:
-            alert("Error: Nothing to translate")
+            output_text.value = ""
     except ValueError as err:
-        alert("Error: Something went wrong " + str(err))
+        output_text.value ="Error: Something went wrong " + str(err)
 
 document["translateBtn"].bind("click", translate)
+document["inputText"].bind("input", translate)
 
 # from it_encode_lib.base64.base64 import *
 # a = str(input())

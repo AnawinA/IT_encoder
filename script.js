@@ -12,6 +12,8 @@ const inputText = document.getElementById('inputText');
 const outputText = document.getElementById('outputText');
 const searchBox = document.getElementById('search-box');
 
+const topicUsing = document.getElementById('topic-using');
+const toolUsing = document.getElementById('tool-using');
 
 document.getElementById('isDecode').addEventListener('click', function() {
     if (this.checked) {
@@ -33,10 +35,8 @@ const params = new URLSearchParams(window.location.search);
 const topic = params.get('e');
 const tool = params.get('c')
 if (topic && tool) {
-    document.getElementById('topic-using').textContent = topic
-    document.getElementById('tool-using').textContent = tool
-} else {
-    console.log("no data")
+    topicUsing.textContent = topic
+    toolUsing.textContent = tool
 }
 
 
@@ -55,6 +55,12 @@ function toggleDarkMode() {
   const currentTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
   localStorage.setItem('theme', currentTheme);
 }
+
+
+// const toolRemember = localStorage.getItem('tool') || 'base64';
+// const topicRemember = localStorage.getItem('topic') || 'binary';
+
+
 
 
 
