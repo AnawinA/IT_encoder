@@ -7,4 +7,12 @@ def rot13_encode(text):
     )
     return text.translate(rot13)
 
+def rot13_decode(text):
+    """rot13 to text"""
+    textrot = str.maketrans(
+        "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm",
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+    )
+    return text.translate(textrot)
+
 print(rot13_encode("hello"))
