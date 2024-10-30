@@ -6,3 +6,5 @@ def rot13_encode(text):
         "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm"
     )
     return text.translate(rot13)
+
+print(rot13_encode("hello"))
