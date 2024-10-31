@@ -8,6 +8,7 @@ import details
 
 ph_prev = "Hello IT!"
 ph_prev_num = "67070197"
+ph_prev_small = "IT!"
 ph_prev_small_num = "196"
 ph_prev_list = "1, 3, 4, 5, 7, 8, 10"
 ph_prev_ip = ("161,246,38,35", "255,255,0,128")
@@ -20,7 +21,7 @@ it_encode = {
         "base32": (bundle.base32_encoder, bundle.base32_decoder, {'c': 'T', 'src': 'images/b32 icon.png', 'desc': details.base32, 'in': ph_prev, 'out': bundle.base32_encoder(ph_prev)}),
         "hex/base16": (bundle.hex_encode, bundle.hex_decode,{'c': 'P', 'src': 'images/H.png', 'desc': details.hex_base16, 'in': ph_prev, 'out': bundle.hex_encode(ph_prev)}),
         "sha1": (bundle.generate_sha1, None, {'c': 'K', 'desc': details.sha1, 'in': ph_prev, 'out': bundle.generate_sha1(ph_prev), 'no_decode': True}),
-        "sha224": (bundle.generate_sha224, None, {'c': 'K', 'desc': details.sha122, 'in': ph_prev, 'out': bundle.generate_sha224(ph_prev), 'no_decode': True}),
+        "sha224": (bundle.generate_sha224, None, {'c': 'K', 'desc': details.sha224, 'in': ph_prev, 'out': bundle.generate_sha224(ph_prev), 'no_decode': True}),
         "ROT13": (bundle.rot13_encode, None, {'c': 'K', 'in': ph_prev, 'out': bundle.rot13_encode(ph_prev)}),
     },
     "iJudge": {
@@ -42,6 +43,11 @@ it_encode = {
         "snake->camel": (bundle.toCamelCase, bundle.to_snakecase, {'c': 'W', 'in': 'hello_it!', 'out': bundle.toCamelCase('hello_it!'), 'input2': 'delimiter: _'}),
         "reverse": (lambda x: x[::-1], lambda x: x[::-1], {'c': 'W', 'in': ph_prev, 'out': ph_prev[::-1]}),
     },
+    "Language": {
+        "Whitespace": (bundle.whitespace_encode, bundle.whitespace_decode, {'c': 'W', 'desc': details.whitespace, 'in': ph_prev, 'out': bundle.whitespace_encode(ph_prev)}), 
+        "Brainfk": (bundle.encode_brainfk, bundle.decode_brainfk, {'c': 'W', 'desc': details.brainfk, 'in': ph_prev_small, 'out': bundle.encode_brainfk(ph_prev_small)}),
+        "Chicken": (bundle.encode_chicken, bundle.decode_chicken, {'c': 'W', 'desc': details.chicken, 'in': ph_prev_small, 'out': bundle.encode_chicken(ph_prev_small)}),
+    }
 }
 
 credits = {}

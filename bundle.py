@@ -550,6 +550,103 @@ def networkid(address, subnet):
 # # print(networkid([161,246,38,35],[255,255,0,128]))
 
 
+
+def encode_brainfk(text):
+    """Encodes text into more optimized Brainfuck code using loops."""
+    brainfuck_code = ""
+
+    for char in text:
+        ascii_val = ord(char)
+        multiplier = ascii_val // 10
+        remainder = ascii_val % 10
+        if multiplier > 0:
+            brainfuck_code += "+" * multiplier + "[>++++++++++<-]>"
+        brainfuck_code += "+" * remainder + "."
+        brainfuck_code += "[-]\n"
+    return brainfuck_code
+
+
+def decode_brainfk(brainfuck_code):
+    """Decodes Brainfuck code back to text by interpreting it."""
+    cells = [0] * 30
+    pointer = 0
+    output = ""
+    code_ptr = 0
+
+    while code_ptr < len(brainfuck_code):
+        command = brainfuck_code[code_ptr]
+        if command == "+":
+            cells[pointer] = (cells[pointer] + 1) % 256
+        elif command == "-":
+            cells[pointer] = (cells[pointer] - 1) % 256
+        elif command == ">":
+            pointer += 1
+        elif command == "<":
+            pointer -= 1
+        elif command == ".":
+            output += chr(cells[pointer])
+        elif command == "[":
+            if cells[pointer] == 0:
+                open_loops = 1
+                while open_loops != 0:
+                    code_ptr += 1
+                    if brainfuck_code[code_ptr] == "[":
+                        open_loops += 1
+                    elif brainfuck_code[code_ptr] == "]":
+                        open_loops -= 1
+        elif command == "]":
+            if cells[pointer] != 0:
+                close_loops = 1
+                while close_loops != 0:
+                    code_ptr -= 1
+                    if brainfuck_code[code_ptr] == "[":
+                        close_loops -= 1
+                    elif brainfuck_code[code_ptr] == "]":
+                        close_loops += 1
+        code_ptr += 1
+    return output
+
+
+
+def encode_chicken(text):
+    """Encodes text into Chicken code."""
+    chicken_code = ""
+    for char in text:
+        ascii_val = ord(char)
+        chicken_code += " ".join(["chicken"] * ascii_val) + "\n"
+    return chicken_code
+
+
+def decode_chicken(chicken_code):
+    """Decodes Chicken code back to text."""
+    decoded_text = ""
+    for line in chicken_code.splitlines():
+        chicken_count = line.split().count("chicken")
+        decoded_text += chr(chicken_count)
+    return decoded_text
+
+
+
+
+def whitespace_encode(text):
+    """Encodes a given text into whitespace characters."""
+    encoded_text = ""
+    for char in text:
+        binary_representation = f"{ord(char):08b}"
+        whitespace_representation = binary_representation.replace("0", " ").replace("1", "\t")
+        encoded_text += whitespace_representation + "\n"
+    return encoded_text
+
+
+def whitespace_decode(encoded_text):
+    """Decodes whitespace characters back into the original text."""
+    decoded_text = ""
+    for line in encoded_text.splitlines():
+        binary_representation = line.replace(" ", "0").replace("\t", "1")
+        decoded_text += chr(int(binary_representation, 2))
+    return decoded_text
+
+
 """rot12Encode"""
 def rot13_encode(text):
     """text to rot13"""
@@ -558,6 +655,14 @@ def rot13_encode(text):
         "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm"
     )
     return text.translate(rot13)
+
+def rot13_decode(text):
+    """rot13 to text"""
+    textrot = str.maketrans(
+        "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm",
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+    )
+    return text.translate(textrot)
 
 # print(rot13_encode("hello"))
 
