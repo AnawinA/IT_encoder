@@ -22,7 +22,8 @@ it_encode = {
         "hex/base16": (bundle.hex_encode, bundle.hex_decode,{'c': 'P', 'src': 'images/H.png', 'desc': details.hex_base16, 'in': ph_prev, 'out': bundle.hex_encode(ph_prev)}),
         "sha1": (bundle.generate_sha1, None, {'c': 'K', 'desc': details.sha1, 'in': ph_prev, 'out': bundle.generate_sha1(ph_prev), 'no_decode': True}),
         "sha224": (bundle.generate_sha224, None, {'c': 'K', 'desc': details.sha224, 'in': ph_prev, 'out': bundle.generate_sha224(ph_prev), 'no_decode': True}),
-        "ROT13": (bundle.rot13_encode, None, {'c': 'K', 'desc': details.rot13, 'in': ph_prev, 'out': bundle.rot13_encode(ph_prev)}),
+        "ROT13": (bundle.rot13_encode, bundle.rot13_decode, {'c': 'K', 'desc': details.rot13, 'in': ph_prev, 'out': bundle.rot13_encode(ph_prev)}),
+        "Morse": (bundle.morse_encode, bundle.morse_decode, {'c': 'K', 'desc': details.Morse, 'in': ph_prev, 'out': bundle.morse_encode(ph_prev)}),
     },
     "iJudge": {
         "mealEncoding": (bundle.meal_encode, bundle.meal_decode, {'c': 'W', 'in': ph_prev, 'out': bundle.meal_encode(ph_prev)}),

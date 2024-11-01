@@ -4,7 +4,7 @@ hex_base16 = "Hexadecimal, or hex, is a base-16 number system that uses sixteen 
 sha1 = "SHA-1 (Secure Hash Algorithm 1) is a cryptographic hash function that takes an input (such as a message or file) and produces a 160-bit (20-byte) hash value, often displayed as a 40-digit hexadecimal number. SHA-1 is commonly used to verify data integrity, as any change in the input results in a different hash, making it possible to detect alterations."
 sha224 = "SHA-224 is a cryptographic hash function that is part of the SHA-2 family, designed by the National Security Agency (NSA) and published in 2001. It produces a 224-bit hash value and is based on the SHA-256 algorithm, with some modifications."
 rot13 = "a simple letter substitution cipher that replaces a letter with the 13th letter after it in the Latin alphabet"
-
+Morse = "Morse code is a method of encoding text characters as sequences of dots and dashes (or short and long signals) that can be transmitted as sound, light, or visual signals."
 
 
 whitespace = "Whitespace is an esoteric programming language, designed with a unique twist: only spaces, tabs, and line breaks are meaningful."
