@@ -15,6 +15,8 @@ PSCP project - IT_encoder
 * base32
 * Hex/base16
 * ROT13
+* Morse
+
 ### iJudge
 * mealEncoding
 * numberFactory
@@ -32,7 +34,6 @@ PSCP project - IT_encoder
 * Matrix Cryptography - numpy
 
 ## on Development 
-* Morse code
 * ... (more information soon)
 
 ## Credits
