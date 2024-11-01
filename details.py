@@ -3,6 +3,9 @@ base32 = "Base32 is a binary-to-text encoding scheme that uses a set of 32 diffe
 hex_base16 = "Hexadecimal, or hex, is a base-16 number system that uses sixteen symbols to represent values. It’s a compact and human-readable way to represent binary data, especially useful in computing, digital systems, and cryptography. In hex, numbers are represented with digits 0-9 and letters A-F(10-15)"
 sha1 = "SHA-1 (Secure Hash Algorithm 1) is a cryptographic hash function that takes an input (such as a message or file) and produces a 160-bit (20-byte) hash value, often displayed as a 40-digit hexadecimal number. SHA-1 is commonly used to verify data integrity, as any change in the input results in a different hash, making it possible to detect alterations."
 sha224 = "SHA-224 is a cryptographic hash function that is part of the SHA-2 family, designed by the National Security Agency (NSA) and published in 2001. It produces a 224-bit hash value and is based on the SHA-256 algorithm, with some modifications."
+rot13 = "a simple letter substitution cipher that replaces a letter with the 13th letter after it in the Latin alphabet"
+
+
 
 whitespace = "Whitespace is an esoteric programming language, designed with a unique twist: only spaces, tabs, and line breaks are meaningful."
 brainfk = "Brainf**k was designed as a very minimal language, operating on only eight commands. Despite its simplicity, it's Turing-complete, meaning it can theoretically perform any computation that a regular programming language can."

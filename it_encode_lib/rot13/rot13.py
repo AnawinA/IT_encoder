@@ -1,4 +1,4 @@
-"""rot12Encode"""
+"""rot13Encode"""
 def rot13_encode(text):
     """text to rot13"""
     rot13 = str.maketrans(
@@ -6,7 +6,7 @@ def rot13_encode(text):
         "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm"
     )
     return text.translate(rot13)
-
+"""rot13Decode"""
 def rot13_decode(text):
     """rot13 to text"""
     textrot = str.maketrans(
