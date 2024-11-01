@@ -664,7 +664,6 @@ def rot13_decode(text):
     )
     return text.translate(textrot)
 
-# print(rot13_encode("hello"))
 
 
 
@@ -683,9 +682,6 @@ def morse_encode(text):
     return ' '.join(text_tomorse.get(char.upper(), '') for char in text)
 
 
-
-#text = "HELLO WORLD"
-#print(morse_encode(text))
 
 """morseDecode"""
 def morse_decode(text):
