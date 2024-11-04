@@ -1,33 +1,12 @@
 #!/usr/bin/env python
 
-# """encodeHex"""
-# def Encodehex():
-#     """hexencode"""
-#     text = input()
-#     text_encode = text.encode("utf-8").hex()
-#     print(text_encode)
-
-# from collections import deque
-
-# def mov199(text, n, reverse=False):
-#     """mov199"""
-#     e = deque(text)
-#     if reverse:
-#         n = -n
-#     e.rotate(n)
-#     return ''.join(e)
-
-# for i in range(100):
-#     print(mov199('My name is Anawin', i, False))
-
-
 # a = []
 # while b != 0:
 #     b = float(input())
 #     a.append(b)
 # b.sort()
 # for i in range(len(b),0,-1):
-#     print(i)
+#     # print(i)
 
 '''base32 encoder and decoder basic code no bugs'''
 def base32_encoder(plain_txt):
@@ -135,16 +114,150 @@ def base64_decoder(plain_txt):
         dec_txt += (chr(int(dec_bin[i*8:((i+1)*8)], 2)))
     return dec_txt
 
-"""HexEncoder/decoder"""
-def hex_encode(text):
-    """encoderHex"""
-    encode_text = text.encode("utf-8").hex()
-    return encode_text
 
-def hex_decode(text_encoded):
-    """decodeHex"""
-    decode_text = bytes.fromhex(text_encoded).decode('utf-8')
-    return decode_text
+
+"""Sha-1 and Sha-224 Hashing Algorithms"""
+
+class SHA1:
+    """SHA-1 hashing algorithm implementation"""
+    def __init__(self):
+        self.h0 = 0x67452301
+        self.h1 = 0xEFCDAB89
+        self.h2 = 0x98BADCFE
+        self.h3 = 0x10325476
+        self.h4 = 0xC3D2E1F0
+
+    def update(self, message):
+        """Update the hash object with the bytes-like object"""
+        message = bytearray(message)
+        orig_len_in_bits = (8 * len(message)) & 0xffffffffffffffff
+        message.append(0x80)
+        while len(message) % 64 != 56:
+            message.append(0)
+        message += orig_len_in_bits.to_bytes(8, byteorder='big')
+        for chunk in range(0, len(message), 64):
+            w = [0] * 80
+            for i in range(16):
+                w[i] = int.from_bytes(message[chunk + i * 4:chunk + i * 4 + 4], byteorder='big')
+            for i in range(16, 80):
+                w[i] = self._left_rotate(w[i - 3] ^ w[i - 8] ^ w[i - 14] ^ w[i - 16], 1)
+            a, b, c, d, e = self.h0, self.h1, self.h2, self.h3, self.h4
+            for i in range(80):
+                if 0 <= i <= 19:
+                    f = (b & c) | (~b & d)
+                    k = 0x5A827999
+                elif 20 <= i <= 39:
+                    f = b ^ c ^ d
+                    k = 0x6ED9EBA1
+                elif 40 <= i <= 59:
+                    f = (b & c) | (b & d) | (c & d)
+                    k = 0x8F1BBCDC
+                elif 60 <= i <= 79:
+                    f = b ^ c ^ d
+                    k = 0xCA62C1D6
+                temp = self._left_rotate(a, 5) + f + e + k + w[i] & 0xffffffff
+                e = d
+                d = c
+                c = self._left_rotate(b, 30)
+                b = a
+                a = temp
+            self.h0 = (self.h0 + a) & 0xffffffff
+            self.h1 = (self.h1 + b) & 0xffffffff
+            self.h2 = (self.h2 + c) & 0xffffffff
+            self.h3 = (self.h3 + d) & 0xffffffff
+            self.h4 = (self.h4 + e) & 0xffffffff
+
+    def hexdigest(self):
+        """Return the digest of the data passed to the update() method so far"""
+        return ''.join(f'{value:08x}' for value in (self.h0, self.h1, self.h2, self.h3, self.h4))
+
+    @staticmethod
+    def _left_rotate(value, shift):
+        """Left rotate a 32-bit integer value by shift bits"""
+        return ((value << shift) & 0xffffffff) | (value >> (32 - shift))
+
+
+class SHA224:
+    """SHA-224 hashing algorithm implementation"""
+    def __init__(self):
+        self.h = [
+            0xc1059ed8, 0x367cd507, 0x3070dd17, 0xf70e5939,
+            0xffc00b31, 0x68581511, 0x64f98fa7, 0xbefa4fa4
+        ]
+
+    def update(self, message):
+        """Update the hash object with the bytes-like object"""
+        message = bytearray(message)
+        orig_len_in_bits = (8 * len(message)) & 0xffffffffffffffff
+        message.append(0x80)
+        while len(message) % 64 != 56:
+            message.append(0)
+        message += orig_len_in_bits.to_bytes(8, byteorder='big')
+        for chunk in range(0, len(message), 64):
+            w = [0] * 64
+            for i in range(16):
+                w[i] = int.from_bytes(message[chunk + i * 4:chunk + i * 4 + 4], byteorder='big')
+            for i in range(16, 64):
+                s0 = self._right_rotate(w[i - 15], 7) ^ self._right_rotate(w[i - 15], 18) ^ (w[i - 15] >> 3)
+                s1 = self._right_rotate(w[i - 2], 17) ^ self._right_rotate(w[i - 2], 19) ^ (w[i - 2] >> 10)
+                w[i] = (w[i - 16] + s0 + w[i - 7] + s1) & 0xffffffff
+            a, b, c, d, e, f, g, h = self.h
+            for i in range(64):
+                s1 = self._right_rotate(e, 6) ^ self._right_rotate(e, 11) ^ self._right_rotate(e, 25)
+                ch = (e & f) ^ (~e & g)
+                temp1 = h + s1 + ch + self._k[i] + w[i]
+                s0 = self._right_rotate(a, 2) ^ self._right_rotate(a, 13) ^ self._right_rotate(a, 22)
+                maj = (a & b) ^ (a & c) ^ (b & c)
+                temp2 = s0 + maj
+                h = g
+                g = f
+                f = e
+                e = (d + temp1) & 0xffffffff
+                d = c
+                c = b
+                b = a
+                a = (temp1 + temp2) & 0xffffffff
+            self.h = [(x + y) & 0xffffffff for x, y in zip(self.h, [a, b, c, d, e, f, g, h])]
+
+    def hexdigest(self):
+        """Return the digest of the data passed to the update() method so far"""
+        return ''.join(f'{value:08x}' for value in self.h[:7])
+
+    @staticmethod
+    def _right_rotate(value, shift):
+        """Right rotate a 32-bit integer value by shift bits"""
+        return (value >> shift) | ((value << (32 - shift)) & 0xffffffff)
+
+    _k = [
+        0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+        0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+        0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+        0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+        0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+        0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+        0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+        0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2
+    ]
+
+def generate_sha1(input_string):
+    """Generate SHA-1 hash"""
+    sha1 = SHA1()
+    sha1.update(input_string.encode('utf-8'))
+    return sha1.hexdigest()
+
+def generate_sha224(input_string):
+    """Generate SHA-224 hash"""
+    sha224 = SHA224()
+    sha224.update(input_string.encode('utf-8'))
+    return sha224.hexdigest()
+
+if __name__ == "__main__":
+    input_string = "Hello, World!"
+    sha1_result = generate_sha1(input_string)
+    sha224_result = generate_sha224(input_string)
+    # print(f"SHA-1 hash of '{input_string}': {sha1_result}")
+    # print(f"SHA-224 hash of '{input_string}': {sha224_result}")
+
 
 
 """Caesar shift"""
@@ -249,27 +362,11 @@ def number_cut_decode(str_arr: str) -> int:
     return sum(arr)
 
 
-"""password"""
-# import hashlib
-# def password(text: str):
-#     """password"""
-#     word = hashlib.sha512(text.encode('utf-8'))
-#     print(word.hexdigest().upper())
-
-# def break_password(word: str):
-#     """BreakPassword"""
-#     for i in range(0, 100000):
-#         tmp = hashlib.sha512(str(i).zfill(5).encode('utf-8')).hexdigest().upper()
-#         if tmp == word:
-#             print(str(i).zfill(5))
-#             break
-
-
 """Ejudge"""
-def main():
+
+def de_roman(roman):
     """Roman"""
     romanvalue = {"I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000}
-    roman = input()
     ans = 0
     for i, j in enumerate(roman):
         if i == len(roman)-1:
@@ -278,7 +375,24 @@ def main():
             ans += romanvalue[j]
         else:
             ans -= romanvalue[j]
-    print(ans)
+    return ans
+
+def en_roman(num):
+    """Convert an integer to a Roman numeral."""
+    num = int(num)
+    roman_numerals = {
+        1000: "M", 900: "CM", 500: "D", 400: "CD",
+        100: "C", 90: "XC", 50: "L", 40: "XL",
+        10: "X", 9: "IX", 5: "V", 4: "IV",
+        1: "I"
+    }
+    result = ""
+    for value in sorted(roman_numerals.keys(), reverse=True):
+        while num >= value:
+            result += roman_numerals[value]
+            num -= value
+    return result
+
 
 """Run Length Encoding"""
 
@@ -340,7 +454,7 @@ def shorten_num_decode(text: str) -> list[int]:
     """Shorten"""
     arr = []
     for num in text.split(','):
-        print(num.strip())
+        # print(num.strip())
         if '-' in num.strip():
             start, end = num.strip().split('-')
             arr.extend(range(int(start), int(end) + 1))
@@ -390,6 +504,227 @@ def temperature(temp: float, type_temp="C", to_type="F"):
         new_temp = c_to_r(c_temp)
     return new_temp
 
+
+"""HexEncoder/decoder"""
+def hex_encode(text):
+    """encoderHex"""
+    encode_text = text.encode("utf-8").hex()
+    return encode_text
+
+def hex_decode(text_encoded):
+    """decodeHex"""
+    decode_text = bytes.fromhex(text_encoded).decode('utf-8')
+    return decode_text
+
+
+
+
+
+
+
+
+
+
+
+'''input ip address and subnet mask output network id'''
+def networkid(address, subnet):
+    '''input address [255, 082, 255, 000] subnet [252, 127, 063, 006] list[4][3] '''
+    address = address.replace("[", '').replace("]", '').split(",")
+    subnet = subnet.replace("[", '').replace("]", '').split(",")
+    netid = []
+    for i in range(4):
+        atemp = ""
+        stemp = ""
+        kaddress = int(address[i])
+        ksubnet = int(subnet[i])
+        atmp = bin(kaddress).replace("0b","")
+        stmp = bin(ksubnet).replace("0b","")
+        atemp = "0"*(8-len(atmp))+atmp
+        stemp = "0"*(8-len(stmp))+stmp
+        addsub = [int(i) and int(j) for (i, j) in zip(atemp, stemp)]
+        astemp = ""
+        for i in addsub:
+            astemp += str(i)
+        netid.append(int(astemp,2))
+    return netid
+# # print(networkid([161,246,38,35],[255,255,0,128]))
+
+
+
+def encode_brainfk(text):
+    """Encodes text into more optimized Brainfuck code using loops."""
+    brainfuck_code = ""
+
+    for char in text:
+        ascii_val = ord(char)
+        multiplier = ascii_val // 10
+        remainder = ascii_val % 10
+        if multiplier > 0:
+            brainfuck_code += "+" * multiplier + "[>++++++++++<-]>"
+        brainfuck_code += "+" * remainder + "."
+        brainfuck_code += "[-]\n"
+    return brainfuck_code
+
+
+def decode_brainfk(brainfuck_code):
+    """Decodes Brainfuck code back to text by interpreting it."""
+    cells = [0] * 30
+    pointer = 0
+    output = ""
+    code_ptr = 0
+
+    while code_ptr < len(brainfuck_code):
+        command = brainfuck_code[code_ptr]
+        if command == "+":
+            cells[pointer] = (cells[pointer] + 1) % 256
+        elif command == "-":
+            cells[pointer] = (cells[pointer] - 1) % 256
+        elif command == ">":
+            pointer += 1
+        elif command == "<":
+            pointer -= 1
+        elif command == ".":
+            output += chr(cells[pointer])
+        elif command == "[":
+            if cells[pointer] == 0:
+                open_loops = 1
+                while open_loops != 0:
+                    code_ptr += 1
+                    if brainfuck_code[code_ptr] == "[":
+                        open_loops += 1
+                    elif brainfuck_code[code_ptr] == "]":
+                        open_loops -= 1
+        elif command == "]":
+            if cells[pointer] != 0:
+                close_loops = 1
+                while close_loops != 0:
+                    code_ptr -= 1
+                    if brainfuck_code[code_ptr] == "[":
+                        close_loops -= 1
+                    elif brainfuck_code[code_ptr] == "]":
+                        close_loops += 1
+        code_ptr += 1
+    return output
+
+
+
+def encode_chicken(text):
+    """Encodes text into Chicken code."""
+    chicken_code = ""
+    for char in text:
+        ascii_val = ord(char)
+        chicken_code += " ".join(["chicken"] * ascii_val) + "\n"
+    return chicken_code
+
+
+def decode_chicken(chicken_code):
+    """Decodes Chicken code back to text."""
+    decoded_text = ""
+    for line in chicken_code.splitlines():
+        chicken_count = line.split().count("chicken")
+        decoded_text += chr(chicken_count)
+    return decoded_text
+
+
+
+
+def whitespace_encode(text):
+    """Encodes a given text into whitespace characters."""
+    encoded_text = ""
+    for char in text:
+        binary_representation = f"{ord(char):08b}"
+        whitespace_representation = binary_representation.replace("0", " ").replace("1", "\t")
+        encoded_text += whitespace_representation + "\n"
+    return encoded_text
+
+
+def whitespace_decode(encoded_text):
+    """Decodes whitespace characters back into the original text."""
+    decoded_text = ""
+    for line in encoded_text.splitlines():
+        binary_representation = line.replace(" ", "0").replace("\t", "1")
+        decoded_text += chr(int(binary_representation, 2))
+    return decoded_text
+
+
+"""rot13Encode"""
+def rot13_encode(text):
+    """text to rot13"""
+    rot13 = str.maketrans(
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+        "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm"
+    )
+    return text.translate(rot13)
+"""rot13Decode"""
+def rot13_decode(text):
+    """rot13 to text"""
+    textrot = str.maketrans(
+        "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm",
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+    )
+    return text.translate(textrot)
+
+
+
+
+"""morseEncode"""
+def morse_encode(text):
+    """text to morse"""
+    text_tomorse = {
+        'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.',
+        'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..',
+        'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.',
+        'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-',
+        'Y': '-.--', 'Z': '--..', '1': '.----', '2': '..---', '3': '...--', '4': '....-', 
+        '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.', '0': '-----',
+        ' ': '/'
+    }
+    return ' '.join(text_tomorse.get(char.upper(), '') for char in text)
+
+
+
+"""morseDecode"""
+def morse_decode(text):
+    """morse to text"""
+    morse_totext = {
+        '.-': 'A', '-...': 'B', '-.-.': 'C', '-..': 'D', '.': 'E', '..-.': 'F',
+        '--.': 'G', '....': 'H', '..': 'I', '.---': 'J', '-.-': 'K', '.-..': 'L',
+        '--': 'M', '-.': 'N', '---': 'O', '.--.': 'P', '--.-': 'Q', '.-.': 'R',
+        '...': 'S', '-': 'T', '..-': 'U', '...-': 'V', '.--': 'W', '-..-': 'X',
+        '-.--': 'Y', '--..': 'Z', '.----': '1', '..---': '2', '...--': '3', '....-': '4',
+        '.....': '5', '-....': '6', '--...': '7', '---..': '8', '----.': '9', '-----': '0',
+        '/': ' '
+    }
+    return ' '.join(morse_totext.get(char.upper(), '') for char in text)
+
+
+
+
+"""to camel case and snake case"""
+
+def toCamelCase(str_snake, delimiter='_'):
+    """camel"""
+    if delimiter == '':
+        delimiter = '_'
+    init, *temp = str_snake.split(delimiter)
+    res = ''.join([init.lower(), *map(str.title, temp)])
+    return res
+
+def to_snakecase(strCamel, delimiter='_'):
+    """snake"""
+    if delimiter == '':
+        delimiter = '_'
+    return ''.join([delimiter+i.lower() if i.isupper() 
+        else i for i in strCamel]).lstrip(delimiter)
+
+
+'''all text to uppercase'''
+def lowercase(plaintext):
+    return plaintext.lower()
+
+'''all text to uppercase'''
+def uppercase(plaintext):
+    return plaintext.upper()
 
 """ArmStrong"""
 

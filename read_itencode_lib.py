@@ -13,9 +13,10 @@ def bundle_files(files, output_file):
         outfile.write('#!/usr/bin/env python\n\n')
         for file in files:
             with open(file, 'r') as infile:
-                content = infile.read()
-                outfile.write(content)
-                outfile.write('\n\n')  # Add new lines between files for separation
+                content = infile.read().replace('print(', '# print(')
+                if "import" not in content:
+                    outfile.write(content)
+                    outfile.write('\n\n')  # Add new lines between files for separation
 
 def main():
     project_dir = './it_encode_lib'  # Adjust your project directory

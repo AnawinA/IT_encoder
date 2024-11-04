@@ -8,54 +8,114 @@ import details
 
 ph_prev = "Hello IT!"
 ph_prev_num = "67070197"
+ph_prev_small = "IT!"
+ph_prev_small_num = "196"
 ph_prev_list = "1, 3, 4, 5, 7, 8, 10"
+ph_prev_ip = ("161,246,38,35", "255,255,0,128")
+
+bundle.generate_sha1("hi")
 
 it_encode = {
     "binary": {
-        "base64": (bundle.base64_encoder, bundle.base64_decoder, {'desc': details.base64, 'in': ph_prev, 'out': bundle.base64_encoder(ph_prev)}),
-        "base32": (bundle.base32_encoder, bundle.base32_decoder, {'desc': details.base32, 'in': ph_prev, 'out': bundle.base32_encoder(ph_prev)}),
-        "hex/base16": (bundle.hex_encode, bundle.hex_decode,{'desc': details.hex_base16, 'in': ph_prev, 'out': bundle.hex_encode(ph_prev)}),
+        "base64": (bundle.base64_encoder, bundle.base64_decoder, {'c': 'T', 'src': 'images/b64 icon.png', 'desc': details.base64, 'in': ph_prev, 'out': bundle.base64_encoder(ph_prev)}),
+        "base32": (bundle.base32_encoder, bundle.base32_decoder, {'c': 'T', 'src': 'images/b32 icon.png', 'desc': details.base32, 'in': ph_prev, 'out': bundle.base32_encoder(ph_prev)}),
+        "hex/base16": (bundle.hex_encode, bundle.hex_decode,{'c': 'P', 'src': 'images/H.png', 'desc': details.hex_base16, 'in': ph_prev, 'out': bundle.hex_encode(ph_prev)}),
+        "sha1": (bundle.generate_sha1, None, {'c': 'K', 'desc': details.sha1, 'in': ph_prev, 'out': bundle.generate_sha1(ph_prev), 'no_decode': True}),
+        "sha224": (bundle.generate_sha224, None, {'c': 'K', 'desc': details.sha224, 'in': ph_prev, 'out': bundle.generate_sha224(ph_prev), 'no_decode': True}),
+        "ROT13": (bundle.rot13_encode, bundle.rot13_decode, {'c': 'P', 'desc': details.rot13, 'in': ph_prev, 'out': bundle.rot13_encode(ph_prev)}),
+        "Morse": (bundle.morse_encode, bundle.morse_decode, {'c': 'P', 'desc': details.Morse, 'in': ph_prev, 'out': bundle.morse_encode(ph_prev)}),
     },
     "iJudge": {
-        "mealEncoding": (bundle.meal_encode, bundle.meal_decode, {'in': ph_prev, 'out': bundle.meal_encode(ph_prev)}),
-        "numberFactory": (bundle.number_cut_encode, bundle.number_cut_decode, {'in': ph_prev_num, 'out': bundle.number_cut_encode(ph_prev_num)}),
-        "runLength": (bundle.run_length_encode, bundle.run_length_decode, {'in': ph_prev, 'out': bundle.run_length_encode(ph_prev)}),
-        "shorten": (bundle.shorten_num_encode, bundle.shorten_num_decode, {'in': ph_prev_list, 'out': bundle.shorten_num_encode(ph_prev_list)}),
-        "test2": (bundle.shorten_num_encode, bundle.shorten_num_decode, {}),
-        "test3": (bundle.shorten_num_encode, bundle.shorten_num_decode, {}),
-        "test4": (bundle.shorten_num_encode, bundle.shorten_num_decode, {}),
+        "mealEncoding": (bundle.meal_encode, bundle.meal_decode, {'c': 'W', 'in': ph_prev, 'out': bundle.meal_encode(ph_prev)}),
+        "numberFactory": (bundle.number_cut_encode, bundle.number_cut_decode, {'c': 'W', 'in': ph_prev_num, 'out': bundle.number_cut_encode(ph_prev_num)}),
+        "runLength": (bundle.run_length_encode, bundle.run_length_decode, {'c': 'W', 'in': ph_prev, 'out': bundle.run_length_encode(ph_prev)}),
+        "shorten": (bundle.shorten_num_encode, bundle.shorten_num_decode, {'c': 'W', 'in': ph_prev_list, 'out': bundle.shorten_num_encode(ph_prev_list)}),
+        "roman": (bundle.en_roman, bundle.de_roman, {'c': 'W', 'in': ph_prev_small_num, 'out': bundle.en_roman(ph_prev_small_num)}),
+    },
+    "ICS": {
+        "networkID": (bundle.networkid, bundle.networkid, {'c': 'T', 'in': ph_prev_ip[0], 'out': bundle.networkid(*ph_prev_ip), 'input2': '252,127,63,6', 'no_decode': True}),
     },
     "Text": {
-        "upper/lowercase": (str.upper, str.lower, {'in': str.lower(ph_prev), 'out': str.upper(ph_prev)}),
-        "swapcase": (str.swapcase, str.swapcase, {'in': ph_prev, 'out': str.swapcase(ph_prev)}),
-        "capitalize": (str.capitalize, str.capitalize, {'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev)}),
-        "title": (str.title, str.title, {'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev)}),
-        "join/split-text": (str.join, str.split, {'in': ph_prev, 'out': str.split(ph_prev)}),
+        "upper/lowercase": (str.upper, str.lower, {'c': 'W', 'src': 'images/text_images/upperlowercase.png', 'in': str.lower(ph_prev), 'out': str.upper(ph_prev)}),
+        "swapcase": (str.swapcase, str.swapcase, {'c': 'W', 'src': 'images/text_images/swapcase.png', 'in': ph_prev, 'out': str.swapcase(ph_prev)}),
+        "capitalize": (str.capitalize, str.capitalize, {'c': 'W', 'src': 'images/text_images/capitalize.png', 'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev), 'no_decode': True}),
+        "title": (str.title, str.title, {'c': 'W', 'src': 'images/text_images/title.png', 'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev), 'no_decode': True}),
+        "join/split-text": (lambda x: list(x), lambda x: ''.join(x), {'c': 'W', 'src': 'images/text_images/join-split.png', 'in': ph_prev, 'out': str.split(ph_prev)}),
+        "snake->camel": (bundle.toCamelCase, bundle.to_snakecase, {'c': 'W', 'src': 'images/text_images/snake-camel.png', 'in': 'hello_it!', 'out': bundle.toCamelCase('hello_it!'), 'input2': 'delimiter: _'}),
+        "reverse": (lambda x: x[::-1], lambda x: x[::-1], {'c': 'W', 'src': 'images/text_images/reverse.png', 'in': ph_prev, 'out': ph_prev[::-1]}),
+    },
+    "Language": {
+        "Whitespace": (bundle.whitespace_encode, bundle.whitespace_decode, {'c': 'W', 'desc': details.whitespace, 'in': ph_prev, 'out': bundle.whitespace_encode(ph_prev)}), 
+        "Brainfk": (bundle.encode_brainfk, bundle.decode_brainfk, {'c': 'W', 'desc': details.brainfk, 'in': ph_prev_small, 'out': bundle.encode_brainfk(ph_prev_small)}),
+        "Chicken": (bundle.encode_chicken, bundle.decode_chicken, {'c': 'W', 'desc': details.chicken, 'in': ph_prev_small, 'out': bundle.encode_chicken(ph_prev_small)}),
     }
 }
 
+credits = {}
 
 def getName(e):
+    """getName for execute from 'it_encode' dict"""
     mytopic, mytool = str(e.target.title).split(" ")
     document['topic-using'].textContent = mytopic
     document['tool-using'].textContent = mytool
+
     tool_details = it_encode[mytopic][mytool][2]
-    if 'desc' in tool_details:
-        document['details-desc'].textContent = 'description ' + mytool 
-        document['details-content'].textContent = tool_details.get('desc')
-        document['details-desc'].style.display = 'block'
-    else:
-        document['details-desc'].style.display = 'none'
+    config(tool_details, mytool)
+
     document['sidebar'].classList.remove('open')
     on_in, on_out = (tool_details['in'], tool_details['out']) if not input_text.classList.contains('swap-placeholder') else (tool_details['out'], tool_details['in'])
     input_text.attrs['placeholder'], output_text.attrs['placeholder'] = on_in, on_out
 
+
+def config(td, mytool):
+    """[-] Ignore"""
+    if 'no_decode' in td:
+        document['isDecode'].checked = False
+        document['isDecode'].disabled = True
+    else:
+        document['isDecode'].parent.style.display = 'block'
+        document['isDecode'].disabled = False
+    if 'desc' in td:
+        document['details-desc'].textContent = 'description ' + mytool 
+        document['details-content'].textContent = td.get('desc')
+        document['details-desc'].style.display = 'block'
+    else:
+        document['details-desc'].style.display = 'none'
+
+    if 'input2' in td:
+        document['input2-input'].attrs['placeholder'] = td.get('input2')
+        document['input2-input'].disabled = False
+        document['input2-input'].parent.style.display = 'block'
+    else:
+        document['input2-input'].disabled = True
+        document['input2-input'].parent.style.display = 'none'
+
 for i_topic in it_encode:
     document['search-box'] <= html.H2(i_topic, Class="category-divider")
     document['search-box'] <= html.UL((html.LI(
-        html.BUTTON(html.IMG(src="images/default.png", alt=i_tool, title=i_topic+" "+i_tool) + html.SPAN(i_tool)).bind('click', getName)
+        html.BUTTON(html.IMG(src=it_encode[i_topic][i_tool][2].get("src", "images/default.png"), alt=i_tool, title=i_topic+" "+i_tool) + html.SPAN(i_tool)).bind('click', getName)
         ) for i_tool in it_encode[i_topic]), Class="nav-grid")
+    
+    for i_tool in it_encode[i_topic]:
+        by = it_encode[i_topic][i_tool][2]['c']
+        name_by = None
+        match by:
+            case 'W':
+                name_by = 'อนาวิล'
+            case 'P':
+                name_by = 'วสวัตติ์'
+            case 'T':
+                name_by = 'อภิพล'
+            case 'K':
+                name_by = 'คทาฤทธี'
+        if name_by not in credits:
+            credits[name_by] = [i_tool]
+        else:
+            credits[name_by] += [i_tool]
 
+print(credits)
+for i in credits:
+    document['credits-here'] <= html.LI(html.STRONG(i + f" [{len(credits[i])}]: " ) + ", ".join(credits[i]))
 
 
 input_text = document["inputText"]
@@ -66,9 +126,12 @@ tool = document["tool-using"]
 
 def execute(is_decode, text_input):
     """execute"""
+    if False if document["input2-input"].disabled else True:
+        my_value = document["input2-input"].value
+        return it_encode[topic.textContent][tool.textContent][is_decode](text_input, my_value or "")
     return it_encode[topic.textContent][tool.textContent][is_decode](text_input)
 
-def translate(e):
+def translate(_):
     """encode"""
     try:
         text_input = input_text.value
@@ -77,11 +140,12 @@ def translate(e):
             output_result = execute(is_decode, text_input)
             output_text.value = output_result
         else:
-            alert("Error: Nothing to translate")
+            output_text.value = ""
     except ValueError as err:
-        alert("Error: Something went wrong " + str(err))
+        output_text.value ="Error: Something went wrong " + str(err)
 
 document["translateBtn"].bind("click", translate)
+document["inputText"].bind("input", translate)
 
 # from it_encode_lib.base64.base64 import *
 # a = str(input())
@@ -94,11 +158,9 @@ def clear(_):
 
 document["clearBtn"].bind("click", clear)
 
-
 def swap(_):
     input_text.value, output_text.value = output_text.value, input_text.value
     input_text.classList.toggle("swap-placeholder")
     input_text.attrs['placeholder'], output_text.attrs['placeholder'] = output_text.attrs['placeholder'], input_text.attrs['placeholder']
-
 
 document["isDecode"].bind("click", swap)

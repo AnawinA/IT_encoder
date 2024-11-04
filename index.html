@@ -6,24 +6,27 @@
     <title>Translator Website</title>
     <link rel="stylesheet" href="styles.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.10.6/brython.min.js"></script>
-    
+    <link rel="shortcut icon" href="../../images/it.ico" type="image/x-icon">
 </head>
 <body onload="brython()">
     <!-- Navbar (Sidebar) -->
     <div class="topbar" id="topbar">
         <div class="menu-toggle" id="mobile-menu">&#9776;</div>
-        <h2 class="title"><span>I</span><span>T</span> encoder</h2>
+        <h2 class="title"><span>i</span><span>T</span> encoder</h2>
         <div>
+            <button onclick="toggleDarkMode()" class="darkmode-btn">Dark Mode</button>
+            <button id="openModal">Made by</button>
         </div>
     </div>
     <div class="sidebar" id="sidebar">
         <nav>
             <img src="images/it encoder.png" class="logo" alt="" width="100%">
             <p class="small-description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa accusamus sit mollitia tenetur voluptas temporibus vel ipsam quasi modi
+                Encoders are essential in various applications, including robotics, packaging, automation, and more, where precise motion control is required.
             </p>
             <div class="close-btn" id="close-btn">&times;</div>
-            
+
+            <input id="find" type="search" placeholder="Search" id="search-input" oninput="searching(event)">
             <div id="search-box">
                 <!-- <h2 class="category-divider">Main</h2>
                 <ul class="nav-grid">
@@ -54,8 +57,24 @@
             <h2 class="category-divider">Advanced</h2>
                 <ul class="nav-grid">
                     <li><a href="./advanced/mfit/matrix-cryptography.html"><img src="images/default.png" alt="Dictionary"><span>Matrix Cryptography</span></a href="./"></li>
+                    <li><a href="./advanced/calculus/calculus.html"><img src="images/default.png" alt="Dictionary"><span>Calculus</span></a href="./"></li>
                 </ul>
         </nav>
+    </div>
+    <!-- Credits -->
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span id="close-modal-btn">&times;</span>
+        <p>
+            Made with ❤️ by IT encoder
+            <p><strong>Encoders:</strong></p>
+            <ul id="credits-here">
+            </ul>
+            <p><strong>Icons & UI:</strong> สิทธารถ</p>
+            <p><strong>Web development:</strong> อนาวิล</p>
+            <p><strong>Python management:</strong> อภิพล</p>
+        </p>
+      </div>
     </div>
     <main>
         <section class="translator-section">
@@ -67,18 +86,25 @@
             </details>
             <form id="translator-form">
                 <label for="inputText">Text to Translate: <span class="describeLabel"></span></label>
-                <textarea id="inputText" rows="4" placeholder="Enter Text Here... ex.Hello IT!"></textarea>
+                <textarea id="inputText" rows="5" placeholder="Enter Text Here... ex.Hello IT!" autofocus autocomplete="on"></textarea>
 
                 <div>
+                    
                     <div class="middle-control">
-                        <input type="checkbox" id="isDecode"><label for="isDecode">Encode</label>
-                        <h3 class="arrow-translate">&dArr;</h3><br>
-                        <small>(encode/decode)</small>
+                        <div style="display: none;">
+                            <input type="text" id="input2-input" size="10" disabled placeholder="n/a"><br>
+                            <small>second input</small>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="isDecode"><label for="isDecode">Encode</label>
+                            <h3 class="arrow-translate">&dArr;</h3><br>
+                            <small>(encode/decode)</small>
+                        </div>
                     </div>
                 </div>
 
                 <label for="outputText">Translated Text:</label>
-                <textarea id="outputText" rows="4" readonly placeholder="Translated = SGVsbG8gSVQh"></textarea>
+                <textarea id="outputText" rows="5" readonly placeholder="Translated = SGVsbG8gSVQh"></textarea>
 
                 <div class="button-container">
                     <button id="clearBtn">Clear</button>
