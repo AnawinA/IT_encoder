@@ -36,18 +36,18 @@ it_encode = {
         "networkID": (bundle.networkid, bundle.networkid, {'c': 'T', 'in': ph_prev_ip[0], 'out': bundle.networkid(*ph_prev_ip), 'input2': '252,127,63,6', 'no_decode': True}),
     },
     "Text": {
-        "upper/lowercase": (str.upper, str.lower, {'c': 'W', 'in': str.lower(ph_prev), 'out': str.upper(ph_prev)}),
-        "swapcase": (str.swapcase, str.swapcase, {'c': 'W', 'in': ph_prev, 'out': str.swapcase(ph_prev)}),
-        "capitalize": (str.capitalize, str.capitalize, {'c': 'W', 'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev), 'no_decode': True}),
-        "title": (str.title, str.title, {'c': 'W', 'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev), 'no_decode': True}),
-        "join/split-text": (lambda x: list(x), lambda x: ''.join(x), {'c': 'W', 'in': ph_prev, 'out': str.split(ph_prev)}),
-        "snake->camel": (bundle.toCamelCase, bundle.to_snakecase, {'c': 'W', 'in': 'hello_it!', 'out': bundle.toCamelCase('hello_it!'), 'input2': 'delimiter: _'}),
-        "reverse": (lambda x: x[::-1], lambda x: x[::-1], {'c': 'W', 'in': ph_prev, 'out': ph_prev[::-1]}),
+        "upper/lowercase": (str.upper, str.lower, {'c': 'W', 'src': 'images/text_images/upperlowercase.png', 'in': str.lower(ph_prev), 'out': str.upper(ph_prev)}),
+        "swapcase": (str.swapcase, str.swapcase, {'c': 'W', 'src': 'images/text_images/swapcase.png', 'in': ph_prev, 'out': str.swapcase(ph_prev)}),
+        "capitalize": (str.capitalize, str.capitalize, {'c': 'W', 'src': 'images/text_images/capitalize.png', 'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev), 'no_decode': True}),
+        "title": (str.title, str.title, {'c': 'W', 'src': 'images/text_images/title.png', 'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev), 'no_decode': True}),
+        "join/split-text": (lambda x: list(x), lambda x: ''.join(x), {'c': 'W', 'src': 'images/text_images/join-split.png', 'in': ph_prev, 'out': str.split(ph_prev)}),
+        "snake->camel": (bundle.toCamelCase, bundle.to_snakecase, {'c': 'W', 'src': 'images/text_images/snake-camel.png', 'in': 'hello_it!', 'out': bundle.toCamelCase('hello_it!'), 'input2': 'delimiter: _'}),
+        "reverse": (lambda x: x[::-1], lambda x: x[::-1], {'c': 'W', 'src': 'images/text_images/reverse.png', 'in': ph_prev, 'out': ph_prev[::-1]}),
     },
     "Language": {
-        "Whitespace": (bundle.whitespace_encode, bundle.whitespace_decode, {'c': 'W', 'desc': details.whitespace, 'in': ph_prev, 'out': bundle.whitespace_encode(ph_prev)}), 
-        "Brainfk": (bundle.encode_brainfk, bundle.decode_brainfk, {'c': 'W', 'desc': details.brainfk, 'in': ph_prev_small, 'out': bundle.encode_brainfk(ph_prev_small)}),
-        "Chicken": (bundle.encode_chicken, bundle.decode_chicken, {'c': 'W', 'desc': details.chicken, 'in': ph_prev_small, 'out': bundle.encode_chicken(ph_prev_small)}),
+        "Whitespace": (bundle.whitespace_encode, bundle.whitespace_decode, {'c': 'W', 'src': 'images/language/white-space.png', 'desc': details.whitespace, 'in': ph_prev, 'out': bundle.whitespace_encode(ph_prev)}), 
+        "Brainfk": (bundle.encode_brainfk, bundle.decode_brainfk, {'c': 'W', 'src': 'images/language/Brainf.png', 'desc': details.brainfk, 'in': ph_prev_small, 'out': bundle.encode_brainfk(ph_prev_small)}),
+        "Chicken": (bundle.encode_chicken, bundle.decode_chicken, {'c': 'W', 'src': 'images/language/chicken.png', 'desc': details.chicken, 'in': ph_prev_small, 'out': bundle.encode_chicken(ph_prev_small)}),
     }
 }
 
@@ -58,6 +58,8 @@ def getName(e):
     mytopic, mytool = str(e.target.title).split(" ")
     document['topic-using'].textContent = mytopic
     document['tool-using'].textContent = mytool
+    document['icon-prev'].attrs['src'] = e.target.attrs['src']
+    document['icon-prev'].attrs['title'] = e.target.attrs['title']
 
     tool_details = it_encode[mytopic][mytool][2]
     config(tool_details, mytool)
