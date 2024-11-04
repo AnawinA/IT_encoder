@@ -574,3 +574,43 @@ cursor: pointer;
     text-align: left;
     font-size: 0.85rem;
 }
+
+#icon-prev {
+    width: 100px;
+    outline: 2px solid var(--text-color);
+    border-radius: 15px;
+    outline-offset: -1px;
+    transition: outline 0.1s ease-out, bottom 0.1s ease-out, outline-offset 0.1s cubic-bezier(1, 0, 0, 0);
+    position: relative;
+    bottom: 0;
+}
+
+
+#icon-prev:hover {
+    outline: 2px solid var(--blue);
+    outline-offset: 2px;
+    bottom: 5px;
+}
+
+.tranlator-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.tranlator-header div {
+    flex-grow: 1;
+}
+
+@media screen and (max-width: 600px) {
+    .tranlator-header {
+        flex-direction: column-reverse;
+        gap: 0;
+    }
+
+    .tranlator-header div h1 {
+        margin-bottom: 5px;
+        white-space: nowrap;
+    }
+}
