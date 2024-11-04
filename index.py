@@ -45,9 +45,9 @@ it_encode = {
         "reverse": (lambda x: x[::-1], lambda x: x[::-1], {'c': 'W', 'src': 'images/text_images/reverse.png', 'in': ph_prev, 'out': ph_prev[::-1]}),
     },
     "Language": {
-        "Whitespace": (bundle.whitespace_encode, bundle.whitespace_decode, {'c': 'W', 'desc': details.whitespace, 'in': ph_prev, 'out': bundle.whitespace_encode(ph_prev)}), 
-        "Brainfk": (bundle.encode_brainfk, bundle.decode_brainfk, {'c': 'W', 'desc': details.brainfk, 'in': ph_prev_small, 'out': bundle.encode_brainfk(ph_prev_small)}),
-        "Chicken": (bundle.encode_chicken, bundle.decode_chicken, {'c': 'W', 'desc': details.chicken, 'in': ph_prev_small, 'out': bundle.encode_chicken(ph_prev_small)}),
+        "Whitespace": (bundle.whitespace_encode, bundle.whitespace_decode, {'c': 'W', 'src': 'images/language/white-space.png', 'desc': details.whitespace, 'in': ph_prev, 'out': bundle.whitespace_encode(ph_prev)}), 
+        "Brainfk": (bundle.encode_brainfk, bundle.decode_brainfk, {'c': 'W', 'src': 'images/language/Brainf.png', 'desc': details.brainfk, 'in': ph_prev_small, 'out': bundle.encode_brainfk(ph_prev_small)}),
+        "Chicken": (bundle.encode_chicken, bundle.decode_chicken, {'c': 'W', 'src': 'images/language/chicken.png', 'desc': details.chicken, 'in': ph_prev_small, 'out': bundle.encode_chicken(ph_prev_small)}),
     }
 }
 
@@ -58,6 +58,8 @@ def getName(e):
     mytopic, mytool = str(e.target.title).split(" ")
     document['topic-using'].textContent = mytopic
     document['tool-using'].textContent = mytool
+    document['icon-prev'].attrs['src'] = e.target.attrs['src']
+    document['icon-prev'].attrs['title'] = e.target.attrs['title']
 
     tool_details = it_encode[mytopic][mytool][2]
     config(tool_details, mytool)
