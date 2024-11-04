@@ -1,4 +1,5 @@
 '''pep8borntojudge'''
+""" 
 import random
 def main():
     '''pep9'''
@@ -30,3 +31,4 @@ def main():
         probb=random.randint(minimum_number,maximum_number)
         print(f"{i}.) {proba} {var} {probb} = ")
 main()
+ """

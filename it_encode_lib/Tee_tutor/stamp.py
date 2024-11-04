@@ -1,5 +1,5 @@
 '''pep8'''
-import random
+""" import random
 def main():
     '''fwedscx'''
     a = random.randint(0,19)
@@ -28,3 +28,4 @@ def main():
         num += 1
     print("Game Over your score is",score)
 main()
+ """

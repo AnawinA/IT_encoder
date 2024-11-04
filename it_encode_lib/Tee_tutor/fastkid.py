@@ -1,5 +1,5 @@
 '''pep8borntojudge'''
-import random
+""" import random
 def main():
     '''pep9'''
     error=24
@@ -19,3 +19,4 @@ def main():
     
         score += 1
 main()
+ """

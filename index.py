@@ -12,6 +12,7 @@ ph_prev_small = "IT!"
 ph_prev_small_num = "196"
 ph_prev_list = "1, 3, 4, 5, 7, 8, 10"
 ph_prev_ip = ("161,246,38,35", "255,255,0,128")
+ph_prev_zero = "0"
 
 bundle.generate_sha1("hi")
 
@@ -31,6 +32,7 @@ it_encode = {
         "runLength": (bundle.run_length_encode, bundle.run_length_decode, {'c': 'W', 'in': ph_prev, 'out': bundle.run_length_encode(ph_prev)}),
         "shorten": (bundle.shorten_num_encode, bundle.shorten_num_decode, {'c': 'W', 'in': ph_prev_list, 'out': bundle.shorten_num_encode(ph_prev_list)}),
         "roman": (bundle.en_roman, bundle.de_roman, {'c': 'W', 'in': ph_prev_small_num, 'out': bundle.en_roman(ph_prev_small_num)}),
+        "temperature": (bundle.temperature, lambda x, y: bundle.temperature(float(x, (y[::-1] if y != '' else 'FC')), {'c': 'T', 'in': ph_prev_zero, 'out': bundle.temperature("0", 'CF'), 'input2': 'CF (Celsius to Fahrenheit)'}),
     },
     "ICS": {
         "networkID": (bundle.networkid, bundle.networkid, {'c': 'T', 'in': ph_prev_ip[0], 'out': bundle.networkid(*ph_prev_ip), 'input2': '252,127,63,6', 'no_decode': True}),

@@ -1,3 +1,4 @@
+"""to camel case and snake case"""
 
 def toCamelCase(str_snake, delimiter='_'):
     """camel"""

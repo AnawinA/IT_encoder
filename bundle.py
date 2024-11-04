@@ -488,11 +488,13 @@ def all_to_c(x, type_in):
         expression = (x - 491.67) * 5/9
     return expression
 
-def temperature(temp: float, type_temp="C", to_type="F"):
+def temperature(temp: float, type_="CF"):
     """Temperature"""
-    type_temp = type_temp.strip().upper()
-    to_type = to_type.strip().upper()
-    c_temp = temp
+    if type_ == "":
+        type_ = "CF"
+    type_ = type_.strip().upper()
+    type_temp, to_type = type_[0], type_[1]
+    c_temp = float(temp)
     if type_temp != "C":
         c_temp = all_to_c(temp, type_temp)
     new_temp = c_temp
@@ -520,7 +522,10 @@ def hex_decode(text_encoded):
 
 
 
-
+'''change nandgate to othergate'''
+def main():
+    '''nnn'''
+    x = str(input())
 
 
 
@@ -647,6 +652,49 @@ def whitespace_decode(encoded_text):
     return decoded_text
 
 
+"""morseEncode"""
+def morse_encode(text):
+    """text to morse"""
+    text_tomorse = {
+        'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.',
+        'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..',
+        'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.',
+        'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-',
+        'Y': '-.--', 'Z': '--..', '1': '.----', '2': '..---', '3': '...--', '4': '....-', 
+        '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.', '0': '-----',
+        ' ': '/', '.': '.--.--.--', ',': '--..--', '?': '..--..', "'": '.----.', '!': '-.-.--',
+        '/': '-..-.', '(': '-.--.', ')': '-.--.-', '&': '.-...', ':': '---...', ';': '-.-.-.',
+        '=': '-...-', '+': '.-.-.', '-': '-....-', '_': '..--.-', '"': '.-..-.', '$': '...-..-',
+        '@': '.--.-.'
+    }
+    return ' '.join(text_tomorse.get(char.upper(), '') for char in text)
+
+
+
+#text = "HELLO WORLD"
+## print(morse_encode(text))
+
+"""morseDecode"""
+def morse_decode(text):
+    """morse to text"""
+    morse_totext = {
+        '.-': 'A', '-...': 'B', '-.-.': 'C', '-..': 'D', '.': 'E', '..-.': 'F',
+        '--.': 'G', '....': 'H', '..': 'I', '.---': 'J', '-.-': 'K', '.-..': 'L',
+        '--': 'M', '-.': 'N', '---': 'O', '.--.': 'P', '--.-': 'Q', '.-.': 'R',
+        '...': 'S', '-': 'T', '..-': 'U', '...-': 'V', '.--': 'W', '-..-': 'X',
+        '-.--': 'Y', '--..': 'Z', '.----': '1', '..---': '2', '...--': '3', '....-': '4',
+        '.....': '5', '-....': '6', '--...': '7', '---..': '8', '----.': '9', '-----': '0',
+        '/': ' ', '.--.--.--': '.', '--..--': ',', '..--..': '?', ".----.": "'", '-.-.--': '!',
+        '-..-.': '/', '-.--.': '(', '-.--.-': ')', '.-...': '&', '---...': ':', '-.-.-.': ';',
+        '-...-': '=', '.-.-.': '+', '-....-': '-', '..--.-': '_', '.-..-.': '"', '...-..-': '$',
+        '.--.-.': '@'
+    }
+    return ' '.join(morse_totext.get(symbol, '') for symbol in text.split())
+text = ".... .."
+# print(morse_decode(text))
+
+
+
 """rot13Encode"""
 def rot13_encode(text):
     """text to rot13"""
@@ -664,41 +712,21 @@ def rot13_decode(text):
     )
     return text.translate(textrot)
 
+# print(rot13_encode("hello"))
 
-
-
-"""morseEncode"""
-def morse_encode(text):
-    """text to morse"""
-    text_tomorse = {
-        'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.', 'F': '..-.',
-        'G': '--.', 'H': '....', 'I': '..', 'J': '.---', 'K': '-.-', 'L': '.-..',
-        'M': '--', 'N': '-.', 'O': '---', 'P': '.--.', 'Q': '--.-', 'R': '.-.',
-        'S': '...', 'T': '-', 'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-',
-        'Y': '-.--', 'Z': '--..', '1': '.----', '2': '..---', '3': '...--', '4': '....-', 
-        '5': '.....', '6': '-....', '7': '--...', '8': '---..', '9': '----.', '0': '-----',
-        ' ': '/'
-    }
-    return ' '.join(text_tomorse.get(char.upper(), '') for char in text)
-
-
-
-"""morseDecode"""
-def morse_decode(text):
-    """morse to text"""
-    morse_totext = {
-        '.-': 'A', '-...': 'B', '-.-.': 'C', '-..': 'D', '.': 'E', '..-.': 'F',
-        '--.': 'G', '....': 'H', '..': 'I', '.---': 'J', '-.-': 'K', '.-..': 'L',
-        '--': 'M', '-.': 'N', '---': 'O', '.--.': 'P', '--.-': 'Q', '.-.': 'R',
-        '...': 'S', '-': 'T', '..-': 'U', '...-': 'V', '.--': 'W', '-..-': 'X',
-        '-.--': 'Y', '--..': 'Z', '.----': '1', '..---': '2', '...--': '3', '....-': '4',
-        '.....': '5', '-....': '6', '--...': '7', '---..': '8', '----.': '9', '-----': '0',
-        '/': ' '
-    }
-    return ' '.join(morse_totext.get(char.upper(), '') for char in text)
-
-
-
+# '''change unit of temp'''
+# def c_to_f(temp):
+#     '''cel to fah'''
+#     return (temp*(9/5))+32
+# def f_to_c(temp):
+#     '''fah to cel'''
+#     return (temp-32*(5/9))
+# def c_to_k(temp):
+#     '''cel to kavin'''
+#     return (temp+273.15)
+# def f_to_k(temp):
+#     '''cel to kavin'''
+#     return (temp*(9/5))+32+237.15
 
 """to camel case and snake case"""
 
