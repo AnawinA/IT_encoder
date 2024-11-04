@@ -35,7 +35,7 @@ def morse_decode(text):
         '-...-': '=', '.-.-.': '+', '-....-': '-', '..--.-': '_', '.-..-.': '"', '...-..-': '$',
         '.--.-.': '@'
     }
-    return ' '.join(morse_totext.get(symbol, '') for symbol in text.split())
+    return ''.join(morse_totext.get(symbol, '') for symbol in text.split())
 text = ".... .."
 print(morse_decode(text))
 
