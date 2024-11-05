@@ -114,6 +114,27 @@ def base64_decoder(plain_txt):
         dec_txt += (chr(int(dec_bin[i*8:((i+1)*8)], 2)))
     return dec_txt
 
+def encode_to_binary(text):
+    """Encodes text into binary format."""
+    binary_code = ""
+    for char in text:
+        binary_val = bin(ord(char))[2:]
+        binary_val = binary_val.zfill(8)
+        binary_code += binary_val + " " 
+    return binary_code.strip()
+
+
+def decode_from_binary(binary_code):
+    """Decodes binary code back to text."""
+    decoded_text = ""
+    binary_values = binary_code.split()
+    
+    for binary_val in binary_values:
+        decoded_text += chr(int(binary_val, 2))
+    
+    return decoded_text
+
+
 
 
 """Sha-1 and Sha-224 Hashing Algorithms"""
@@ -257,6 +278,64 @@ if __name__ == "__main__":
     sha224_result = generate_sha224(input_string)
     # print(f"SHA-1 hash of '{input_string}': {sha1_result}")
     # print(f"SHA-224 hash of '{input_string}': {sha224_result}")
+
+
+
+def encode_utf8(text):
+    """Encodes a string into bytes using UTF-8 encoding."""
+    try:
+        return str(text.encode('utf-8')).replace('b', '').strip("'")
+    except UnicodeEncodeError as e:
+        return f"Error encoding string to UTF-8: {e}"
+
+def decode_utf8(byte_data):
+    """Decodes bytes back into a string using UTF-8 encoding."""
+    try:
+        return str.encode(byte_data).decode('utf-8')
+    except UnicodeDecodeError as e:
+        return f"Error decoding bytes from UTF-8: {e}"
+
+def encode_ascii(text):
+    """Encodes a string into bytes using ASCII encoding."""
+    try:
+        return text.encode('ascii')
+    except UnicodeEncodeError as e:
+        return f"Error encoding string to ASCII: {e}"
+
+def decode_ascii(byte_data):
+    """Decodes bytes back into a string using ASCII encoding."""
+    try:
+        return byte_data.decode('ascii')
+    except UnicodeDecodeError as e:
+        return f"Error decoding bytes from ASCII: {e}"
+
+def encode_utf16(text):
+    """Encodes a string into bytes using UTF-16 encoding."""
+    try:
+        return text.encode('utf-16')
+    except UnicodeEncodeError as e:
+        return f"Error encoding string to UTF-16: {e}"
+
+def decode_utf16(byte_data):
+    """Decodes bytes back into a string using UTF-16 encoding."""
+    try:
+        return byte_data.decode('utf-16')
+    except UnicodeDecodeError as e:
+        return f"Error decoding bytes from UTF-16: {e}"
+
+def encode_iso_8859_1(text):
+    """Encodes a string into bytes using ISO-8859-1 encoding."""
+    try:
+        return text.encode('iso-8859-1')
+    except UnicodeEncodeError as e:
+        return f"Error encoding string to ISO-8859-1: {e}"
+
+def decode_iso_8859_1(byte_data):
+    """Decodes bytes back into a string using ISO-8859-1 encoding."""
+    try:
+        return byte_data.decode('iso-8859-1')
+    except UnicodeDecodeError as e:
+        return f"Error decoding bytes from ISO-8859-1: {e}"
 
 
 
@@ -531,6 +610,56 @@ def main():
 
 
 
+'''parity bits'''
+def parity_even_bit(data):
+    '''evenbit'''
+    dat = str(data)
+    sum_dat = 0
+    for i in dat:
+        sum_dat += int(i)
+    if not sum_dat %2:
+        dat += "0"
+    else:
+        dat += "1"
+    return dat
+
+def parity_dff_bit(data):
+    '''odd bit'''
+    dat = str(data)
+    sum_dat = 0
+    for i in dat:
+        sum_dat += int(i)
+    if not sum_dat %2:
+        dat += "1"
+    else:
+        dat += "0"
+    return dat
+
+
+def url_encode(url):
+    encoded_url = ""
+    for char in url:
+        if char.isalnum() or char in ('-', '_', '.', '~'):
+            encoded_url += char
+        else:
+            encoded_url += '%' + format(ord(char), '02X')
+    return encoded_url
+
+def url_decode(encoded_url):
+    decoded_url = ""
+    i = 0
+    while i < len(encoded_url):
+        if encoded_url[i] == '%' and i + 2 < len(encoded_url):
+            hex_value = encoded_url[i + 1:i + 3]
+            decoded_url += chr(int(hex_value, 16))
+            i += 3
+        else:
+            decoded_url += encoded_url[i]
+            i += 1
+    return decoded_url
+
+
+
 '''input ip address and subnet mask output network id'''
 def networkid(address, subnet):
     '''input address [255, 082, 255, 000] subnet [252, 127, 063, 006] list[4][3] '''
@@ -632,6 +761,71 @@ def decode_chicken(chicken_code):
 
 
 
+def encode_false_ascii(text):
+    """Encodes text into FALSE ASCII code."""
+    false_code = ""
+    for char in text:
+        ascii_val = ord(char)
+        false_code += f"{ascii_val}a"  # 'a' for output in FALSE
+    return false_code
+
+
+def decode_false_ascii(false_code):
+    """Decodes FALSE ASCII code back to text."""
+    decoded_text = ""
+    index = 0
+
+    while index < len(false_code):
+        # Extract the ASCII value
+        ascii_val_str = ""
+        while index < len(false_code) and false_code[index].isdigit():
+            ascii_val_str += false_code[index]
+            index += 1
+        
+        # Convert ASCII value string to a character and add to result
+        if ascii_val_str:
+            decoded_text += chr(int(ascii_val_str))
+        
+        # Move to the next command (skip the 'a' command)
+        if index < len(false_code) and false_code[index] == 'a':
+            index += 1
+    
+    return decoded_text
+
+
+def encode_false_binary(text):
+    """Encodes text into FALSE Binary code."""
+    false_binary_code = ""
+    for char in text:
+        binary_val = bin(ord(char))[2:]
+        binary_val = binary_val.zfill(8)
+        false_binary_code += binary_val
+    return false_binary_code
+
+
+def decode_false_binary(false_binary_code):
+    """Decodes FALSE Binary code back to text."""
+    decoded_text = ""
+    for i in range(0, len(false_binary_code), 8):
+        byte = false_binary_code[i:i+8]
+        decoded_text += chr(int(byte, 2))
+    return decoded_text
+
+
+# Example usage
+text = "I want to test it!"
+encoded_false_ascii = encode_false_ascii(text)
+# print("Encoded FALSE ASCII code:", encoded_false_ascii)
+
+decoded_text_ascii = decode_false_ascii(encoded_false_ascii)
+# print("Decoded text from ASCII:", decoded_text_ascii)  # Should match the original text
+
+encoded_false_binary = encode_false_binary(text)
+# print("Encoded FALSE Binary code:", encoded_false_binary)
+
+decoded_text_binary = decode_false_binary(encoded_false_binary)
+# print("Decoded text from Binary:", decoded_text_binary)  # Should match the original text
+
 
 def whitespace_encode(text):
     """Encodes a given text into whitespace characters."""
@@ -689,7 +883,7 @@ def morse_decode(text):
         '-...-': '=', '.-.-.': '+', '-....-': '-', '..--.-': '_', '.-..-.': '"', '...-..-': '$',
         '.--.-.': '@'
     }
-    return ' '.join(morse_totext.get(symbol, '') for symbol in text.split())
+    return ''.join(morse_totext.get(symbol, '') for symbol in text.split())
 text = ".... .."
 # print(morse_decode(text))
 

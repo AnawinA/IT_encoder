@@ -5,8 +5,12 @@ sha1 = "SHA-1 (Secure Hash Algorithm 1) is a cryptographic hash function that ta
 sha224 = "SHA-224 is a cryptographic hash function that is part of the SHA-2 family, designed by the National Security Agency (NSA) and published in 2001. It produces a 224-bit hash value and is based on the SHA-256 algorithm, with some modifications."
 rot13 = "a simple letter substitution cipher that replaces a letter with the 13th letter after it in the Latin alphabet"
 Morse = "Morse code is a method of encoding text characters as sequences of dots and dashes (or short and long signals) that can be transmitted as sound, light, or visual signals."
+binary = "Binary is a base-2 numeral system that uses two symbols: typically 0 and 1. It is the foundation of all binary code used in computer systems and digital electronics, including programming languages, data storage, and network communications."
 
+url = "URL encoding is essential to ensure that URLs are transmitted and interpreted correctly by browsers and servers."
 
 whitespace = "Whitespace is an esoteric programming language, designed with a unique twist: only spaces, tabs, and line breaks are meaningful."
 brainfk = "Brainf**k was designed as a very minimal language, operating on only eight commands. Despite its simplicity, it's Turing-complete, meaning it can theoretically perform any computation that a regular programming language can."
 chicken = 'Chicken is a language in which the only valid keyword is "chicken." The number of repetitions of "chicken" determines the operation.'
+false_ascii = "(similar to ASCII but contains \"a\" keyword) original FALSE language, which uses ASCII characters for its syntax and commands. It is designed to be minimalistic and concise"
+false_binary = "(similar to binary but without spaces) FALSE have been created in binary form, where the commands are represented in binary code rather than ASCII text."

@@ -13,29 +13,30 @@ ph_prev_small_num = "196"
 ph_prev_list = "1, 3, 4, 5, 7, 8, 10"
 ph_prev_ip = ("161,246,38,35", "255,255,0,128")
 ph_prev_zero = "0"
-
-bundle.generate_sha1("hi")
+ph_prev_emoji = "Hello 💻"
 
 it_encode = {
     "binary": {
         "base64": (bundle.base64_encoder, bundle.base64_decoder, {'c': 'T', 'src': 'images/b64 icon.png', 'desc': details.base64, 'in': ph_prev, 'out': bundle.base64_encoder(ph_prev)}),
         "base32": (bundle.base32_encoder, bundle.base32_decoder, {'c': 'T', 'src': 'images/b32 icon.png', 'desc': details.base32, 'in': ph_prev, 'out': bundle.base32_encoder(ph_prev)}),
         "hex/base16": (bundle.hex_encode, bundle.hex_decode,{'c': 'P', 'src': 'images/H.png', 'desc': details.hex_base16, 'in': ph_prev, 'out': bundle.hex_encode(ph_prev)}),
+        "binary/base2": (bundle.encode_to_binary, bundle.decode_from_binary, {'c': 'W', 'src': 'images/binary.png', 'desc': details.binary, 'in': ph_prev, 'out': bundle.encode_to_binary(ph_prev)}),
         "sha1": (bundle.generate_sha1, None, {'c': 'K', 'desc': details.sha1, 'in': ph_prev, 'out': bundle.generate_sha1(ph_prev), 'no_decode': True}),
         "sha224": (bundle.generate_sha224, None, {'c': 'K', 'desc': details.sha224, 'in': ph_prev, 'out': bundle.generate_sha224(ph_prev), 'no_decode': True}),
         "ROT13": (bundle.rot13_encode, bundle.rot13_decode, {'c': 'P', 'desc': details.rot13, 'in': ph_prev, 'out': bundle.rot13_encode(ph_prev)}),
         "Morse": (bundle.morse_encode, bundle.morse_decode, {'c': 'P', 'desc': details.Morse, 'in': ph_prev, 'out': bundle.morse_encode(ph_prev)}),
     },
     "iJudge": {
-        "mealEncoding": (bundle.meal_encode, bundle.meal_decode, {'c': 'W', 'in': ph_prev, 'out': bundle.meal_encode(ph_prev)}),
-        "numberFactory": (bundle.number_cut_encode, bundle.number_cut_decode, {'c': 'W', 'in': ph_prev_num, 'out': bundle.number_cut_encode(ph_prev_num)}),
-        "runLength": (bundle.run_length_encode, bundle.run_length_decode, {'c': 'W', 'in': ph_prev, 'out': bundle.run_length_encode(ph_prev)}),
-        "shorten": (bundle.shorten_num_encode, bundle.shorten_num_decode, {'c': 'W', 'in': ph_prev_list, 'out': bundle.shorten_num_encode(ph_prev_list)}),
-        "roman": (bundle.en_roman, bundle.de_roman, {'c': 'W', 'in': ph_prev_small_num, 'out': bundle.en_roman(ph_prev_small_num)}),
+        "mealEncoding": (bundle.meal_encode, bundle.meal_decode, {'c': 'W', 'src': 'images/ijudge/ij meanEn.png', 'in': ph_prev, 'out': bundle.meal_encode(ph_prev)}),
+        "numberFactory": (bundle.number_cut_encode, bundle.number_cut_decode, {'c': 'W', 'src': 'images/ijudge/ij numberFac.png', 'in': ph_prev_num, 'out': bundle.number_cut_encode(ph_prev_num)}),
+        "runLength": (bundle.run_length_encode, bundle.run_length_decode, {'c': 'W', 'src': 'images/ijudge/ij runLength.png', 'in': ph_prev, 'out': bundle.run_length_encode(ph_prev)}),
+        "shorten": (bundle.shorten_num_encode, bundle.shorten_num_decode, {'c': 'W', 'src': 'images/ijudge/ij shorten.png', 'in': ph_prev_list, 'out': bundle.shorten_num_encode(ph_prev_list)}),
+        "roman": (bundle.en_roman, bundle.de_roman, {'c': 'W', 'src': 'images/ijudge/ij roman.png', 'in': ph_prev_small_num, 'out': bundle.en_roman(ph_prev_small_num)}),
         "temperature": (bundle.temperature, lambda x, y: bundle.temperature(float(x, (y[::-1] if y != '' else 'FC'))), {'c': 'T', 'in': ph_prev_zero, 'out': bundle.temperature("0", 'CF'), 'input2': 'CF (Celsius to Fahrenheit)'}),
     },
     "ICS": {
         "networkID": (bundle.networkid, bundle.networkid, {'c': 'T', 'in': ph_prev_ip[0], 'out': bundle.networkid(*ph_prev_ip), 'input2': '252,127,63,6', 'no_decode': True}),
+        "URL": (bundle.url_encode, bundle.url_decode, {'c': 'W', 'src': 'images/url.png', 'in': ph_prev, 'out': bundle.url_encode(ph_prev), 'desc': details.url}),
     },
     "Text": {
         "upper/lowercase": (str.upper, str.lower, {'c': 'W', 'src': 'images/text_images/upperlowercase.png', 'in': str.lower(ph_prev), 'out': str.upper(ph_prev)}),
@@ -50,6 +51,14 @@ it_encode = {
         "Whitespace": (bundle.whitespace_encode, bundle.whitespace_decode, {'c': 'W', 'src': 'images/language/white-space.png', 'desc': details.whitespace, 'in': ph_prev, 'out': bundle.whitespace_encode(ph_prev)}), 
         "Brainfk": (bundle.encode_brainfk, bundle.decode_brainfk, {'c': 'W', 'src': 'images/language/Brainf.png', 'desc': details.brainfk, 'in': ph_prev_small, 'out': bundle.encode_brainfk(ph_prev_small)}),
         "Chicken": (bundle.encode_chicken, bundle.decode_chicken, {'c': 'W', 'src': 'images/language/chicken.png', 'desc': details.chicken, 'in': ph_prev_small, 'out': bundle.encode_chicken(ph_prev_small)}),
+        "FalseASCII": (bundle.encode_false_ascii, bundle.decode_false_ascii, {'c': 'W', 'src': 'images/language/false ASCII.png', 'desc': details.false_ascii, 'in': ph_prev, 'out': bundle.encode_false_ascii(ph_prev)}),
+        "FalseBinary": (bundle.encode_false_binary, bundle.decode_false_binary, {'c': 'W', 'src': 'images/language/false binary.png', 'desc': details.false_binary, 'in': ph_prev, 'out': bundle.encode_false_binary(ph_prev)}),
+    },
+    "BuiltIn": {
+        "UTF-8": (bundle.encode_utf8, bundle.decode_utf8, {'c': 'W', 'in': ph_prev_emoji, 'out': bundle.encode_utf8(ph_prev_emoji)}),
+        # "UTF-16"
+        # "ASCII"
+        # "ISO 8859-1"
     }
 }
 
