@@ -23,11 +23,13 @@ def all_to_c(x, type_in):
         expression = (x - 491.67) * 5/9
     return expression
 
-def temperature(temp: float, type_temp="C", to_type="F"):
+def temperature(temp: float, type_="CF"):
     """Temperature"""
-    type_temp = type_temp.strip().upper()
-    to_type = to_type.strip().upper()
-    c_temp = temp
+    if type_ == "":
+        type_ = "CF"
+    type_ = type_.strip().upper()
+    type_temp, to_type = type_[0], type_[1]
+    c_temp = float(temp)
     if type_temp != "C":
         c_temp = all_to_c(temp, type_temp)
     new_temp = c_temp
