@@ -57,7 +57,7 @@ it_encode = {
     "BuiltIn": {
         "UTF-8": (bundle.encode_utf8, bundle.decode_utf8, {'c': 'W', 'in': ph_prev_emoji, 'out': bundle.encode_utf8(ph_prev_emoji)}),
         # "UTF-16"
-        # "ASCII"
+        "ASCII": (bundle.encode_ascii, bundle.decode_ascii, {'c': 'W', 'in': ph_prev, 'out': bundle.encode_ascii(ph_prev)}),
         # "ISO 8859-1"
     }
 }
