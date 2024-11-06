@@ -373,19 +373,69 @@ def decode_big5(byte_data):
         return f"Error decoding bytes from Big5: {e}"
 
 
-"""Caesar shift"""
+def atbash_cipher(text):
+    encoded = []
+    for char in text:
+        if char.isalpha():
+            offset = 65 if char.isupper() else 97
+            # Map letter to its reverse
+            encoded.append(chr(offset + (25 - (ord(char) - offset))))
+        else:
+            encoded.append(char)
+    return ''.join(encoded)
 
-def shift(char, n):
-    """shift"""
-    if not char.isalpha():
-        return char
-    cp = chr((ord(char) - 97 + n) % 26 + 97)
-    return cp
 
-def caesar_cipher(text: str, n: int) -> tuple[str, str]:
-    """Caesar shift"""
-    return ("".join(shift(char, n) for char in text),
-"".join(shift(char, -n) for char in text))
+
+def caesar_cipher(text, shift):
+    if shift == '':
+        shift = int(5)
+    else:
+        shift = int(shift)
+    encoded = []
+    for char in text:
+        if char.isalpha():
+            # Shift within alphabet bounds
+            offset = 65 if char.isupper() else 97
+            encoded.append(chr((ord(char) + shift - offset) % 26 + offset))
+        else:
+            encoded.append(char)
+    return ''.join(encoded)
+
+def caesar_decipher(encoded_text, shift):
+    return caesar_cipher(encoded_text, "-" + shift)
+
+
+
+def vigenere(text, key, encode=True):
+    if key == '':
+        key = 'KEY'
+    encoded = []
+    key_length = len(key)
+    for i, char in enumerate(text):
+        if char.isalpha():
+            offset = 65 if char.isupper() else 97
+            shift = ord(key[i % key_length].upper()) - 65
+            shift = shift if encode else -shift
+            encoded.append(chr((ord(char) + shift - offset) % 26 + offset))
+        else:
+            encoded.append(char)
+    return ''.join(encoded)
+
+def vigenere_cipher(text, key):
+    return vigenere(text, key, encode=True)
+
+def vigenere_decipher(text, key):
+    return vigenere(text, key, encode=False)
+
+
+def xor_encrypt_decrypt(data, key):
+    # XOR encryption/decryption
+    if key == '':
+        key = int(123)
+    else:
+        key = int(key)
+    return ''.join(chr(ord(c) ^ key) for c in data)
+
 
 
 """coin change"""
@@ -691,17 +741,6 @@ def url_decode(encoded_url):
             decoded_url += encoded_url[i]
             i += 1
     return decoded_url
-
-
-
-
-def xor_encrypt_decrypt(data, key):
-    # XOR encryption/decryption
-    if key == '':
-        key = int(123)
-    else:
-        key = int(key)
-    return ''.join(chr(ord(c) ^ key) for c in data)
 
 
 

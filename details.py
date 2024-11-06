@@ -14,3 +14,11 @@ brainfk = "Brainf**k was designed as a very minimal language, operating on only 
 chicken = 'Chicken is a language in which the only valid keyword is "chicken." The number of repetitions of "chicken" determines the operation.'
 false_ascii = "(similar to ASCII but contains \"a\" keyword) original FALSE language, which uses ASCII characters for its syntax and commands. It is designed to be minimalistic and concise"
 false_binary = "(similar to binary but without spaces) FALSE have been created in binary form, where the commands are represented in binary code rather than ASCII text."
+
+
+# cipher
+xor_cipher = "XOR cipher is a simple encryption algorithm that uses the XOR (exclusive disjunction) operation to encrypt and decrypt data."
+caesar_cipher = "Caesar Cipher is one of the oldest and simplest encryption techniques. Each letter in the text is shifted by a fixed number of positions."
+atbash_cipher = "Atbash Cipher is a substitution cipher where each letter is mapped to its reverse in the alphabet (e.g., A ↔ Z, B ↔ Y)."
+vigenere_cipher = "Vigenère Cipher uses a keyword to shift each character of the plaintext by different amounts based on the keyword's letters."
+

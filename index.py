@@ -39,7 +39,6 @@ it_encode = {
         "networkID": (bundle.networkid, bundle.networkid, {'c': 'T', 'in': ph_prev_ip[0], 'out': bundle.networkid(*ph_prev_ip), 'input2': '252,127,63,6', 'no_decode': True}),
         "URL": (bundle.url_encode, bundle.url_decode, {'c': 'W', 'src': 'images/url.png', 'in': ph_prev, 'out': bundle.url_encode(ph_prev), 'desc': details.url}),
         "parityBits": (bundle.parity_even_bit, bundle.parity_dff_bit, {'c': 'T', 'src': 'images/default.png', 'in': ph_prev_binary, 'out': bundle.parity_even_bit(ph_prev_binary)}),
-        "XORcipher": (bundle.xor_encrypt_decrypt, bundle.xor_encrypt_decrypt, {'c': 'W', 'src': 'images/cipher/xor_cipher.png', 'in': ph_prev, 'out': bundle.xor_encrypt_decrypt(ph_prev, "123"), 'input2': '123 (key)'}),
     },
     "Text": {
         "upper/lowercase": (str.upper, str.lower, {'c': 'W', 'src': 'images/text_images/upperlowercase.png', 'in': str.lower(ph_prev), 'out': str.upper(ph_prev)}),
@@ -61,6 +60,12 @@ it_encode = {
         "UTF-8": (bundle.encode_utf8, bundle.decode_utf8, {'c': 'W', 'in': ph_prev_emoji, 'out': bundle.encode_utf8(ph_prev_emoji), 'no_decode': True}),
         "ISO-8859-1": (bundle.encode_iso_8859_1, bundle.encode_iso_8859_1, {'c': 'W', 'in': ph_prev_emoji, 'out': bundle.encode_iso_8859_1(ph_prev_emoji)}),
         "ASCII": (bundle.encode_ascii, bundle.decode_ascii, {'c': 'W', 'in': ph_prev, 'out': bundle.encode_ascii(ph_prev)}),
+    },
+    "Cipher": {
+        "XORcipher": (bundle.xor_encrypt_decrypt, bundle.xor_encrypt_decrypt, {'c': 'W', 'desc': details.xor_cipher, 'src': 'images/cipher/xor_cipher.png', 'in': ph_prev, 'out': bundle.xor_encrypt_decrypt(ph_prev, "123"), 'input2': '123 (key)'}),
+        "Atbash": (bundle.atbash_cipher, bundle.atbash_cipher, {'c': 'W', 'desc': details.atbash_cipher, 'src': 'images/cipher/atbash_cipher.png', 'in': ph_prev, 'out': bundle.atbash_cipher(ph_prev)}),
+        "Vigenere": (bundle.vigenere_cipher, bundle.vigenere_decipher, {'c': 'W', 'desc': details.vigenere_cipher, 'src': 'images/cipher/vigenere_cipher.png', 'in': ph_prev, 'out': bundle.vigenere_cipher(ph_prev, "KEY"), 'input2': 'KEY'}),
+        "Caesar": (bundle.caesar_cipher, bundle.caesar_decipher, {'c': 'W', 'desc': details.caesar_cipher, 'src': 'images/cipher/caesar_cipher.png', 'in': ph_prev, 'out': bundle.caesar_cipher(ph_prev, 5), "input2": '5 (shift)'}),
     },
     "External": {
         "UTF-16": (None, None, {'c': 'W'}),
