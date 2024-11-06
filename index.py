@@ -58,6 +58,14 @@ it_encode = {
         "UTF-8": (bundle.encode_utf8, bundle.decode_utf8, {'c': 'W', 'in': ph_prev_emoji, 'out': bundle.encode_utf8(ph_prev_emoji), 'no_decode': True}),
         "ISO-8859-1": (bundle.encode_iso_8859_1, bundle.encode_iso_8859_1, {'c': 'W', 'in': ph_prev_emoji, 'out': bundle.encode_iso_8859_1(ph_prev_emoji)}),
         "ASCII": (bundle.encode_ascii, bundle.decode_ascii, {'c': 'W', 'in': ph_prev, 'out': bundle.encode_ascii(ph_prev)}),
+    },
+    "External": {
+        "UTF-16": (None, None, {'c': 'W'}),
+        "MD-5": (None, None, {'c': 'W'}),
+        "SHA-1": (None, None, {'c': 'K'}),
+        "SHA-256": (None, None, {'c': 'K'}),
+        "SHA-512": (None, None, {'c': 'K'}),
+        "quopri": (None, None, {'c': 'W'}),
     }
 }
 
@@ -105,7 +113,9 @@ def config(td, mytool):
 for i_topic in it_encode:
     document['search-box'] <= html.H2(i_topic, Class="category-divider")
     document['search-box'] <= html.UL((html.LI(
-        html.BUTTON(html.IMG(src=it_encode[i_topic][i_tool][2].get("src", "images/default.png"), alt=i_tool, title=i_topic+" "+i_tool) + html.SPAN(i_tool)).bind('click', getName)
+        (html.BUTTON(html.IMG(src=it_encode[i_topic][i_tool][2].get("src", "images/default.png"), alt=i_tool, title=i_topic+" "+i_tool) + html.SPAN(i_tool)).bind('click', getName) ) \
+            if not it_encode[i_topic][i_tool][0] is None \
+            else html.BUTTON(html.A(html.IMG(src=it_encode[i_topic][i_tool][2].get("src", "images/default.png"), alt=i_tool, title=i_topic+" "+i_tool) + html.SPAN(i_tool), href="./advanced/more-crypto/index.html?c=" + i_tool))
         ) for i_tool in it_encode[i_topic]), Class="nav-grid")
     
     for i_tool in it_encode[i_topic]:
@@ -159,10 +169,6 @@ def translate(_):
 document["translateBtn"].bind("click", translate)
 document["inputText"].bind("input", translate)
 
-# from it_encode_lib.base64.base64 import *
-# a = str(input())
-# b = base64_decoder(base64_encoder(a))
-# print(b)
 
 def clear(_):
     input_text.value = ""
