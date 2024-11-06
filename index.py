@@ -14,6 +14,7 @@ ph_prev_list = "1, 3, 4, 5, 7, 8, 10"
 ph_prev_ip = ("161,246,38,35", "255,255,0,128")
 ph_prev_zero = "0"
 ph_prev_emoji = "Hello 💻"
+ph_prev_binary = "001011001"
 
 it_encode = {
     "binary": {
@@ -32,18 +33,20 @@ it_encode = {
         "runLength": (bundle.run_length_encode, bundle.run_length_decode, {'c': 'W', 'src': 'images/ijudge/ij runLength.png', 'in': ph_prev, 'out': bundle.run_length_encode(ph_prev)}),
         "shorten": (bundle.shorten_num_encode, bundle.shorten_num_decode, {'c': 'W', 'src': 'images/ijudge/ij shorten.png', 'in': ph_prev_list, 'out': bundle.shorten_num_encode(ph_prev_list)}),
         "roman": (bundle.en_roman, bundle.de_roman, {'c': 'W', 'src': 'images/ijudge/ij roman.png', 'in': ph_prev_small_num, 'out': bundle.en_roman(ph_prev_small_num)}),
-        "temperature": (bundle.temperature, lambda x, y: bundle.temperature(float(x, (y[::-1] if y != '' else 'FC'))), {'c': 'T', 'in': ph_prev_zero, 'out': bundle.temperature("0", 'CF'), 'input2': 'CF (Celsius to Fahrenheit)'}),
+        "temperature": (bundle.temperature, lambda x, y: bundle.temperature(float(x, (y[::-1] if y != '' else 'FC'))), {'c': 'T', 'in': ph_prev_zero, 'src': 'images/temperature.png', 'out': bundle.temperature("0", 'CF'), 'input2': 'CF [CFKR](Celsius to Fahrenheit)'}),
     },
     "ICS": {
         "networkID": (bundle.networkid, bundle.networkid, {'c': 'T', 'in': ph_prev_ip[0], 'out': bundle.networkid(*ph_prev_ip), 'input2': '252,127,63,6', 'no_decode': True}),
         "URL": (bundle.url_encode, bundle.url_decode, {'c': 'W', 'src': 'images/url.png', 'in': ph_prev, 'out': bundle.url_encode(ph_prev), 'desc': details.url}),
+        "parityBits": (bundle.parity_even_bit, bundle.parity_dff_bit, {'c': 'T', 'src': 'images/default.png', 'in': ph_prev_binary, 'out': bundle.parity_even_bit(ph_prev_binary)}),
+        "XORcipher": (bundle.xor_encrypt_decrypt, bundle.xor_encrypt_decrypt, {'c': 'W', 'src': 'images/cipher/xor_cipher.png', 'in': ph_prev, 'out': bundle.xor_encrypt_decrypt(ph_prev, "123"), 'input2': '123 (key)'}),
     },
     "Text": {
         "upper/lowercase": (str.upper, str.lower, {'c': 'W', 'src': 'images/text_images/upperlowercase.png', 'in': str.lower(ph_prev), 'out': str.upper(ph_prev)}),
         "swapcase": (str.swapcase, str.swapcase, {'c': 'W', 'src': 'images/text_images/swapcase.png', 'in': ph_prev, 'out': str.swapcase(ph_prev)}),
         "capitalize": (str.capitalize, str.capitalize, {'c': 'W', 'src': 'images/text_images/capitalize.png', 'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev), 'no_decode': True}),
         "title": (str.title, str.title, {'c': 'W', 'src': 'images/text_images/title.png', 'in': str.lower(ph_prev), 'out': str.capitalize(ph_prev), 'no_decode': True}),
-        "join/split-text": (lambda x: list(x), lambda x: ''.join(x), {'c': 'W', 'src': 'images/text_images/join-split.png', 'in': ph_prev, 'out': str.split(ph_prev)}),
+        "join-split": (lambda x: list(x), lambda x: ''.join(x), {'c': 'W', 'src': 'images/text_images/join-split.png', 'in': ph_prev, 'out': str.split(ph_prev)}),
         "snake->camel": (bundle.toCamelCase, bundle.to_snakecase, {'c': 'W', 'src': 'images/text_images/snake-camel.png', 'in': 'hello_it!', 'out': bundle.toCamelCase('hello_it!'), 'input2': 'delimiter: _'}),
         "reverse": (lambda x: x[::-1], lambda x: x[::-1], {'c': 'W', 'src': 'images/text_images/reverse.png', 'in': ph_prev, 'out': ph_prev[::-1]}),
     },
@@ -65,7 +68,7 @@ it_encode = {
         "SHA-1": (None, None, {'c': 'K'}),
         "SHA-256": (None, None, {'c': 'K'}),
         "SHA-512": (None, None, {'c': 'K'}),
-        "quopri": (None, None, {'c': 'W'}),
+        "quopri": (None, None, {'c': 'W', 'src': 'images/text_images/quopri.png'}),
     }
 }
 
@@ -168,7 +171,7 @@ def translate(_):
 
 document["translateBtn"].bind("click", translate)
 document["inputText"].bind("input", translate)
-
+document["input2-input"].bind("input", translate)
 
 def clear(_):
     input_text.value = ""
