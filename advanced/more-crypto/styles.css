@@ -1,0 +1,614 @@
+/* Reset some basic styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&family=Quicksand:wght@300..700&display=swap');
+
+:root {
+    --blue: #3c84ff;
+    --white: #f4f4f4;
+    --background-color: #fff;
+    --text-color: #333;
+    --side-bar-color: #292929;
+    --translator-color: #f4f4f4;
+}
+
+body.dark-mode {
+    --background-color: black;
+}
+
+body.dark-mode * {
+    --text-color: #f5f5f5;
+    --side-bar-color: #181818;
+    --translator-color: #1f1f1f
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+
+body {
+    font-family: "Inter", Arial, sans-serif;
+    line-height: 1.6;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    background-image: 
+    linear-gradient(75deg, rgba(86, 113, 114, 0.7), rgba(65, 59, 82, 0.7))
+    , linear-gradient(to top, rgb(0, 0, 0, 0.9), rgba(71, 66, 145, 0));
+    height: 100vh;
+}
+
+
+/* Sidebar styles */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -310px;
+    height: 100%;
+    width: 300px;
+    color: #777;
+    background-color: var(--side-bar-color);
+    transition: left 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto; /* Enable scrolling */
+    scrollbar-width: thin; /* Firefox custom scrollbar width */
+    box-shadow: 0 0 10px #000;
+    z-index: 99;
+}
+
+
+
+.sidebar .empty-space {
+    width: 100%;
+    height: 60px;
+}
+
+.sidebar.open {
+    left: 0;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 1px; /* Custom scrollbar width for WebKit browsers */
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: #888; /* Custom scrollbar color */
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+}
+
+.small-description {
+    font-family: monospace;
+    text-align: left;
+    padding: 0 10px;
+    margin-bottom: 20px;
+}
+
+.sidebar .logo {
+    padding: 0 30px;
+    /* border: thin solid red; */
+    object-fit: contain;
+    height: 150px;
+    margin-block: -5px;
+}
+
+
+/* Top bar for label */
+.topbar {
+    background-color: var(--side-bar-color);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+}
+
+.topbar div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+
+}
+
+
+h2.title {
+    font-size: 2.5rem;
+    font-family: "Poppins" ,sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.title span:first-child {
+    color: #79a2ac;
+}
+.title span:last-child {
+    color: #ddbd65;
+}
+
+.goto-home {
+    text-decoration: none;
+    background-color: transparent;
+    color: #555;
+    border: thin solid #555;
+    padding: 2px 5px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+body.darkmode .darkmode-btn {
+    background-color: #333;
+    color: #f5f5f5;
+}
+
+
+/* Grid for navbar buttons */
+.nav-grid {
+    list-style-type: none;
+    padding: 5px;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    justify-items: center;
+}
+
+.nav-grid li {
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.nav-grid button, .nav-grid a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-grid span {
+    aspect-ratio: 1/1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    margin: 20px 0 5px 0;
+    transition: width 0.2s ease-out, transform 0.05s ease-out, box-shadow 0.2s ease-out;
+    filter: brightness(100%), drop-shadow(0 0 5px #000);
+    transform: rotate(0deg);
+    border-radius: 10px;
+    box-shadow: 0 0 0 #000;
+    background: linear-gradient(45deg, #444 0%, #222 100%);
+}
+
+.nav-grid span:hover {
+    width: 85px;
+    height: 85px;
+    filter: brightness(110%);
+    transform: rotate(2deg);
+    box-shadow: 0 0 10px #000;
+}
+
+.nav-grid img:active {
+    box-shadow: 0 0 0 #000;
+    border: medium solid white;
+}
+
+.nav-grid span {
+    font-size: 1rem;
+    text-align: center;
+}
+
+/* Category divider styles */
+.category-divider {
+    color: #fff;
+    text-align: center;
+    border-bottom: 2px solid #555;
+    margin: 15px 0 15px 0;
+}
+
+/* Menu toggle button */
+.menu-toggle {
+    position: relative;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Main content area */
+.translator-section {
+    max-width: 800px;
+    margin: 6rem auto;
+    padding: 1rem;
+    background: var(--translator-color);
+    color: var(--text-color);
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    transition: background-color 0.3s ease-out, color 0.3s ease-out;
+}
+
+.translator-section h1 {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    letter-spacing: 0.25px;
+}
+
+.translator-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: left;
+    padding-left: 10px;
+    background-image: linear-gradient(to right, #ffffff00 15%, #78a1e7, #daa764);
+}
+
+#topic-using {
+    color: #45669b;
+    font-size: 1rem;
+    font-style: italic;
+}
+
+#tool-using {
+    color: #274b8a;
+}
+
+details {
+    margin-bottom: 1rem;
+    margin-top: -10px;
+    text-align: left;
+}
+
+details summary {
+    font-weight: bold;
+}
+
+details summary::marker {
+    display: none;
+    font-size: 0;
+}
+
+details summary::-webkit-details-marker {
+    display:none;
+}
+
+summary::before {
+    content: '';
+    border-width: .4rem;
+    border-style: solid;
+    border-color: transparent transparent transparent var(--text-color);
+    position: relative;
+    top: 0.05rem;
+    display: inline-block;
+    transform: rotate(0);
+    transform-origin: .2rem 50%;
+    transition: .25s transform ease;
+    margin-right: 3px;
+}
+
+details[open] > summary::before {
+    transform: rotate(90deg);
+    border-color: transparent transparent transparent #3c84ff;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    font-weight: bold;
+}
+
+textarea, input {
+    caret-color: var(--blue);
+    transition: all 0.2s ease-out;
+    background-color: transparent;
+    color: var(--text-color);
+}
+
+textarea:focus#outputText {
+    outline: none;
+}
+
+textarea:focus:not(#outputText), input:focus {
+    outline: none;
+    box-shadow: 0 0 0px 2px var(--blue) inset;
+    border: thin solid var(--blue);
+}
+
+input[type="search"] {
+    display: block;
+    margin: auto;
+    border: none;
+    background-color: #333;
+    border-radius: 10px;
+    padding: 7px;
+    border: thin solid #555;
+    margin-top: 10px;
+    color: white;
+    font-size: 1.05rem;
+}
+
+
+textarea {
+    margin-bottom: 1rem;
+    margin-inline: 2rem;
+    padding: 0.5rem;
+    font-size: 1.05rem;
+    resize: vertical;
+    border-radius: 5px;
+}
+
+textarea[readonly] {
+    background-color: rgb(0, 0, 0, 0.05);
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.button-container button {
+    padding: 0.75rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.15s ease-out, outline 0.1s ease-out;
+    outline: 0 solid #AAA;
+}
+
+.button-container button:hover {
+    outline-width: 5px;
+}
+
+.button-container button:active {
+    outline-width: 2px;
+}
+
+.button-container #translateBtn {
+    flex: 0.5 1 auto;
+}
+
+.button-container #clearBtn {
+    background-color: transparent;
+    color: #333;
+    font-weight: bolder;
+    border: 2px solid #333;
+}
+
+
+::-moz-selection { /* Code for Firefox */
+    color: white;
+    background: var(--blue);
+}
+  
+::selection {
+    color: white;
+    background: var(--blue);
+}
+
+
+
+
+
+.button-container button:hover {
+    background-color: #555;
+}
+
+/* py-script styles */
+#pyscript-operation-details {
+    position: absolute;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-color: #00000033;
+    color: white;
+    font-weight: bold;
+    pointer-events: none;
+}
+
+#isDecode {
+    display: none;
+}
+
+#isDecode:checked ~ label {
+    background-color: white;
+    color: var(--blue);
+}
+
+#isDecode:disabled ~ label {
+    background-color: darkgray;
+    color: white;
+}
+
+#isDecode ~ label {
+    background-color: var(--blue);
+    color: white;
+    font-weight: bold;
+
+    border: thin solid#292929;
+    padding: 7px 10px;
+    margin: 5px;
+    border-radius: 3px;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    transition: background-color 0.1s ease-out, box-shadow 0.1s ease-out;
+}
+
+#isDecode:not(:disabled) ~ label:hover {
+    box-shadow: 0 0 10px var(--blue);
+}
+
+
+.arrow-translate {
+    display: inline-block;
+    font-size: 1.7rem;
+    font-weight: bold;
+    vertical-align: sub;
+    margin: 0 0 -5px 5px;
+    transform: rotate(0);
+    transition: transform 0.2s ease-out;
+}
+
+#isDecode:checked ~ .arrow-translate {
+    transform: rotate(180deg);
+}
+
+.middle-control {
+    margin: 5px 0;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 10px;
+}
+
+#input2-input {
+    padding: 5px;
+    font-size: 1.05rem;
+}
+
+/* Modal */
+
+
+#openModal {
+    background-color: transparent;
+    color: #555;
+    border: thin solid #555;
+    padding: 2px 5px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.modal {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.6);
+justify-content: center;
+align-items: center;
+}
+
+.modal-content {
+    color: var(--text-color);
+    background-color: var(--translator-color);
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 400px;
+    width: 80%;
+    text-align: center;
+    position: relative;
+    opacity: 0;
+    transform: translateY(-200px);
+    z-index: 999;
+}
+
+.modal-content span {
+    color: var(--text-color);
+}
+
+@keyframes slideIn {
+from {
+    opacity: 0;
+    transform: translateY(-200px);
+}
+to {
+    opacity: 1;
+    transform: translateY(0);
+}
+}
+
+@keyframes slideOut {
+from {
+    opacity: 1;
+    transform: translateY(0);
+}
+to {
+    opacity: 0;
+    transform: translateY(-200px);
+}
+}
+
+.modal.show .modal-content {
+animation: slideIn 0.4s ease-out forwards;
+}
+
+.modal.hide .modal-content {
+animation: slideOut 0.4s ease-out forwards;
+}
+
+#close-modal-btn {
+position: absolute;
+top: 10px;
+right: 10px;
+font-size: 24px;
+cursor: pointer;
+}
+
+#credits-here {
+    text-align: left;
+    font-size: 0.85rem;
+}
+
+#pyscript-operation-details {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(27, 27, 27, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    pointer-events: none;
+}
+
+#pyscript-operation-details p {
+    animation: floating 1s ease-in-out infinite alternate;
+}
+
+#pyscript-operation-details p::before {
+    content: "pyscript: ";
+}

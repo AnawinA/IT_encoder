@@ -55,10 +55,9 @@ it_encode = {
         "FalseBinary": (bundle.encode_false_binary, bundle.decode_false_binary, {'c': 'W', 'src': 'images/language/false binary.png', 'desc': details.false_binary, 'in': ph_prev, 'out': bundle.encode_false_binary(ph_prev)}),
     },
     "BuiltIn": {
-        "UTF-8": (bundle.encode_utf8, bundle.decode_utf8, {'c': 'W', 'in': ph_prev_emoji, 'out': bundle.encode_utf8(ph_prev_emoji)}),
-        # "UTF-16"
+        "UTF-8": (bundle.encode_utf8, bundle.decode_utf8, {'c': 'W', 'in': ph_prev_emoji, 'out': bundle.encode_utf8(ph_prev_emoji), 'no_decode': True}),
+        "ISO-8859-1": (bundle.encode_iso_8859_1, bundle.encode_iso_8859_1, {'c': 'W', 'in': ph_prev_emoji, 'out': bundle.encode_iso_8859_1(ph_prev_emoji)}),
         "ASCII": (bundle.encode_ascii, bundle.decode_ascii, {'c': 'W', 'in': ph_prev, 'out': bundle.encode_ascii(ph_prev)}),
-        # "ISO 8859-1"
     }
 }
 

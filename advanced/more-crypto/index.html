@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT encoder</title>
+    <link rel="shortcut icon" href="../../images/it.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    <py-env>
+        - numpy
+        - paths:
+            - crypto.py
+    </py-env>
+</head>
+<body>
+    <!-- Navbar (Sidebar) -->
+    <div class="topbar" id="topbar">
+        <div>
+            <div class="menu-toggle" id="mobile-menu">&#9776;</div>
+            <a href="../../index.html" class="goto-home">goto Home</a>
+        </div>
+        <h2 class="title"><span>i</span><span>T</span> ADVANCED</h2>
+        <div>
+            <button onclick="toggleDarkMode()" class="darkmode-btn goto-home">Dark Mode</button>
+        </div>
+    </div>
+    <div class="sidebar" id="sidebar">
+        <nav>
+            <img src="../../images/it encoder.png" class="logo" alt="" width="100%">
+            <p class="small-description">
+                Encoders are essential in various applications, including robotics, packaging, automation, and more, where precise motion control is required.
+            </p>
+            <div class="close-btn" id="close-btn">&times;</div>
+
+            <input id="find" type="search" placeholder="Search" id="search-input" oninput="searching(event)">
+            <div id="search-box">
+                <!-- <h2 class="category-divider">Main</h2>
+                <ul class="nav-grid">
+                    <li><button><img src="images/default.png" alt="Home"><span>A</span></button></li>
+                    <li><button><img src="images/default.png" alt="Translate"><span>B</span></button></li>
+                    <li><button><img src="images/default.png" alt="Language"><span>C</span></button></li>
+                </ul>-->
+                <h2 class="category-divider">Advanced</h2>
+                    <ul class="nav-grid">
+                        <li><a href="../../advanced/mfit/matrix-cryptography.html"><span>Matrix Cryptography</span></a href="./"></li>
+                        <li><button><span>ASCII</span></button></li>
+                        <li><button><span>UTF-8</span></button></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!-- Credits -->
+    <main>
+        <section class="translator-section">
+            <h1>Language Translator</h1>
+            <h2>encoder = <ins id="tool-using">base64</ins></h2>
+            <details>
+                <summary id="details-desc">description base64</summary>
+                <p class="small-description" id="details-content">Base64 is an encoding method that transforms binary data into text format using 64 different ASCII characters. It's widely used to transmit data over media that handle text, ensuring the data remains unchanged. Base64 is prevalent in web development for embedding images and other files within HTML or CSS files.</p>
+            </details>
+            <form id="translator-form">
+                <label for="inputText">Text to Translate: <span class="describeLabel"></span></label>
+                <textarea id="inputText" rows="5" placeholder="Enter Text Here..." autofocus autocomplete="on"></textarea>
+
+                <div>
+                    
+                    <div class="middle-control">
+                        <div style="display: none;">
+                            <input type="text" id="input2-input" size="10" disabled placeholder="n/a"><br>
+                            <small>second input</small>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="isDecode"><label for="isDecode">Encode</label>
+                            <h3 class="arrow-translate">&dArr;</h3><br>
+                            <small>(encode/decode)</small>
+                        </div>
+                    </div>
+                </div>
+
+                <label for="outputText">Translated Text:</label>
+                <textarea id="outputText" rows="5" readonly placeholder="Translated"></textarea>
+
+                <div class="button-container">
+                    <button id="clearBtn">Clear</button>
+                    <button type="button" id="translateBtn">Translate</button>
+                    <button id="copyBtn">Copy</button>
+                </div>
+            </form>
+        </section>
+    </main>
+    <script type="text/javascript" src="script.js"></script>
+    <py-script src="index.py"></py-script>
+</body>
+</html>

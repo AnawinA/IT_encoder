@@ -10,21 +10,6 @@ def _decode_builtins(byte_data: str, type_encode: str):
     except Exception as e:
         return f"Error decoding bytes from {byte_data}: {e}"
 
-def encode_utf8(text):
-    """Encodes a string into bytes using UTF-8 encoding."""
-    return _encode_builtins(text, 'UTF-8')
-
-def decode_utf8(byte_data):
-    """Decodes bytes back into a string using UTF-8 encoding."""
-    return _decode_builtins(byte_data, 'UTF-8')
-
-def encode_ascii(text):
-    """Encodes a string into bytes using ASCII encoding."""
-    return _encode_builtins(text, 'ASCII')
-
-def decode_ascii(byte_data):
-    """Decodes bytes back into a string using ASCII encoding."""
-    return _decode_builtins(byte_data, 'ASCII')
 
 def encode_utf16(text):
     """Encodes a string into bytes using UTF-16 encoding."""
@@ -33,17 +18,6 @@ def encode_utf16(text):
 def decode_utf16(byte_data):
     """Decodes bytes back into a string using UTF-16 encoding."""
     return _decode_builtins(byte_data, 'UTF-16')
-
-def encode_iso_8859_1(text):
-    """Encodes a string into bytes using ISO-8859-1 encoding."""
-    return _encode_builtins(text, 'ISO-8859-1')
-
-def decode_iso_8859_1(byte_data):
-    """Decodes bytes back into a string using ISO-8859-1 encoding."""
-    return _decode_builtins(byte_data, 'ISO-8859-1')
-
-
-
 
 def encode_utf32(text):
     """Encodes a string into bytes using UTF-32 encoding."""
