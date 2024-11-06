@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="styles.css">
     <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
     <py-env>
-        - numpy
         - paths:
             - crypto.py
     </py-env>
@@ -44,8 +43,12 @@
                 <h2 class="category-divider">Advanced</h2>
                     <ul class="nav-grid">
                         <li><a href="../../advanced/mfit/matrix-cryptography.html"><span>Matrix Cryptography</span></a href="./"></li>
-                        <li><button><span>ASCII</span></button></li>
-                        <li><button><span>UTF-8</span></button></li>
+                        <li><button><span>UTF-16</span></button></li>
+                        <li><button><span>MD-5</span></button></li>
+                        <li><button><span>SHA-1</span></button></li>
+                        <li><button><span>SHA-256</span></button></li>
+                        <li><button><span>SHA-512</span></button></li>
+                        <li><button><span>quopri</span></button></li>
                 </ul>
             </div>
         </nav>
@@ -54,9 +57,9 @@
     <main>
         <section class="translator-section">
             <h1>Language Translator</h1>
-            <h2>encoder = <ins id="tool-using">base64</ins></h2>
+            <h2>encoder = <ins id="tool-using">UTF-16</ins></h2>
             <details>
-                <summary id="details-desc">description base64</summary>
+                <summary id="details-desc">description</summary>
                 <p class="small-description" id="details-content">Base64 is an encoding method that transforms binary data into text format using 64 different ASCII characters. It's widely used to transmit data over media that handle text, ensuring the data remains unchanged. Base64 is prevalent in web development for embedding images and other files within HTML or CSS files.</p>
             </details>
             <form id="translator-form">

@@ -2,7 +2,12 @@ import crypto
 import pyodide
 
 it_encode = {
-    "UTF-8": (crypto.encode_utf8, crypto.decode_utf8),
+    "UTF-16": (crypto.encode_utf16, None),
+    "MD-5": (crypto.md5_encode, None),
+    "SHA-1": (crypto.sha1_encode, None),
+    "SHA-256": (crypto.sha256_encode, None),
+    "SHA-512": (crypto.sha512_encode, None),
+    "quopri": (crypto.encode_quopri, crypto.decode_quopri),
 }
 
 def get_tool():
@@ -14,8 +19,16 @@ def translate(e):
     # print(get_tool())
     is_decode = int(Element("isDecode").element.checked)
     input_text = Element("inputText").element.value
-    Element("outputText").element.value = it_encode[get_tool()][is_decode](input_text)
+    get_encode = it_encode[get_tool()][is_decode]
+    print(get_encode)
+    if get_encode is None:
+        Element("outputText").element.value = "Not supported"
+    else:
+        Element("outputText").element.value = get_encode(input_text)
+
 Element('translateBtn').element.addEventListener('click', pyodide.create_proxy(translate))
+Element('inputText').element.addEventListener('input', pyodide.create_proxy(translate))
+
 
 def clear(e):
     Element("inputText").element.value = ""
@@ -25,14 +38,3 @@ def clear(e):
 
 Element('clearBtn').element.addEventListener('click', pyodide.create_proxy(clear))
 
-# def encoding(e):
-#     encoded = encode_matrix(Element("encode_string").element.value
-#                             , json.loads(MATRIX.element.innerText))
-#     Element("encoded_output").write(encoded)
-# Element('encode_button').element.addEventListener('click', pyodide.create_proxy(encoding))
-
-# def decoding(e):
-#     decoded = decode_matrix(json.loads(Element("decode_list").element.value)
-#                             , json.loads(MATRIX.element.innerText))
-#     Element("decoded_output").write(decoded)
-# Element('decode_button').element.addEventListener('click', pyodide.create_proxy(decoding))
