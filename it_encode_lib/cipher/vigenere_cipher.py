@@ -19,3 +19,4 @@ def vigenere_cipher(text, key):
 
 def vigenere_decipher(text, key):
     return vigenere(text, key, encode=False)
+

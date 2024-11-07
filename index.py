@@ -27,6 +27,7 @@ it_encode = {
         "Morse": (bundle.morse_encode, bundle.morse_decode, {'c': 'P', 'src': 'images/morse.png', 'desc': details.Morse, 'in': ph_prev, 'out': bundle.morse_encode(ph_prev)}),
         "Ordinary": (bundle.ord_encode, bundle.ord_decode, {'c': 'P', 'src': 'images/ord.png', 'desc': details.ord_encode, 'in': ph_prev, 'out': bundle.ord_encode(ph_prev)}),
         "oct/base8": (bundle.encode_to_base8, bundle.decode_from_base8, {'c': 'P', 'src': 'images/octal.png', 'desc': details.oct_base8, 'in': ph_prev, 'out': bundle.encode_to_base8(ph_prev)}),
+        "ADFGX": (bundle.encode_adfgx, bundle.decode_adfgx, {'c': 'K', 'src': 'images/cipher/ADFGX.png', 'desc': details.adfgx, 'in': ph_prev, 'out': bundle.encode_adfgx(ph_prev, 'KEY'), 'input2': 'KEY (key)'}),
     },
     "iJudge": {
         "mealEncoding": (bundle.meal_encode, bundle.meal_decode, {'c': 'W', 'src': 'images/ijudge/ij meanEn.png', 'in': ph_prev, 'out': bundle.meal_encode(ph_prev)}),

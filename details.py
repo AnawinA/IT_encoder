@@ -16,6 +16,7 @@ chicken = 'Chicken is a language in which the only valid keyword is "chicken." T
 false_ascii = "(similar to ASCII but contains \"a\" keyword) original FALSE language, which uses ASCII characters for its syntax and commands. It is designed to be minimalistic and concise"
 false_binary = "(similar to binary but without spaces) FALSE have been created in binary form, where the commands are represented in binary code rather than ASCII text."
 phonetic_alphabet = "Phonetic alphabets are systems used to represent the sounds of speech in written form, allowing for clear and unambiguous communication, especially over radio, telephone, or in situations where clarity is crucial."
+adfgx = ""
 
 # cipher
 xor_cipher = "XOR cipher is a simple encryption algorithm that uses the XOR (exclusive disjunction) operation to encrypt and decrypt data."
