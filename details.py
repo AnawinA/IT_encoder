@@ -16,7 +16,7 @@ chicken = 'Chicken is a language in which the only valid keyword is "chicken." T
 false_ascii = "(similar to ASCII but contains \"a\" keyword) original FALSE language, which uses ASCII characters for its syntax and commands. It is designed to be minimalistic and concise"
 false_binary = "(similar to binary but without spaces) FALSE have been created in binary form, where the commands are represented in binary code rather than ASCII text."
 phonetic_alphabet = "Phonetic alphabets are systems used to represent the sounds of speech in written form, allowing for clear and unambiguous communication, especially over radio, telephone, or in situations where clarity is crucial."
-adfgx = ""
+adfgx = 'Description of How the ADFGX Cipher Works. The ADFGX cipher is a field cipher used by the German Army during World War I. It combines a modified Polybius square with a single columnar transposition to encrypt messages. The name "ADFGX" comes from the letters used in the cipher, which were chosen because they are very distinct in Morse code.'
 
 # cipher
 xor_cipher = "XOR cipher is a simple encryption algorithm that uses the XOR (exclusive disjunction) operation to encrypt and decrypt data."

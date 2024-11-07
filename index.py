@@ -58,7 +58,6 @@ it_encode = {
         "Chicken": (bundle.encode_chicken, bundle.decode_chicken, {'c': 'W', 'src': 'images/language/chicken.png', 'desc': details.chicken, 'in': ph_prev_small, 'out': bundle.encode_chicken(ph_prev_small)}),
         "FalseASCII": (bundle.encode_false_ascii, bundle.decode_false_ascii, {'c': 'W', 'src': 'images/language/false ASCII.png', 'desc': details.false_ascii, 'in': ph_prev, 'out': bundle.encode_false_ascii(ph_prev)}),
         "FalseBinary": (bundle.encode_false_binary, bundle.decode_false_binary, {'c': 'W', 'src': 'images/language/false binary.png', 'desc': details.false_binary, 'in': ph_prev, 'out': bundle.encode_false_binary(ph_prev)}),
-        "ADFGX": (bundle.encode_adfgx, bundle.decode_adfgx, {'c': 'K', 'src': 'images/cipher/ADFGX.png', 'desc': details.adfgx, 'in': ph_prev, 'out': bundle.encode_adfgx(ph_prev, 'KEY'), 'input2': 'KEY (key)'}),
     },
     "Cipher": {
         "XORcipher": (bundle.xor_encrypt_decrypt, bundle.xor_encrypt_decrypt, {'c': 'P', 'desc': details.xor_cipher, 'src': 'images/cipher/xor_cipher.png', 'in': ph_prev, 'out': bundle.xor_encrypt_decrypt(ph_prev, "123"), 'input2': '123 (key)'}),
@@ -67,6 +66,7 @@ it_encode = {
         "Vigenere": (bundle.vigenere_cipher, bundle.vigenere_decipher, {'c': 'P', 'desc': details.vigenere_cipher, 'src': 'images/cipher/vigenere_cipher.png', 'in': ph_prev, 'out': bundle.vigenere_cipher(ph_prev, "KEY"), 'input2': 'KEY'}),
         "Caesar": (bundle.caesar_cipher, bundle.caesar_decipher, {'c': 'P', 'desc': details.caesar_cipher, 'src': 'images/cipher/caesar_cipher.png', 'in': ph_prev, 'out': bundle.caesar_cipher(ph_prev, 5), "input2": '5 (shift)'}),
         "Zigzag": (bundle.rail_fence_encrypt, bundle.rail_fence_decrypt, {'c': 'P', 'desc': details.zigzag_cipher, 'src': 'images/cipher/zigzag.png', 'in': ph_prev, 'out': bundle.rail_fence_encrypt(ph_prev, 5), "input2": '5 (rails)'}),
+        "ADFGX": (bundle.encode_adfgx, bundle.decode_adfgx, {'c': 'K', 'src': 'images/cipher/ADFGX.png', 'desc': details.adfgx, 'in': ph_prev, 'out': bundle.encode_adfgx(ph_prev, 'KEY'), 'input2': 'KEY (key)'}),
     },
     "External": {
         "UTF-16": (None, None, {'c': 'W', 'src': 'images/utf-16.png'}),
@@ -81,9 +81,10 @@ it_encode = {
 topic = document["topic-using"]
 tool = document["tool-using"]
 
-if tool.textContent != "base64":
+try:
     document['icon-prev'].attrs['src'] = it_encode[topic.textContent][tool.textContent][2].get("src", "images/default.png")
-
+except:
+    document['icon-prev'].attrs['src'] = "images/default.png"
 
 credits = {}
 
