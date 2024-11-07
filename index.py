@@ -22,8 +22,8 @@ it_encode = {
         "base32": (bundle.base32_encoder, bundle.base32_decoder, {'c': 'T', 'src': 'images/b32 icon.png', 'desc': details.base32, 'in': ph_prev, 'out': bundle.base32_encoder(ph_prev)}),
         "hex/base16": (bundle.hex_encode, bundle.hex_decode,{'c': 'P', 'src': 'images/H.png', 'desc': details.hex_base16, 'in': ph_prev, 'out': bundle.hex_encode(ph_prev)}),
         "binary/base2": (bundle.encode_to_binary, bundle.decode_from_binary, {'c': 'W', 'src': 'images/binary.png', 'desc': details.binary, 'in': ph_prev, 'out': bundle.encode_to_binary(ph_prev)}),
-        "sha1": (bundle.generate_sha1, None, {'c': 'K', 'desc': details.sha1, 'in': ph_prev, 'out': bundle.generate_sha1(ph_prev), 'no_decode': True}),
-        "sha224": (bundle.generate_sha224, None, {'c': 'K', 'desc': details.sha224, 'in': ph_prev, 'out': bundle.generate_sha224(ph_prev), 'no_decode': True}),
+        "sha1": (bundle.generate_sha1, None, {'c': 'K', 'src': 'images/sha/sha1.png', 'desc': details.sha1, 'in': ph_prev, 'out': bundle.generate_sha1(ph_prev), 'no_decode': True}),
+        "sha224": (bundle.generate_sha224, None, {'c': 'K', 'src': 'images/sha/sha224.png', 'desc': details.sha224, 'in': ph_prev, 'out': bundle.generate_sha224(ph_prev), 'no_decode': True}),
         "Morse": (bundle.morse_encode, bundle.morse_decode, {'c': 'P', 'src': 'images/morse.png', 'desc': details.Morse, 'in': ph_prev, 'out': bundle.morse_encode(ph_prev)}),
         "Ordinary": (bundle.ord_encode, bundle.ord_decode, {'c': 'W', 'src': 'images/ord.png', 'desc': details.ord_encode, 'in': ph_prev, 'out': bundle.ord_encode(ph_prev)}),
     },
@@ -36,9 +36,9 @@ it_encode = {
         "temperature": (bundle.temperature, lambda x, y: bundle.temperature(float(x, (y[::-1] if y != '' else 'FC'))), {'c': 'T', 'in': ph_prev_zero, 'src': 'images/temperature.png', 'out': bundle.temperature("0", 'CF'), 'input2': 'CF [CFKR](Celsius to Fahrenheit)'}),
     },
     "ICS": {
-        "networkID": (bundle.networkid, bundle.networkid, {'c': 'T', 'in': ph_prev_ip[0], 'out': bundle.networkid(*ph_prev_ip), 'input2': '252,127,63,6', 'no_decode': True}),
+        "networkID": (bundle.networkid, bundle.networkid, {'c': 'T', 'src': 'images/networkid.png', 'in': ph_prev_ip[0], 'out': bundle.networkid(*ph_prev_ip), 'input2': '252,127,63,6', 'no_decode': True}),
         "URL": (bundle.url_encode, bundle.url_decode, {'c': 'W', 'src': 'images/url.png', 'in': ph_prev, 'out': bundle.url_encode(ph_prev), 'desc': details.url}),
-        "parityBits": (bundle.parity_even_bit, bundle.parity_dff_bit, {'c': 'T', 'src': 'images/default.png', 'in': ph_prev_binary, 'out': bundle.parity_even_bit(ph_prev_binary)}),
+        "parityBits": (bundle.parity_even_bit, bundle.parity_dff_bit, {'c': 'T', 'src': 'images/paritybits.png', 'in': ph_prev_binary, 'out': bundle.parity_even_bit(ph_prev_binary)}),
     },
     "Text": {
         "upper/lowercase": (str.upper, str.lower, {'c': 'W', 'src': 'images/text_images/upperlowercase.png', 'in': str.lower(ph_prev), 'out': str.upper(ph_prev)}),
@@ -71,7 +71,6 @@ it_encode = {
     "External": {
         "UTF-16": (None, None, {'c': 'W'}),
         "MD-5": (None, None, {'c': 'W'}),
-        "SHA-1": (None, None, {'c': 'K'}),
         "SHA-256": (None, None, {'c': 'K'}),
         "SHA-512": (None, None, {'c': 'K'}),
         "quopri": (None, None, {'c': 'W', 'src': 'images/text_images/quopri.png'}),
