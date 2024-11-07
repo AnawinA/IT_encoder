@@ -373,6 +373,35 @@ def decode_big5(byte_data):
         return f"Error decoding bytes from Big5: {e}"
 
 
+def gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
+
+def mod_inverse(a, m):
+    for x in range(1, m):
+        if (a * x) % m == 1:
+            return x
+    return None
+
+def affine_encrypt(text, a, b):
+    if gcd(a, 26) != 1:
+        raise ValueError("a and 26 must be coprime.")
+    return ''.join(chr(((a * (ord(char) - 65) + b) % 26) + 65) if char.isupper() else char for char in text)
+
+def affine_decrypt(encoded_text, a, b):
+    a_inv = mod_inverse(a, 26)
+    return ''.join(chr((a_inv * ((ord(char) - 65) - b) % 26) + 65) if char.isupper() else char for char in encoded_text)
+
+original_text = "HELLOAFFINE"
+a, b = 5, 8  # Example keys
+encoded = affine_encrypt(original_text, a, b)
+decoded = affine_decrypt(encoded, a, b)
+
+# print("Original Text:", original_text)
+# print("Encoded Text (Affine Cipher):", encoded)
+# print("Decoded Text:", decoded)
+
 def atbash_cipher(text):
     encoded = []
     for char in text:
@@ -437,6 +466,55 @@ def xor_encrypt_decrypt(data, key):
     return ''.join(chr(ord(c) ^ key) for c in data)
 
 
+
+def rail_fence_encrypt(text, rails):
+    if rails == '':
+        rails = int(5)
+    else:
+        rails = int(rails)
+    fence = [[] for _ in range(rails)]
+    rail = 0
+    var = 1
+
+    for char in text:
+        fence[rail].append(char)
+        rail += var
+        if rail == 0 or rail == rails - 1:
+            var = -var
+
+    return ''.join(''.join(row) for row in fence)
+
+def rail_fence_decrypt(cipher, rails):
+    if rails == '':
+        rails = int(5)
+    else:
+        rails = int(rails)
+    fence = [[] for _ in range(rails)]
+    rail = 0
+    var = 1
+
+    for i in range(len(cipher)):
+        fence[rail].append(None)
+        rail += var
+        if rail == 0 or rail == rails - 1:
+            var = -var
+
+    idx = 0
+    for row in fence:
+        for j in range(len(row)):
+            row[j] = cipher[idx]
+            idx += 1
+
+    rail = 0
+    var = 1
+    result = []
+    for i in range(len(cipher)):
+        result.append(fence[rail].pop(0))
+        rail += var
+        if rail == 0 or rail == rails - 1:
+            var = -var
+
+    return ''.join(result)
 
 """coin change"""
 

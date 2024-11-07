@@ -23,3 +23,4 @@ caesar_cipher = "Caesar Cipher is one of the oldest and simplest encryption tech
 atbash_cipher = "Atbash Cipher is a substitution cipher where each letter is mapped to its reverse in the alphabet (e.g., A ↔ Z, B ↔ Y)."
 vigenere_cipher = "Vigenère Cipher uses a keyword to shift each character of the plaintext by different amounts based on the keyword's letters."
 ord_encode = "Ordinary encoding is a method of encoding text characters as sequences of ASCII numbers. It is used in most modern programming languages."
+zigzag_cipher = "(Zig-Zag Cipher) Rail Fence Cipher encodes text by arranging it in a zig-zag pattern across multiple rows, then reading off each row sequentially."

@@ -65,6 +65,7 @@ it_encode = {
         "Atbash": (bundle.atbash_cipher, bundle.atbash_cipher, {'c': 'P', 'desc': details.atbash_cipher, 'src': 'images/cipher/atbash_cipher.png', 'in': ph_prev, 'out': bundle.atbash_cipher(ph_prev)}),
         "Vigenere": (bundle.vigenere_cipher, bundle.vigenere_decipher, {'c': 'P', 'desc': details.vigenere_cipher, 'src': 'images/cipher/vigenere_cipher.png', 'in': ph_prev, 'out': bundle.vigenere_cipher(ph_prev, "KEY"), 'input2': 'KEY'}),
         "Caesar": (bundle.caesar_cipher, bundle.caesar_decipher, {'c': 'P', 'desc': details.caesar_cipher, 'src': 'images/cipher/caesar_cipher.png', 'in': ph_prev, 'out': bundle.caesar_cipher(ph_prev, 5), "input2": '5 (shift)'}),
+        "Zigzag": (bundle.rail_fence_encrypt, bundle.rail_fence_decrypt, {'c': 'P', 'desc': details.zigzag_cipher, 'src': 'images/cipher/zigzag.png', 'in': ph_prev, 'out': bundle.rail_fence_encrypt(ph_prev, 5), "input2": '5 (rails)'}),
     },
     "External": {
         "UTF-16": (None, None, {'c': 'W', 'src': 'images/utf-16.png'}),
