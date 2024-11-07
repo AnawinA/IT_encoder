@@ -25,7 +25,7 @@ it_encode = {
         "sha1": (bundle.generate_sha1, None, {'c': 'K', 'desc': details.sha1, 'in': ph_prev, 'out': bundle.generate_sha1(ph_prev), 'no_decode': True}),
         "sha224": (bundle.generate_sha224, None, {'c': 'K', 'desc': details.sha224, 'in': ph_prev, 'out': bundle.generate_sha224(ph_prev), 'no_decode': True}),
         "Morse": (bundle.morse_encode, bundle.morse_decode, {'c': 'P', 'src': 'images/morse.png', 'desc': details.Morse, 'in': ph_prev, 'out': bundle.morse_encode(ph_prev)}),
-        "Ordinary": (bundle.ord_encode, bundle.ord_decode, {'c': 'W', 'src': 'images/ORD.png', 'desc': details.ord_encode, 'in': ph_prev, 'out': bundle.ord_encode(ph_prev)}),
+        "Ordinary": (bundle.ord_encode, bundle.ord_decode, {'c': 'W', 'src': 'images/ord.png', 'desc': details.ord_encode, 'in': ph_prev, 'out': bundle.ord_encode(ph_prev)}),
     },
     "iJudge": {
         "mealEncoding": (bundle.meal_encode, bundle.meal_decode, {'c': 'W', 'src': 'images/ijudge/ij meanEn.png', 'in': ph_prev, 'out': bundle.meal_encode(ph_prev)}),
