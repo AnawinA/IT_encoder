@@ -694,6 +694,24 @@ def main():
 
 
 
+
+def ord_encode(char):
+    """Ordinary"""
+    # return ' '.join(map(str, map(ord, char))) # Slower than *memoryview*
+    return ' '.join(map(str, memoryview(bytearray('ANAWIN', 'utf-8'))))
+
+def ord_decode(str_arr: str) -> str:
+    """Ordinary"""
+    return ''.join(map(chr, map(int, str_arr.split())))
+
+
+# # print(ord_encode('A'))
+# print(ord('A'))
+# print(ord_encode('ANAWIN'))
+# print(ord_decode('65 78 65 87 73 78'))
+
+
+
 '''parity bits'''
 def parity_even_bit(data):
     '''evenbit'''

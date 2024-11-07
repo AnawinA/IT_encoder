@@ -21,4 +21,4 @@ xor_cipher = "XOR cipher is a simple encryption algorithm that uses the XOR (exc
 caesar_cipher = "Caesar Cipher is one of the oldest and simplest encryption techniques. Each letter in the text is shifted by a fixed number of positions."
 atbash_cipher = "Atbash Cipher is a substitution cipher where each letter is mapped to its reverse in the alphabet (e.g., A ↔ Z, B ↔ Y)."
 vigenere_cipher = "Vigenère Cipher uses a keyword to shift each character of the plaintext by different amounts based on the keyword's letters."
-
+ord_encode = "Ordinary encoding is a method of encoding text characters as sequences of ASCII numbers. It is used in most modern programming languages."
