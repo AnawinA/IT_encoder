@@ -40,25 +40,33 @@ if (topic && tool) {
 }
 
 
+
 const userPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
 const savedTheme = localStorage.getItem('theme') || (userPrefersDark ? 'dark' : 'light');
 
 // Apply the saved or prefered theme
 if (savedTheme === 'dark') {
-  document.body.classList.add('dark-mode');
+    document.body.classList.add('dark-mode');
 }
 
 // Toggle and save theme
 function toggleDarkMode() {
-  document.body.classList.toggle('dark-mode');
-  console.log("toggle")
+    document.body.classList.toggle('dark-mode');
+    console.log("toggle")
   const currentTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
   localStorage.setItem('theme', currentTheme);
 }
 
+const toolRemember = localStorage.getItem('tool') || 'base64';
+const topicRemember = localStorage.getItem('topic') || 'binary';
 
-// const toolRemember = localStorage.getItem('tool') || 'base64';
-// const topicRemember = localStorage.getItem('topic') || 'binary';
+toolUsing.textContent = toolRemember;
+topicUsing.textContent = topicRemember;
+
+inputText.addEventListener('change', function() {
+    localStorage.setItem('tool', toolUsing.textContent);
+    localStorage.setItem('topic', topicUsing.textContent);
+})
 
 
 

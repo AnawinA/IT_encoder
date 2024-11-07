@@ -24,8 +24,8 @@ it_encode = {
         "binary/base2": (bundle.encode_to_binary, bundle.decode_from_binary, {'c': 'W', 'src': 'images/binary.png', 'desc': details.binary, 'in': ph_prev, 'out': bundle.encode_to_binary(ph_prev)}),
         "sha1": (bundle.generate_sha1, None, {'c': 'K', 'desc': details.sha1, 'in': ph_prev, 'out': bundle.generate_sha1(ph_prev), 'no_decode': True}),
         "sha224": (bundle.generate_sha224, None, {'c': 'K', 'desc': details.sha224, 'in': ph_prev, 'out': bundle.generate_sha224(ph_prev), 'no_decode': True}),
-        "ROT13": (bundle.rot13_encode, bundle.rot13_decode, {'c': 'P', 'desc': details.rot13, 'in': ph_prev, 'out': bundle.rot13_encode(ph_prev)}),
-        "Morse": (bundle.morse_encode, bundle.morse_decode, {'c': 'P', 'desc': details.Morse, 'in': ph_prev, 'out': bundle.morse_encode(ph_prev)}),
+        "Morse": (bundle.morse_encode, bundle.morse_decode, {'c': 'P', 'src': 'images/morse.png', 'desc': details.Morse, 'in': ph_prev, 'out': bundle.morse_encode(ph_prev)}),
+        "Ordinary": (bundle.ord_encode, bundle.ord_decode, {'c': 'W', 'src': 'images/ORD.png', 'desc': details.ord_encode, 'in': ph_prev, 'out': bundle.ord_encode(ph_prev)}),
     },
     "iJudge": {
         "mealEncoding": (bundle.meal_encode, bundle.meal_decode, {'c': 'W', 'src': 'images/ijudge/ij meanEn.png', 'in': ph_prev, 'out': bundle.meal_encode(ph_prev)}),
@@ -62,10 +62,11 @@ it_encode = {
         "ASCII": (bundle.encode_ascii, bundle.decode_ascii, {'c': 'W', 'in': ph_prev, 'out': bundle.encode_ascii(ph_prev)}),
     },
     "Cipher": {
-        "XORcipher": (bundle.xor_encrypt_decrypt, bundle.xor_encrypt_decrypt, {'c': 'W', 'desc': details.xor_cipher, 'src': 'images/cipher/xor_cipher.png', 'in': ph_prev, 'out': bundle.xor_encrypt_decrypt(ph_prev, "123"), 'input2': '123 (key)'}),
-        "Atbash": (bundle.atbash_cipher, bundle.atbash_cipher, {'c': 'W', 'desc': details.atbash_cipher, 'src': 'images/cipher/atbash_cipher.png', 'in': ph_prev, 'out': bundle.atbash_cipher(ph_prev)}),
-        "Vigenere": (bundle.vigenere_cipher, bundle.vigenere_decipher, {'c': 'W', 'desc': details.vigenere_cipher, 'src': 'images/cipher/vigenere_cipher.png', 'in': ph_prev, 'out': bundle.vigenere_cipher(ph_prev, "KEY"), 'input2': 'KEY'}),
-        "Caesar": (bundle.caesar_cipher, bundle.caesar_decipher, {'c': 'W', 'desc': details.caesar_cipher, 'src': 'images/cipher/caesar_cipher.png', 'in': ph_prev, 'out': bundle.caesar_cipher(ph_prev, 5), "input2": '5 (shift)'}),
+        "XORcipher": (bundle.xor_encrypt_decrypt, bundle.xor_encrypt_decrypt, {'c': 'P', 'desc': details.xor_cipher, 'src': 'images/cipher/xor_cipher.png', 'in': ph_prev, 'out': bundle.xor_encrypt_decrypt(ph_prev, "123"), 'input2': '123 (key)'}),
+        "ROT13": (bundle.rot13_encode, bundle.rot13_decode, {'c': 'P', 'src': 'images/cipher/rot13.png', 'desc': details.rot13, 'in': ph_prev, 'out': bundle.rot13_encode(ph_prev)}),
+        "Atbash": (bundle.atbash_cipher, bundle.atbash_cipher, {'c': 'P', 'desc': details.atbash_cipher, 'src': 'images/cipher/atbash_cipher.png', 'in': ph_prev, 'out': bundle.atbash_cipher(ph_prev)}),
+        "Vigenere": (bundle.vigenere_cipher, bundle.vigenere_decipher, {'c': 'P', 'desc': details.vigenere_cipher, 'src': 'images/cipher/vigenere_cipher.png', 'in': ph_prev, 'out': bundle.vigenere_cipher(ph_prev, "KEY"), 'input2': 'KEY'}),
+        "Caesar": (bundle.caesar_cipher, bundle.caesar_decipher, {'c': 'P', 'desc': details.caesar_cipher, 'src': 'images/cipher/caesar_cipher.png', 'in': ph_prev, 'out': bundle.caesar_cipher(ph_prev, 5), "input2": '5 (shift)'}),
     },
     "External": {
         "UTF-16": (None, None, {'c': 'W'}),
@@ -76,6 +77,14 @@ it_encode = {
         "quopri": (None, None, {'c': 'W', 'src': 'images/text_images/quopri.png'}),
     }
 }
+
+
+topic = document["topic-using"]
+tool = document["tool-using"]
+
+if tool.textContent != "base64":
+    document['icon-prev'].attrs['src'] = it_encode[topic.textContent][tool.textContent][2].get("src", "images/default.png")
+
 
 credits = {}
 
@@ -93,6 +102,8 @@ def getName(e):
     document['sidebar'].classList.remove('open')
     on_in, on_out = (tool_details['in'], tool_details['out']) if not input_text.classList.contains('swap-placeholder') else (tool_details['out'], tool_details['in'])
     input_text.attrs['placeholder'], output_text.attrs['placeholder'] = on_in, on_out
+
+
 
 
 def config(td, mytool):
@@ -151,8 +162,7 @@ for i in credits:
 input_text = document["inputText"]
 output_text = document["outputText"]
 
-topic = document["topic-using"]
-tool = document["tool-using"]
+
 
 def execute(is_decode, text_input):
     """execute"""
@@ -190,3 +200,4 @@ def swap(_):
     input_text.attrs['placeholder'], output_text.attrs['placeholder'] = output_text.attrs['placeholder'], input_text.attrs['placeholder']
 
 document["isDecode"].bind("click", swap)
+
