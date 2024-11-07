@@ -25,7 +25,8 @@ it_encode = {
         "sha1": (bundle.generate_sha1, None, {'c': 'K', 'src': 'images/sha/sha1.png', 'desc': details.sha1, 'in': ph_prev, 'out': bundle.generate_sha1(ph_prev), 'no_decode': True}),
         "sha224": (bundle.generate_sha224, None, {'c': 'K', 'src': 'images/sha/sha224.png', 'desc': details.sha224, 'in': ph_prev, 'out': bundle.generate_sha224(ph_prev), 'no_decode': True}),
         "Morse": (bundle.morse_encode, bundle.morse_decode, {'c': 'P', 'src': 'images/morse.png', 'desc': details.Morse, 'in': ph_prev, 'out': bundle.morse_encode(ph_prev)}),
-        "Ordinary": (bundle.ord_encode, bundle.ord_decode, {'c': 'W', 'src': 'images/ord.png', 'desc': details.ord_encode, 'in': ph_prev, 'out': bundle.ord_encode(ph_prev)}),
+        "Ordinary": (bundle.ord_encode, bundle.ord_decode, {'c': 'P', 'src': 'images/ord.png', 'desc': details.ord_encode, 'in': ph_prev, 'out': bundle.ord_encode(ph_prev)}),
+        "oct/base8": (bundle.encode_to_base8, bundle.decode_from_base8, {'c': 'P', 'src': 'images/octal.png', 'desc': details.oct_base8, 'in': ph_prev, 'out': bundle.encode_to_base8(ph_prev)}),
     },
     "iJudge": {
         "mealEncoding": (bundle.meal_encode, bundle.meal_decode, {'c': 'W', 'src': 'images/ijudge/ij meanEn.png', 'in': ph_prev, 'out': bundle.meal_encode(ph_prev)}),
@@ -48,6 +49,8 @@ it_encode = {
         "join-split": (lambda x: list(x), lambda x: ''.join(x), {'c': 'W', 'src': 'images/text_images/join-split.png', 'in': ph_prev, 'out': str.split(ph_prev)}),
         "snake->camel": (bundle.toCamelCase, bundle.to_snakecase, {'c': 'W', 'src': 'images/text_images/snake-camel.png', 'in': 'hello_it!', 'out': bundle.toCamelCase('hello_it!'), 'input2': 'delimiter: _'}),
         "reverse": (lambda x: x[::-1], lambda x: x[::-1], {'c': 'W', 'src': 'images/text_images/reverse.png', 'in': ph_prev, 'out': ph_prev[::-1]}),
+        "UTF-8": (bundle.encode_utf8, bundle.decode_utf8, {'c': 'W', 'src': 'images/utf-8.png', 'in': ph_prev_emoji, 'out': bundle.encode_utf8(ph_prev_emoji), 'no_decode': True}),
+        "Phonetic": (bundle.encode_to_phonetic, bundle.decode_from_phonetic, {'c': 'W', 'src': 'images/text_images/phonetic.png', 'desc': details.phonetic_alphabet, 'in': ph_prev, 'out': bundle.encode_to_phonetic(ph_prev)}),
     },
     "Language": {
         "Whitespace": (bundle.whitespace_encode, bundle.whitespace_decode, {'c': 'W', 'src': 'images/language/white-space.png', 'desc': details.whitespace, 'in': ph_prev, 'out': bundle.whitespace_encode(ph_prev)}), 
@@ -55,11 +58,6 @@ it_encode = {
         "Chicken": (bundle.encode_chicken, bundle.decode_chicken, {'c': 'W', 'src': 'images/language/chicken.png', 'desc': details.chicken, 'in': ph_prev_small, 'out': bundle.encode_chicken(ph_prev_small)}),
         "FalseASCII": (bundle.encode_false_ascii, bundle.decode_false_ascii, {'c': 'W', 'src': 'images/language/false ASCII.png', 'desc': details.false_ascii, 'in': ph_prev, 'out': bundle.encode_false_ascii(ph_prev)}),
         "FalseBinary": (bundle.encode_false_binary, bundle.decode_false_binary, {'c': 'W', 'src': 'images/language/false binary.png', 'desc': details.false_binary, 'in': ph_prev, 'out': bundle.encode_false_binary(ph_prev)}),
-    },
-    "BuiltIn": {
-        "UTF-8": (bundle.encode_utf8, bundle.decode_utf8, {'c': 'W', 'in': ph_prev_emoji, 'out': bundle.encode_utf8(ph_prev_emoji), 'no_decode': True}),
-        "ISO-8859-1": (bundle.encode_iso_8859_1, bundle.encode_iso_8859_1, {'c': 'W', 'in': ph_prev_emoji, 'out': bundle.encode_iso_8859_1(ph_prev_emoji)}),
-        "ASCII": (bundle.encode_ascii, bundle.decode_ascii, {'c': 'W', 'in': ph_prev, 'out': bundle.encode_ascii(ph_prev)}),
     },
     "Cipher": {
         "XORcipher": (bundle.xor_encrypt_decrypt, bundle.xor_encrypt_decrypt, {'c': 'P', 'desc': details.xor_cipher, 'src': 'images/cipher/xor_cipher.png', 'in': ph_prev, 'out': bundle.xor_encrypt_decrypt(ph_prev, "123"), 'input2': '123 (key)'}),
@@ -69,10 +67,10 @@ it_encode = {
         "Caesar": (bundle.caesar_cipher, bundle.caesar_decipher, {'c': 'P', 'desc': details.caesar_cipher, 'src': 'images/cipher/caesar_cipher.png', 'in': ph_prev, 'out': bundle.caesar_cipher(ph_prev, 5), "input2": '5 (shift)'}),
     },
     "External": {
-        "UTF-16": (None, None, {'c': 'W'}),
-        "MD-5": (None, None, {'c': 'W'}),
-        "SHA-256": (None, None, {'c': 'K'}),
-        "SHA-512": (None, None, {'c': 'K'}),
+        "UTF-16": (None, None, {'c': 'W', 'src': 'images/utf-16.png'}),
+        "MD-5": (None, None, {'c': 'K', 'src': 'images/sha/md5.png'}),
+        "SHA-256": (None, None, {'c': 'K', 'src': 'images/sha/sha256.png'}),
+        "SHA-512": (None, None, {'c': 'K', 'src': 'images/sha/sha512.png'}),
         "quopri": (None, None, {'c': 'W', 'src': 'images/text_images/quopri.png'}),
     }
 }
